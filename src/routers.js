@@ -14,6 +14,7 @@ import {
   Lightbox,
 } from 'react-native-router-flux';
 import Users from 'views/users/container.js';
+import PinCode from 'views/pinCode/index';
 const stateHandler = (prevState, newState, action) => {
   console.log('onStateChange: ACTION:', action);
 };
@@ -24,10 +25,14 @@ const prefix = Platform.OS === 'android' ? 'mychat://mychat/' : 'mychat://';
 const transitionConfig = () => ({
   screenInterpolator: StackViewStyleInterpolator.forFadeFromBottomAndroid,
 });
+
 const router = () => (
   <Router onStateChange={stateHandler} uriPrefix={prefix}>
-    <Overlay key="overlay">
-      <Scene component={Users} key="users" />
+    <Overlay key="overlay" panHandlers={null}>
+      <Modal key="modal" transitionConfig={transitionConfig} hideNavBar>
+        <Scene component={Users} key="users" />
+        <Scene component={PinCode} key="pinCode" initial />
+      </Modal>
     </Overlay>
   </Router>
 );

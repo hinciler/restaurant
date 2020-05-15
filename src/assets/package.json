@@ -1,0 +1,6 @@
+{
+    "name": "assets",
+    "dependencies": {
+        "assets": "^3.0.1"
+    }
+}

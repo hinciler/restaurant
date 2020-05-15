@@ -3,6 +3,7 @@ import {Text} from 'react-native';
 import {Provider} from 'react-redux';
 import Index from './src/routers';
 import {store} from './src/state/store';
+
 console.disableYellowBox = true;
 
 //ios font size değişse de fontlar değişmesin diye
