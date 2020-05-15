@@ -1,7 +1,8 @@
 import React, {PureComponent} from 'react';
-import {View, Text} from 'react-native';
-import {Button} from 'components';
+import {View, Text, ScrollView, Image} from 'react-native';
+import {Button, Header, PinCodeView} from 'components';
 import {styles} from './style';
+const logo = require('assets/img/logo.png');
 
 class PinCode extends PureComponent {
   constructor(props) {
@@ -11,7 +12,19 @@ class PinCode extends PureComponent {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Pincode</Text>
+        <ScrollView>
+          <View>
+            <Header />
+            <View style={{flexDirection: 'row'}}>
+              <View style={styles.leftComponent}>
+                <Image style={styles.logo} source={logo} />
+              </View>
+              <View style={{flex: 1}}>
+                <PinCodeView />
+              </View>
+            </View>
+          </View>
+        </ScrollView>
       </View>
     );
   }
