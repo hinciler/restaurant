@@ -1,18 +1,22 @@
 import React, {PureComponent} from 'react';
-import {View, Text} from 'react-native';
-import {Button} from 'components';
+import {View, Image} from 'react-native';
 import {styles} from './style';
+import {Header, PinCodeView} from 'components';
 
 class PinCode extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Pincode</Text>
-      </View>
+      <>
+        <Header />
+        <View style={styles.container}>
+          <View style={styles.left}>
+            <Image source={require('assets/img/logo.png')} />
+          </View>
+          <View style={styles.right}>
+            <PinCodeView />
+          </View>
+        </View>
+      </>
     );
   }
 }
