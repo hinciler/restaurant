@@ -1,19 +1,18 @@
 import {StyleSheet} from 'react-native';
 import {colors} from 'config';
-import {normalize} from 'react-native-elements';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    flexDirection: 'row',
     backgroundColor: colors.background1,
   },
-  logo: {
-    width: normalize(100),
-    resizeMode: 'center',
-  },
-  leftComponent: {
-    justifyContent: 'center',
+  left: {
     flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
+  },
+  right: {
+    flex: 1,
   },
 });

@@ -1,31 +1,22 @@
 import React, {PureComponent} from 'react';
-import {View, Text, ScrollView, Image} from 'react-native';
-import {Button, Header, PinCodeView} from 'components';
+import {View, Image} from 'react-native';
 import {styles} from './style';
-const logo = require('assets/img/logo.png');
+import {Header, PinCodeView} from 'components';
 
 class PinCode extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
   render() {
     return (
-      <View style={styles.container}>
-        <ScrollView>
-          <View>
-            <Header />
-            <View style={{flexDirection: 'row'}}>
-              <View style={styles.leftComponent}>
-                <Image style={styles.logo} source={logo} />
-              </View>
-              <View style={{flex: 1}}>
-                <PinCodeView />
-              </View>
-            </View>
+      <>
+        <Header />
+        <View style={styles.container}>
+          <View style={styles.left}>
+            <Image source={require('assets/img/logo.png')} />
           </View>
-        </ScrollView>
-      </View>
+          <View style={styles.right}>
+            <PinCodeView />
+          </View>
+        </View>
+      </>
     );
   }
 }

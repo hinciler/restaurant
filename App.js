@@ -13,24 +13,18 @@ if (Text.defaultProps == null) {
 }
 Text.defaultProps.allowFontScaling = false;
 
-class App extends Component {
-  //ana view
-  componentDidMount() {
-    if (isTablet()) {
-      Orientation.lockToLandscape();
-    }
-    //this will lock the view to Portrait
-    else {
-      Orientation.lockToPortrait();
-    }
+const App = () => {
+  if (isTablet()) {
+    Orientation.lockToLandscape();
   }
-  render() {
-    return (
-      <Provider store={store}>
-        <Index />
-      </Provider>
-    );
+  //this will lock the view to Portrait
+  else {
+    Orientation.lockToPortrait();
   }
-}
-
+  return (
+    <Provider store={store}>
+      <Index />
+    </Provider>
+  );
+};
 export default App;
