@@ -20,8 +20,8 @@ const router = () => (
   <Router onStateChange={stateHandler} uriPrefix={prefix}>
     <Overlay key="overlay" panHandlers={null}>
       <Modal key="modal" transitionConfig={transitionConfig} hideNavBar>
-        <Scene component={Users} key="users" initial />
-        <Scene component={PinCode} key="pinCode" />
+        <Scene component={Users} key="users" />
+        <Scene component={PinCode} key="pinCode" initial />
       </Modal>
     </Overlay>
   </Router>

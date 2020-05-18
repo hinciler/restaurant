@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import PinCode from './index';
-import {pinCode,getMenu} from '@pinCode/actions';
+import {pinCode, getMenu, getProductPortion} from '@pinCode/actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -14,7 +14,7 @@ const mapStateToDispatch = (dispatch) => {
   return {
     pinCode: (payload) => dispatch(pinCode(payload)),
     getMenu: (payload) => dispatch(getMenu(payload)),
-
+    getProductPortion: (payload) => dispatch(getProductPortion(payload)),
   };
 };
 

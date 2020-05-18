@@ -7,4 +7,7 @@ export default {
   getMenu(data) {
     return axios.post('getMenu', data);
   },
+  getProductPortion(data) {
+    return axios.post('getProductPortions', data);
+  },
 };

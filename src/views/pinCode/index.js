@@ -5,6 +5,40 @@ import {styles} from './style';
 import {isTablet} from 'react-native-device-info';
 
 class PinCode extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      success: false,
+    };
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log('prevProps', prevProps.success);
+    console.log('this.props', this.props.success);
+  }
+
+  onPressUpdate() {
+    const menu_setup = 'Menu';
+    const payload = {
+      query: `
+        {getMenu(name:"${menu_setup}")
+          {categories{
+              id,
+              name,
+              color,
+              foreground,
+              image,
+              header,
+              menuId,
+              isFastMenu,
+              menuItems{productId,name,color,caption,foreground,image, header,quantity,categoryId}
+              }
+          }}
+        `,
+    };
+    this.props.getMenu(payload);
+  }
+
   render() {
     const {lang} = this.props;
     return (
@@ -36,7 +70,7 @@ class PinCode extends PureComponent {
                 <PinCodeView
                   lang={lang}
                   onPressUpdate={() => {
-                    this.onPressUpdate(this.props);
+                    this.onPressUpdate();
                   }}
                 />
               </View>

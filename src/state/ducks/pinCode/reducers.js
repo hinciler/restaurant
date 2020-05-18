@@ -3,6 +3,8 @@ const INITIAL_STATE = {
   loader: false,
   error: '',
   data: [],
+  menu: [],
+  success: false,
 };
 const pinCode = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -32,13 +34,31 @@ const pinCode = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loader: false,
-        data: action.data,
+        menu: action.data,
+        success: true,
       };
     case type.GET_MENU_FAILED:
       return {
         ...state,
         loader: false,
         error: action.error,
+      };
+    case type.GET_PRODUCT_PORTION:
+      return {
+        ...state,
+        loader: true,
+      };
+    case type.GET_PRODUCT_PORTION_SUCCESS:
+      return {
+        ...state,
+        loader: false,
+        product: action.data,
+      };
+    case type.GET_PRODUCT_PORTION_FAILED:
+      return {
+        ...state,
+        loader: false,
+        product_portion_error: action.error,
       };
 
     default:

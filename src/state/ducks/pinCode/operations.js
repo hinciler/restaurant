@@ -50,7 +50,33 @@ export function* getMenu(action) {
 }
 
 function* watch_getMenu() {
-  yield takeLatest(type.pinCode, getMenu);
+  yield takeLatest(type.GET_MENU, getMenu);
 }
 
-export {watch_pinCode, watch_getMenu};
+export function* getProductPortion(action) {
+  try {
+    const response = yield api.getProductPortion(action.payload);
+    if (response.hasOwnProperty('error')) {
+      yield put({
+        type: type.GET_PRODUCT_PORTION,
+        error: response.error,
+      });
+    } else {
+      yield put({
+        type: type.GET_PRODUCT_PORTION_SUCCESS,
+        data: response.data,
+      });
+    }
+  } catch (error) {
+    yield put({
+      type: type.GET_PRODUCT_PORTION_FAILED,
+      error,
+    });
+  }
+}
+
+function* watch_getProductPortion() {
+  yield takeLatest(type.GET_PRODUCT_PORTION, getProductPortion);
+}
+
+export {watch_pinCode, watch_getMenu, watch_getProductPortion};
