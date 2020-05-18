@@ -1,4 +1,7 @@
 {
-  "welcome": "merhaba"
+  "welcome": "merhaba",
+  "update_data": "Veri Güncellemesi Yapmak İstediğinizden Emin misiniz?",
+  "yes": "Evet",
+  "cancel": "İptal"
 
 }

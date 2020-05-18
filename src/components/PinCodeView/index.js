@@ -11,7 +11,7 @@ import debounce from 'utilities/helpers/debounce';
 import {Actions} from 'react-native-router-flux';
 import {Typography} from 'components/Text';
 
-export default function () {
+export default function ({lang, onPressUpdate}) {
   const [code, setCode] = useState('');
   function numPress(num) {
     const concatCode = code.concat(num);
@@ -20,6 +20,21 @@ export default function () {
   function backPress() {
     setCode(code.slice(0, code.length - 1));
   }
+
+  const alertUpdateData = () => {
+    Alert.alert(
+      lang.update_data,
+      '',
+      [
+        {
+          text: lang.cancel,
+          onPress: () => console.log('Cancel Pressed'),
+        },
+        {text: lang.yes, onPress: onPressUpdate},
+      ],
+      {cancelable: false},
+    );
+  };
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -90,7 +105,7 @@ export default function () {
             <IconFontAwesome name={'qrcode'} size={normalize(18)} />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={debounce(() => Alert.alert('merhaba'))}
+            onPress={debounce(alertUpdateData)}
             style={[styles.numOverlay, {borderBottomColor: 'red'}]}>
             <IconMaterial name={'update'} size={normalize(18)} />
           </TouchableOpacity>
