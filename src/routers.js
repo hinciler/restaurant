@@ -14,7 +14,7 @@ import {
   Lightbox,
 } from 'react-native-router-flux';
 import Users from 'views/users/container.js';
-import PinCode from 'views/pinCode/index';
+import PinCode from 'views/pinCode/container';
 const stateHandler = (prevState, newState, action) => {
   console.log('onStateChange: ACTION:', action);
 };
