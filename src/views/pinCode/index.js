@@ -5,14 +5,11 @@ import {styles} from './style';
 import {isTablet} from 'react-native-device-info';
 
 class PinCode extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
   render() {
+    const {lang} = this.props;
     return (
       <View style={styles.container}>
-        {!isTablet() ? (
+        {isTablet() ? (
           <ScrollView
             contentContainerStyle={styles.scrollView}
             showsVerticalScrollIndicator={false}
@@ -22,7 +19,12 @@ class PinCode extends PureComponent {
                 <Image source={require('assets/img/logo.png')} />
               </View>
               <View style={styles.right}>
-                <PinCodeView />
+                <PinCodeView
+                  lang={lang}
+                  onPressUpdate={() => {
+                    this.onPressUpdate(this.props);
+                  }}
+                />
               </View>
             </View>
           </ScrollView>
@@ -31,7 +33,12 @@ class PinCode extends PureComponent {
             <Header />
             <ScrollView contentContainerStyle={styles.scrollView}>
               <View style={styles.container_landscape}>
-                <PinCodeView />
+                <PinCodeView
+                  lang={lang}
+                  onPressUpdate={() => {
+                    this.onPressUpdate(this.props);
+                  }}
+                />
               </View>
             </ScrollView>
           </View>

@@ -1,8 +1,10 @@
 import {connect} from 'react-redux';
 import PinCode from './index';
-import {pinCode} from '@pinCode/actions';
+import {pinCode,getMenu} from '@pinCode/actions';
+
 const mapStateToProps = (state) => {
   return {
+    lang: state.translate.lang,
     data: state.pinCode.data,
     error: state.pinCode.error,
     loading: state.pinCode.loading,
@@ -11,6 +13,8 @@ const mapStateToProps = (state) => {
 const mapStateToDispatch = (dispatch) => {
   return {
     pinCode: (payload) => dispatch(pinCode(payload)),
+    getMenu: (payload) => dispatch(getMenu(payload)),
+
   };
 };
 
