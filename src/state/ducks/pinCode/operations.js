@@ -23,6 +23,34 @@ export function* pinCode(action) {
   }
 }
 
-export default function* watch_pinCode() {
+function* watch_pinCode() {
   yield takeLatest(type.pinCode, pinCode);
 }
+
+export function* getMenu(action) {
+  try {
+    const response = yield api.getMenu(action.payload);
+    if (response.hasOwnProperty('error')) {
+      yield put({
+        type: type.GET_MENU,
+        error: response.error,
+      });
+    } else {
+      yield put({
+        type: type.GET_MENU_SUCCESS,
+        data: response.data,
+      });
+    }
+  } catch (error) {
+    yield put({
+      type: type.GET_MENU_FAILED,
+      error,
+    });
+  }
+}
+
+function* watch_getMenu() {
+  yield takeLatest(type.pinCode, getMenu);
+}
+
+export {watch_pinCode, watch_getMenu};

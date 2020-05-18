@@ -1,5 +1,5 @@
 import type from './types';
-export const pinCode = (payload) => ({
-  type: type.pinCode,
+export const getMenu = (payload) => ({
+  type: type.GET_MENU,
   payload,
 });

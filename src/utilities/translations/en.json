@@ -1,4 +1,7 @@
 {
-  "welcome": "hello"
+  "welcome": "hello",
+  "update_data": "Do you want to update data?",
+  "yes": "Yes",
+  "cancel": "Cancel"
 
 }
