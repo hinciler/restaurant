@@ -1,39 +1,142 @@
 {
-  "settings": [{
+  "settings": [
+    {
       "text": "Table Degistir",
-      "disabled": false
+      "value": "Hayir"
     },
     {
       "text": "Customer Sec",
-      "disabled": false
+      "value": "Hayir"
     },
     {
       "text": "Ticket Note",
-      "disabled": false
+      "value": "Hayir"
     },
     {
       "text": "Print Bill",
-      "disabled": true
-    }, {
+      "value": "Hayir"
+    },
+    {
       "text": "Add Ticket",
-      "disabled": true
+      "value": "Hayir"
     },
     {
       "text": "Customer Sec",
-      "disabled": false
+      "value": "Hayir"
     },
     {
       "text": "Ticket Note",
-      "disabled": false
+      "value": "Hayir"
     },
     {
       "text": "Print Bill",
-      "disabled": false
-    }, {
+      "value": "Hayir"
+    },
+    {
       "text": "Add Ticket",
-      "disabled": false
+      "value": "Hayir"
     }
   ],
-  "orange": ["Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches"],
-  "green": ["Breakfast", "Soup Drink", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches"]
+  "options": [
+    {
+      "text": "Table Degistir",
+      "value": "Hayir"
+    },
+    {
+      "text": "Customer Sec",
+      "value": "Hayir"
+    },
+    {
+      "text": "Ticket Note",
+      "value": "Evet"
+    },
+    {
+      "text": "Print Bill",
+      "value": "Evet"
+    },
+    {
+      "text": "Add Ticket",
+      "value": "Hayir"
+    },
+    {
+      "text": "Customer Sec",
+      "value": "Hayir"
+    },
+    {
+      "text": "Ticket Note",
+      "value": "Hayir"
+    },
+    {
+      "text": "Print Bill",
+      "value": "Hayir"
+    },
+    {
+      "text": "Add Ticket",
+      "value": "Evet"
+    }
+  ],
+  "orange": [
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches"
+  ],
+  "green": [
+    "Breakfast",
+    "Soup Drink",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches"
+  ]
 }

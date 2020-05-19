@@ -2,6 +2,7 @@
   "welcome": "hello",
   "update_data": "Do you want to update data?",
   "yes": "Yes",
-  "cancel": "Cancel"
-
+  "cancel": "Cancel",
+  "basic_settings":"BASIC SETTINGS",
+  "options": "OPTIONS"
 }
