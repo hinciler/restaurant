@@ -13,8 +13,8 @@ class PinCode extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    console.log('prevProps', prevProps.success);
-    console.log('this.props', this.props.success);
+    if (this.props.success && prevProps.success !== this.props.success) {
+    }
   }
 
   onPressUpdate() {

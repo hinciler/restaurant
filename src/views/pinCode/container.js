@@ -4,6 +4,7 @@ import {pinCode, getMenu, getProductPortion} from '@pinCode/actions';
 
 const mapStateToProps = (state) => {
   return {
+    success: state.pinCode.success,
     lang: state.translate.lang,
     data: state.pinCode.data,
     error: state.pinCode.error,
