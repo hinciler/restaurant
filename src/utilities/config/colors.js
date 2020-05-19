@@ -5,6 +5,8 @@ const light = {
   background1: '#f5f5f5',
   background2: '#F0F3FA',
   background3: '#F0F3FA',
+  sambapos_red: '#de3838',
+  sambapos_orange: '#fe3e05',
   active: '#fff',
   white: '#fff',
   text: '#000',
