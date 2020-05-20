@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 const token =
-  'AQAAANCMnd8BFdERjHoAwE_Cl-sBAAAAA5ppupYS3U-AMXbpIDI_fQAAAAACAAAAAAAQZgAAAAEAACAAAADBrarLW-kr4KwTCPaTCnwF9nmI_gnGaiYNjadh3OrAiAAAAAAOgAAAAAIAACAAAACcvVyRtQtvVVDPX7yoq297QKhMeadHR0xpLvEsem2yN-AAAAAsCC744a1OqIUeD67iJHDMdbhtomuua29x_mnZPnRuwCULSQyg2MqQbmXZbEhect5Gvpv6u2yCzsVEIJ90GPDs4o5EhTg8eVMHwDo3mPmcsXJ7VY7yRzdrgP4Cy7lUoLzY0ZcqiSSZd28KNn64UhJhExKWLKM9i0ew2Yov5SvfmCGacHmjucorTvwUdoRtOkynLx56tE7h-aMm2wmTRYc5Dn9sz20s2gDxMgKoeteiwlR1hSdadX77ra5NgzVWnhu-6XMe1dWYuBkzyxXBgTGNQcuWqvEp4mj1jEsLYeh2ukAAAACslW5WfSXMdouDq2Yt0RhpvWPuHSNumMUgXPtS_zMNn0-L29Z_YSjR3Gwj8BIokofHtQXsrCszHO0ouzsvUvCr';
+  'AQAAANCMnd8BFdERjHoAwE_Cl-sBAAAAA5ppupYS3U-AMXbpIDI_fQAAAAACAAAAAAAQZgAAAAEAACAAAADhzUjmTFcn1FEpX5kPa4joCtbx41zMUjFJKVn5VF4iVgAAAAAOgAAAAAIAACAAAAAGhkLQ6cRBCRDcsFKaEVBweZ4rylcdwr8kQiwDZkdiTuAAAAAkd1BEcDWdy5w8sy-pqBgZ2mDamaozoLkdZ6HJnJP7RXxWOXztuDXu55GGxNxBNjsrr1AQCb9TZoaMcQ4oBLsC7cOMsuqoQ2t8Ivj1md0gTzTqOQ71LRQboYuYr2VQNg76n2HxM8HZWRguTBI9uH1p3yYsCig_oXReJJkgyY80lLvLzoURZea_JnwWJ4_tVBslARZ9ruRz0Erz_J8lzE0s57I1nwfijGDdbSiULX00m1NIm9JVBa0mpKtucK0QYRIulR4Pr0zuLLzB7iITtOEdlFfoELxfk7wCjcmMT4K970AAAAAeyMpxT_qQnOPrgLbHoU_o-enxIHoOK6-5yC95o-Hr3KZHsE1LeXJG799FEG9aMOTDpaovx8j0m1TAhcLYyMcg';
 
 export const host = 'http://78.159.99.84:9000/api/graphql';
 import {store} from '../store';
@@ -14,13 +14,13 @@ const axiosInstance = axios.create({
 axiosInstance.defaults.headers['Content-Type'] = 'application/json';
 axiosInstance.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${token}`;
-  console.log('config', config);
+  // console.log('config', config);
   return config;
 });
 
 axiosInstance.interceptors.response.use(
   (response) => {
-    console.log('axiosInstance response', response);
+    // console.log('axiosInstance response', response);
     return response.data;
   },
   (error) => {

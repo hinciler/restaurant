@@ -3,8 +3,62 @@ import {View, Image, ScrollView} from 'react-native';
 import {Button, Header, PinCodeView} from 'components';
 import {styles} from './style';
 import {isTablet} from 'react-native-device-info';
+import axios from 'axios';
 
 class PinCode extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      portionsSuccess: false,
+    };
+  }
+  async getTicketTags() {
+    const requestBody = new URLSearchParams({
+      query: 'tickettags',
+      serial: '111',
+    });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+
+    const sett = await axios.post(
+      'http://78.159.99.84:9000/api/helper',
+      requestBody,
+      config,
+    );
+    // console.log('sett', sett.data);
+  }
+
+  getMenu() {
+    const menu_setup = 'Menu';
+    const payloadMenu = {
+      query: `
+        {getMenu(name:"${menu_setup}")
+          {categories{
+              id,
+              name,
+              color,
+              foreground,
+              image,
+              header,
+              menuId,
+              isFastMenu,
+              menuItems{productId,name,color,caption,foreground,image, header,quantity,categoryId,product{portions{name,id,productId,price}}}
+              }
+          }}
+        `,
+    };
+    this.props.getMenu(payloadMenu);
+  }
+
+  onPressUpdate() {
+    this.getMenu();
+    this.getTicketTags();
+  }
+
   render() {
     const {lang} = this.props;
     return (
@@ -22,7 +76,7 @@ class PinCode extends PureComponent {
                 <PinCodeView
                   lang={lang}
                   onPressUpdate={() => {
-                    this.onPressUpdate(this.props);
+                    this.onPressUpdate();
                   }}
                 />
               </View>
@@ -36,7 +90,7 @@ class PinCode extends PureComponent {
                 <PinCodeView
                   lang={lang}
                   onPressUpdate={() => {
-                    this.onPressUpdate(this.props);
+                    this.onPressUpdate();
                   }}
                 />
               </View>

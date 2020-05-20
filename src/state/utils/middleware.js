@@ -1,6 +1,15 @@
 import {all} from 'redux-saga/effects';
 import watch_getUsers from '@users/operations';
-import {watch_getMenu} from '@pinCode/operations';
+import {
+  watch_getMenu,
+  watch_getProductPortion,
+  watch_getOrderTagGroups,
+} from '@pinCode/operations';
 export default function* Sagas() {
-  yield all([watch_getUsers(), watch_getMenu()]);
+  yield all([
+    watch_getUsers(),
+    watch_getMenu(),
+    watch_getProductPortion(),
+    watch_getOrderTagGroups(),
+  ]);
 }

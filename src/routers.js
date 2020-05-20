@@ -26,7 +26,7 @@ const router = () => (
         <Scene component={PinCode} key="pinCode" initial />
         <Scene component={Settings} key="settings" />
         <Scene component={Order} key="order" />
-      </Modal>
+        </Modal>
     </Overlay>
   </Router>
 );

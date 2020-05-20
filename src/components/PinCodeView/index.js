@@ -114,13 +114,13 @@ export default function ({lang, onPressUpdate}) {
           <Text
             text={'Demo girişi için 1234 pin kullanabilirsiniz'}
             color={'red'}
-            type={Typography.PSS}
+            type={Typography.PL}
           />
         </View>
       </View>
       <View style={styles.footer}>
-        <Text text={'DEMO'} color={'red'} type={Typography.PS} />
-        <Text text={'v 2.0.53'} color={'grey'} type={Typography.PSS} />
+        <Text text={'DEMO'} color={'red'} type={Typography.PLB} />
+        <Text text={'v 2.0.53'} color={'grey'} type={Typography.PL} />
       </View>
     </View>
   );
