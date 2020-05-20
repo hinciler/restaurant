@@ -53,8 +53,7 @@ export default function ({
       checklist.push(data);
     }
   };
-  console.log('list', type);
-  return (
+   return (
     <Modal
       isVisible={visible}
       onBackdropPress={() => setVisible(false)}

@@ -14,8 +14,8 @@ const PickerItem = ({item}) => {
       setVisible(false);
       setValue(item.list[data].Name);
     } else {
-      console.log('data', data);
-    }
+
+     }
   };
   return (
     <View style={styles.container}>
