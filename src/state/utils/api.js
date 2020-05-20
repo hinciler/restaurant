@@ -10,4 +10,7 @@ export default {
   getProductPortion(data) {
     return axios.post('getProductPortions', data);
   },
+  getOrderTagGroups(data) {
+    return axios.post('getOrderTagGroups', data);
+  },
 };

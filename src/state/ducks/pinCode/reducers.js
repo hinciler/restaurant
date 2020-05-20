@@ -2,29 +2,13 @@ import type from './types';
 const INITIAL_STATE = {
   loader: false,
   error: '',
-  data: [],
   menu: [],
-  success: false,
+  menuSuccess: false,
+  productPortion: [],
+  orderTags: [],
 };
 const pinCode = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case type.pinCode:
-      return {
-        ...state,
-        loader: true,
-      };
-    case type.pinCode_SUCCESS:
-      return {
-        ...state,
-        loader: false,
-        data: action.data,
-      };
-    case type.pinCode_FAILED:
-      return {
-        ...state,
-        loader: false,
-        error: action.error,
-      };
     case type.GET_MENU:
       return {
         ...state,
@@ -35,7 +19,7 @@ const pinCode = (state = INITIAL_STATE, action) => {
         ...state,
         loader: false,
         menu: action.data,
-        success: true,
+        menuSuccess: true,
       };
     case type.GET_MENU_FAILED:
       return {
@@ -52,13 +36,30 @@ const pinCode = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loader: false,
-        product: action.data,
+        productPortion: action.data,
       };
     case type.GET_PRODUCT_PORTION_FAILED:
       return {
         ...state,
         loader: false,
         product_portion_error: action.error,
+      };
+    case type.GET_ORDER_TAG:
+      return {
+        ...state,
+        loader: true,
+      };
+    case type.GET_ORDER_TAG_SUCCESS:
+      return {
+        ...state,
+        loader: false,
+        orderTags: action.data,
+      };
+    case type.GET_PRODUCT_PORTION_FAILED:
+      return {
+        ...state,
+        loader: false,
+        orderTagError: action.error,
       };
 
     default:
