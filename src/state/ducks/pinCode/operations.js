@@ -3,9 +3,9 @@ import api from '@duck_utils/api';
 import type from './types';
 import Database from '../../../db/database';
 import {func} from 'prop-types';
+const db = new Database();
 export function* getMenu(action) {
   try {
-    const db = new Database();
     const response = yield api.getMenu(action.payload);
     if (response.hasOwnProperty('error')) {
       yield put({
@@ -14,8 +14,50 @@ export function* getMenu(action) {
       });
     } else {
       const categories = response.data.getMenu.categories;
+      console.log('categories', categories);
       categories.map((item, categoryIdx) => {
+        const groupId = item.id;
+        const name = item.name;
+        const color = item.color;
+        const foreground = item.foreground;
+        const image = item.image;
+        const header = item.header;
+        const menuId = item.menuId;
+        const isFastMenu = item.isFastMenu;
+        const productGroupData = {
+          groupId,
+          name,
+          color,
+          foreground,
+          image,
+          header,
+          menuId,
+          isFastMenu,
+        };
+
         item.menuItems.map((menuItem, idx) => {
+          const productId = menuItem.productId;
+          const productName = menuItem.name;
+          const productColor = menuItem.color;
+          const productForeground = menuItem.foreground;
+          const productImage = menuItem.image;
+          const productHeader = menuItem.header;
+          const productCaption = menuItem.caption;
+          const productCategoryId = menuItem.categoryId;
+          const productQuantity = menuItem.quantity;
+          const productData = {
+            productId,
+            name: productName,
+            color: productColor,
+            foreground: productForeground,
+            image: productImage,
+            header: productHeader,
+            caption: productCaption,
+            categoryId: productCategoryId,
+            quantity: productQuantity,
+          };
+          saveProduct(productGroupData, productData);
+
           menuItem.product.portions.map(async function (productItem, idx) {
             const terminal_setting = 'Server';
             const payloadOrderTag = {
@@ -41,6 +83,22 @@ export function* getMenu(action) {
       error,
     });
   }
+}
+
+function saveProduct(productGroupData, productData) {
+  db.addProductGroup(productGroupData)
+    .then((result) => {
+      console.log(result);
+      const groupId = result.insertId;
+      productData.groupId = groupId;
+      db.addProduct(productData).then((productResult) => {
+        console.log('results_id', productResult);
+      });
+      // console.log('results_id', result.insertId);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 function* watch_getMenu() {

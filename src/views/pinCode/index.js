@@ -29,7 +29,7 @@ class PinCode extends PureComponent {
       requestBody,
       config,
     );
-    console.log('sett', sett.data);
+    // console.log('sett', sett.data);
   }
 
   getMenu() {

@@ -9,11 +9,8 @@ export default class Database {
   initDB() {
     let db;
     return new Promise((resolve) => {
-      console.log('Plugin integrity check ...');
       SQLite.echoTest()
         .then(() => {
-          console.log('Integrity check passed ...');
-          console.log('Opening database ...');
           SQLite.openDatabase(
             database_name,
             database_version,
@@ -21,26 +18,52 @@ export default class Database {
           )
             .then((DB) => {
               db = DB;
-              console.log('Database OPEN');
-              db.executeSql('SELECT 1 FROM Product LIMIT 1')
-                .then(() => {
-                  console.log('Database is ready ... executing query ...');
-                })
+              db.executeSql('SELECT 1 FROM order_line LIMIT 1')
+                .then(() => {})
                 .catch((error) => {
-                  console.log('Received error: ', error);
-                  console.log('Database not yet ready ... populating data');
                   db.transaction((tx) => {
                     tx.executeSql(
-                      'CREATE TABLE IF NOT EXISTS Product (prodId, prodName, prodDesc, prodImage, prodPrice)',
+                      'CREATE TABLE IF NOT EXISTS order_line (name TEXT, quantity TEXT, price TEXT, productId TEXT, portion TEXT, orderTags TEXT, orderTagGroups TEXT, differentSituation TEXT)',
                     );
                   })
                     .then(() => {
-                      console.log('Table created successfully');
+                      console.log('Table order_line created successfully');
                     })
                     .catch((error) => {
                       console.log(error);
                     });
                 });
+              db.executeSql('SELECT 1 FROM product_groups LIMIT 1')
+                .then(() => {})
+                .catch((error) => {
+                  db.transaction((tx) => {
+                    tx.executeSql(
+                      'CREATE TABLE IF NOT EXISTS product_groups (group_id TEXT, name TEXT, color TEXT, foreground TEXT, image TEXT, header TEXT, menuId TEXT, isFastMenu TEXT)',
+                    );
+                  })
+                    .then(() => {
+                      console.log('Table product_groups created successfully');
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
+                });
+              db.executeSql('SELECT 1 FROM products LIMIT 1')
+                .then(() => {})
+                .catch((error) => {
+                  db.transaction((tx) => {
+                    tx.executeSql(
+                      'CREATE TABLE IF NOT EXISTS products (group_id TEXT, product_id TEXT, name TEXT, color TEXT, foreground TEXT, image TEXT, header TEXT, caption TEXT, category_id TEXT, quantity TEXT)',
+                    );
+                  })
+                    .then(() => {
+                      console.log('Table products created successfully');
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
+                });
+
               resolve(db);
             })
             .catch((error) => {
@@ -53,8 +76,6 @@ export default class Database {
     });
   }
 
-  createTable() {}
-
   closeDatabase(db) {
     if (db) {
       console.log('Closing DB');
@@ -63,10 +84,80 @@ export default class Database {
           console.log('Database CLOSED');
         })
         .catch((error) => {
-          this.errorCB(error);
+          console.log(error);
         });
     } else {
       console.log('Database was not OPENED');
     }
+  }
+
+  addProductGroup(prodGroup) {
+    return new Promise((resolve) => {
+      this.initDB()
+        .then((db) => {
+          db.transaction((tx) => {
+            tx.executeSql(
+              'INSERT INTO product_groups VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+              [
+                prodGroup.groupId,
+                prodGroup.name,
+                prodGroup.color,
+                prodGroup.foreground,
+                prodGroup.image,
+                prodGroup.header,
+                prodGroup.menuId,
+                prodGroup.isFastMenu,
+              ],
+            ).then(([tx, results]) => {
+              resolve(results);
+            });
+          })
+            .then((result) => {
+              this.closeDatabase(db);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  }
+
+  addProduct(prod) {
+    return new Promise((resolve) => {
+      this.initDB()
+        .then((db) => {
+          db.transaction((tx) => {
+            tx.executeSql(
+              'INSERT INTO products VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+              [
+                prod.groupId,
+                prod.productId,
+                prod.name,
+                prod.color,
+                prod.foreground,
+                prod.image,
+                prod.header,
+                prod.caption,
+                prod.categoryId,
+                prod.quantity,
+              ],
+            ).then(([tx, results]) => {
+              resolve(results);
+            });
+          })
+            .then((result) => {
+              this.closeDatabase(db);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
   }
 }
