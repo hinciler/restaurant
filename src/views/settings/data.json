@@ -1,40 +1,32 @@
 {
   "settings": [
     {
-      "text": "Table Degistir",
-      "value": "Hayir"
+      "tr": "Adisyon Tipi",
+      "key": "TicketType",
+      "en": "Addition Type",
+      "id": "1",
+      "type": "radio"
     },
     {
-      "text": "Customer Sec",
-      "value": "Hayir"
+      "tr": "Terminal Adi",
+      "key": "Terminal",
+      "en": "Terminal Name",
+      "id": "2",
+      "type": "radio"
     },
     {
-      "text": "Ticket Note",
-      "value": "Hayir"
+      "tr": "Departman",
+      "key": "Department",
+      "en": "Department",
+      "id": "3",
+      "type": "radio"
     },
     {
-      "text": "Print Bill",
-      "value": "Hayir"
-    },
-    {
-      "text": "Add Ticket",
-      "value": "Hayir"
-    },
-    {
-      "text": "Customer Sec",
-      "value": "Hayir"
-    },
-    {
-      "text": "Ticket Note",
-      "value": "Hayir"
-    },
-    {
-      "text": "Print Bill",
-      "value": "Hayir"
-    },
-    {
-      "text": "Add Ticket",
-      "value": "Hayir"
+      "tr": "Masa Varlik Tipi",
+      "key": "EntityType",
+      "en": "Entity Type",
+      "id": "3",
+      "type": "check"
     }
   ],
   "options": [

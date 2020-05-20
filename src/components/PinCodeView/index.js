@@ -100,7 +100,7 @@ export default function ({lang, onPressUpdate}) {
             <IconMaterial name={'phonelink-setup'} size={normalize(18)} />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={debounce(() => Alert.alert('merhaba'))}
+            onPress={debounce(() => Actions.order())}
             style={[styles.numOverlay, {borderBottomColor: 'red'}]}>
             <IconFontAwesome name={'qrcode'} size={normalize(18)} />
           </TouchableOpacity>

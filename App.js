@@ -14,7 +14,7 @@ if (Text.defaultProps == null) {
 Text.defaultProps.allowFontScaling = false;
 
 const App = () => {
-  if (!isTablet()) {
+  if (isTablet()) {
     Orientation.lockToLandscape();
   }
   //this will lock the view to Portrait

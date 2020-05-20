@@ -1,27 +1,28 @@
 import React, {useState, useRef} from 'react';
 import {View, FlatList} from 'react-native';
 import {styles} from './style.js';
-import {Header, PickerItem, Text, Button, OptionsMenu} from 'components';
-import {Typography} from 'components/Text';
+import {Header, PickerItem, Button} from 'components';
 import {Button as NativeButton} from 'react-native-elements';
 const axios = require('axios');
-import {ModalSelectList} from 'react-native-modal-select-list';
 import {colors} from 'config';
 import DomainSelect from './domain';
-
+import _ from 'lodash';
+import {Actions} from 'react-native-router-flux';
 const data = require('./data.json');
-const staticModalOptions = [
-  {
-    label: 'Modal',
-    value: 'Modal',
-  },
-];
+
 export default function () {
   let IPRef = useRef();
 
   const [selectedIndex, updateIndex] = useState(0);
   const [is_disabled, setDisabled] = useState(false);
+  const [_settings, useSettings] = useState({});
   const {settings, options} = data;
+
+  for (let _idx = 0; _idx < options.length; _idx++) {
+    const element = options[_idx];
+    element.id = _idx.toString();
+    options[_idx] = element;
+  }
   const getSettings = async () => {
     const requestBody = new URLSearchParams({
       query: 'baseconfig',
@@ -41,7 +42,20 @@ export default function () {
     );
     if (sett.data) {
       setDisabled(true);
-      console.log('sett.data', sett.data);
+      useSettings(sett.data);
+      const setting = sett.data;
+      setting.map((item) => {
+        settings.map((_sett) => {
+          if (item[_sett.key]) {
+            const selected = item[_sett.key];
+            _sett.list = selected;
+            _sett.text = _sett.tr;
+            _sett.type = selected.length < 2 ? 'radio' : _sett.type;
+            _sett.value = selected[0].Name;
+          }
+        });
+      });
+      useSettings(settings);
     }
   };
   return (
@@ -55,39 +69,42 @@ export default function () {
         color={is_disabled ? colors.grey : colors.active}
         disabled={is_disabled}
       />
+      {_settings.length > 0 ? (
+        <View style={{flex: 1}}>
+          <View style={styles.btngroup}>
+            <NativeButton
+              title={'TEMEL AYARLAR'}
+              type="clear"
+              onPress={() => updateIndex(0)}
+              titleStyle={styles.btn}
+              containerStyle={[
+                styles.btn_container,
+                selectedIndex === 0 && styles.active,
+              ]}
+            />
+            <NativeButton
+              title={'SECENEKLER'}
+              type="clear"
+              onPress={() => updateIndex(1)}
+              titleStyle={styles.btn}
+              containerStyle={[
+                styles.btn_container,
+                selectedIndex === 1 && styles.active,
+              ]}
+            />
+          </View>
 
-      <View style={styles.btngroup}>
-        <NativeButton
-          title={'TEMEL AYARLAR'}
-          type="clear"
-          onPress={() => updateIndex(0)}
-          titleStyle={styles.btn}
-          containerStyle={[
-            styles.btn_container,
-            selectedIndex === 0 && styles.active,
-          ]}
-        />
-        <NativeButton
-          title={'SECENEKLER'}
-          type="clear"
-          onPress={() => updateIndex(1)}
-          titleStyle={styles.btn}
-          containerStyle={[
-            styles.btn_container,
-            selectedIndex === 1 && styles.active,
-          ]}
-        />
-      </View>
+          <FlatList
+            data={selectedIndex === 0 ? _settings : _settings}
+            renderItem={({item}) => <PickerItem item={item} />}
+            keyExtractor={(item) => item.key}
+          />
 
-      <FlatList
-        data={selectedIndex === 0 ? settings : options}
-        renderItem={({item}) => (
-          <PickerItem text={item.text} value={item.value} />
-        )}
-        keyExtractor={(item) => item.id}
-      />
-
-      <Button text={'KAYDET'} onPress={() => alert('kaydet')} />
+          <Button text={'KAYDET'} onPress={Actions.pop} />
+        </View>
+      ) : (
+        <View />
+      )}
     </View>
   );
 }

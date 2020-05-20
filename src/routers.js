@@ -5,6 +5,7 @@ import {Scene, Router, Overlay, Modal} from 'react-native-router-flux';
 import Users from 'views/users/container.js';
 import PinCode from 'views/pinCode/container';
 import Settings from 'views/settings/container';
+import Order from 'views/order';
 
 const stateHandler = (prevState, newState, action) => {
   console.log('onStateChange: ACTION:', action);
@@ -22,8 +23,9 @@ const router = () => (
     <Overlay key="overlay" panHandlers={null}>
       <Modal key="modal" transitionConfig={transitionConfig} hideNavBar>
         <Scene component={Users} key="users" />
-        <Scene component={PinCode} key="pinCode" />
-        <Scene component={Settings} key="settings" initial />
+        <Scene component={PinCode} key="pinCode" initial />
+        <Scene component={Settings} key="settings" />
+        <Scene component={Order} key="order" />
       </Modal>
     </Overlay>
   </Router>

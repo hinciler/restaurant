@@ -1,0 +1,39 @@
+{
+  "leftDummy": [{
+      "text": "Table Degistir",
+      "disabled": false
+    },
+    {
+      "text": "Customer Sec",
+      "disabled": false
+    },
+    {
+      "text": "Ticket Note",
+      "disabled": false
+    },
+    {
+      "text": "Print Bill",
+      "disabled": true
+    }, {
+      "text": "Add Ticket",
+      "disabled": true
+    },
+    {
+      "text": "Customer Sec",
+      "disabled": false
+    },
+    {
+      "text": "Ticket Note",
+      "disabled": false
+    },
+    {
+      "text": "Print Bill",
+      "disabled": false
+    }, {
+      "text": "Add Ticket",
+      "disabled": false
+    }
+  ],
+  "orange": ["Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches"],
+  "green": ["Breakfast", "Soup Drink", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches"]
+}

@@ -23,4 +23,8 @@ export const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     justifyContent: 'space-between',
   },
+  titleStyle: {
+    color: colors.text,
+    fontSize: normalize(10),
+  },
 });
