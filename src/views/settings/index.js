@@ -1,11 +1,10 @@
 import React, {useState, useRef} from 'react';
 import {View, FlatList} from 'react-native';
 import {styles} from './style.js';
-import {Header, PickerItem, Text, Button} from 'components';
+import {Header, PickerItem, Text, Button, OptionsMenu} from 'components';
 import {Typography} from 'components/Text';
 import {Button as NativeButton} from 'react-native-elements';
 const axios = require('axios');
-const qs = require('querystring');
 import {ModalSelectList} from 'react-native-modal-select-list';
 import {colors} from 'config';
 import DomainSelect from './domain';
@@ -18,18 +17,11 @@ const staticModalOptions = [
   },
 ];
 export default function () {
-  let modalRef;
   let IPRef = useRef();
-  const openModal = () => modalRef.show();
-  const saveModalRef = (ref) => (modalRef = ref);
-  const onSelectedOption = (value) => {
-    console.log(`You selected: ${value}`);
-
-    console.log('IPRef.getData()', IPRef.current.getDomain());
-  };
 
   const [selectedIndex, updateIndex] = useState(0);
-  const {settings} = data;
+  const [is_disabled, setDisabled] = useState(false);
+  const {settings, options} = data;
   const getSettings = async () => {
     const requestBody = new URLSearchParams({
       query: 'baseconfig',
@@ -47,56 +39,55 @@ export default function () {
       requestBody,
       config,
     );
-    console.log('sett', sett.data);
+    if (sett.data) {
+      setDisabled(true);
+      console.log('sett.data', sett.data);
+    }
   };
   return (
     <View style={styles.container}>
       <Header />
       <DomainSelect ref={IPRef} />
+
       <Button
         text={'Ayarlari Bul'}
-        color={colors.primary}
-        backgroundColor={colors.secondary}
         onPress={getSettings}
+        color={is_disabled ? colors.grey : colors.active}
+        disabled={is_disabled}
       />
+
       <View style={styles.btngroup}>
         <NativeButton
-          title={<Text text="TEMEL AYARLAR" type={Typography.PS} />}
+          title={'TEMEL AYARLAR'}
           type="clear"
           onPress={() => updateIndex(0)}
-          containerStyle={[styles.btn, selectedIndex === 0 && styles.active]}
+          titleStyle={styles.btn}
+          containerStyle={[
+            styles.btn_container,
+            selectedIndex === 0 && styles.active,
+          ]}
         />
         <NativeButton
-          title={<Text text="SECENEKLER" type={Typography.PSS} />}
+          title={'SECENEKLER'}
           type="clear"
           onPress={() => updateIndex(1)}
-          containerStyle={[styles.btn, selectedIndex === 1 && styles.active]}
+          titleStyle={styles.btn}
+          containerStyle={[
+            styles.btn_container,
+            selectedIndex === 1 && styles.active,
+          ]}
         />
       </View>
-      {selectedIndex === 0 ? (
-        <FlatList
-          data={settings}
-          renderItem={({item}) => (
-            <PickerItem text={item.text} value="English" onPress={openModal} />
-          )}
-          keyExtractor={(item) => item.id}
-        />
-      ) : (
-        <View style={styles.options}>
-          <Text text="Hello Live man" />
-        </View>
-      )}
+
+      <FlatList
+        data={selectedIndex === 0 ? settings : options}
+        renderItem={({item}) => (
+          <PickerItem text={item.text} value={item.value} />
+        )}
+        keyExtractor={(item) => item.id}
+      />
 
       <Button text={'KAYDET'} onPress={() => alert('kaydet')} />
-      <ModalSelectList
-        ref={saveModalRef}
-        placeholder={'Text something...'}
-        closeButtonText={'Close'}
-        options={staticModalOptions}
-        onSelectedOption={onSelectedOption}
-        disableTextSearch={false}
-        numberOfLines={3}
-      />
     </View>
   );
 }

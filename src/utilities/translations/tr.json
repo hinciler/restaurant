@@ -2,6 +2,8 @@
   "welcome": "merhaba",
   "update_data": "Veri Güncellemesi Yapmak İstediğinizden Emin misiniz?",
   "yes": "Evet",
-  "cancel": "İptal"
+  "cancel": "İptal",
+  "basic_settings":"TEMEL AYARLAR",
+  "options": "SECENEKLER"
 
 }

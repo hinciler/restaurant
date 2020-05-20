@@ -25,8 +25,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   btn: {
-    flex: 1,
     textAlign: 'center',
+    color: colors.text,
+    fontSize: normalize(10),
+  },
+  btn_container: {
+    flex: 1,
   },
   active: {
     borderBottomColor: 'red',

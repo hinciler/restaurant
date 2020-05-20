@@ -18,7 +18,7 @@ const Buttons = ({
 }) => {
   return (
     <Button
-      title={<Text text={text} textAlign="center" type={Typography.PLB} color={color} />}
+      title={text}
       buttonStyle={[styles.buttonStyle, {backgroundColor}]}
       disabled={disabled}
       onPress={onPress}
