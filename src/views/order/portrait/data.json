@@ -1,0 +1,49 @@
+{
+  "indexButtons": [{
+      "text": "Adisyona Siparis Ekle",
+      "disabled": false,
+      "onPress": "addOrder"
+    },
+    {
+      "text": "Table Degistir",
+      "disabled": false,
+      "onPress": ""
+    },
+    {
+      "text": "Customer Sec",
+      "disabled": false,
+      "onPress": ""
+    },
+    {
+      "text": "Ticket Note",
+      "disabled": false,
+      "onPress": ""
+    },
+    {
+      "text": "Print Bill",
+      "disabled": true,
+      "onPress": ""
+    }, {
+      "text": "Add Ticket",
+      "disabled": true,
+      "onPress": ""
+    },
+
+    {
+      "text": "Add Test",
+      "disabled": false,
+      "onPress": ""
+    },
+    {
+      "text": "Add Test2",
+      "disabled": false,
+      "onPress": ""
+    }, {
+      "text": "Add Test3",
+      "disabled": false,
+      "onPress": ""
+    }
+  ],
+  "addMenu": ["Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches"],
+  "addFood": ["Breakfast", "Soup Drink", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches"]
+}

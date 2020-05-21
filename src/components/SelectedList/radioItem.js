@@ -1,20 +1,21 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {CheckBox} from 'react-native-elements';
 import {colors} from 'config';
 
-export default function ({text, _key, onPress}) {
-  const [checked, set_checked] = useState(false);
+export default function ({text, index, onPress, selectedIndex}) {
   const pressed = () => {
-    const data = {checked: !checked, text, _key};
-    set_checked(!checked);
+    const data = {index};
     onPress(data);
   };
+
   return (
     <CheckBox
       title={text}
-      checked={checked}
+      checked={index === selectedIndex}
       onPress={pressed}
       checkedColor={colors.red}
+      checkedIcon="dot-circle-o"
+      uncheckedIcon="circle-o"
     />
   );
 }
