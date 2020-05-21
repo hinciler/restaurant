@@ -14,8 +14,6 @@ const mapStateToProps = (state) => {
     lang: state.translate.lang,
     error: state.pinCode.error,
     loading: state.pinCode.loading,
-    productPortion: state.pinCode.productPortion,
-    orderTags: state.pinCode.orderTags,
   };
 };
 const mapStateToDispatch = (dispatch) => {
