@@ -66,6 +66,74 @@ export default class Database {
                       console.log(error);
                     });
                 });
+              db.executeSql('SELECT 1 FROM portions LIMIT 1')
+                .then(() => {})
+                .catch((error) => {
+                  db.transaction((tx) => {
+                    tx.executeSql('DROP TABLE IF EXISTS portions', []);
+                    tx.executeSql(
+                      'CREATE TABLE IF NOT EXISTS portions (id INTEGER PRIMARY KEY AUTOINCREMENT, portion_id TEXT, product_id TEXT, name TEXT, price TEXT)',
+                    );
+                  })
+                    .then(() => {
+                      console.log('Table portions created successfully');
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
+                });
+              db.executeSql('SELECT 1 FROM order_tag_groups LIMIT 1')
+                .then(() => {})
+                .catch((error) => {
+                  db.transaction((tx) => {
+                    tx.executeSql('DROP TABLE IF EXISTS order_tag_groups', []);
+                    tx.executeSql(
+                      'CREATE TABLE IF NOT EXISTS order_tag_groups (id INTEGER PRIMARY KEY AUTOINCREMENT, order_tag_group_id TEXT, product_id TEXT, portion_name TEXT, name TEXT, color TEXT, max TEXT, min TEXT, hidden TEXT)',
+                    );
+                  })
+                    .then(() => {
+                      console.log(
+                        'Table order_tag_groups created successfully',
+                      );
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
+                });
+              db.executeSql('SELECT 1 FROM order_tags LIMIT 1')
+                .then(() => {})
+                .catch((error) => {
+                  db.transaction((tx) => {
+                    tx.executeSql('DROP TABLE IF EXISTS order_tags', []);
+                    tx.executeSql(
+                      'CREATE TABLE IF NOT EXISTS order_tags (id INTEGER PRIMARY KEY AUTOINCREMENT, order_tag_id TEXT, order_tag_group_id TEXT, name TEXT, color TEXT, price TEXT, max_quantity TEXT)',
+                    );
+                  })
+                    .then(() => {
+                      console.log('Table order_tags created successfully');
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
+                });
+              db.executeSql('SELECT 1 FROM ticket_tag_groups LIMIT 1')
+                .then(() => {})
+                .catch((error) => {
+                  db.transaction((tx) => {
+                    tx.executeSql('DROP TABLE IF EXISTS ticket_tag_groups', []);
+                    tx.executeSql(
+                      'CREATE TABLE IF NOT EXISTS ticket_tag_groups (id INTEGER PRIMARY KEY AUTOINCREMENT, ticket_tag_group_id TEXT, free_tagging TEXT, force_value TEXT, ask_before_creating_ticket TEXT, roles TEXT, type TEXT, name TEXT)',
+                    );
+                  })
+                    .then(() => {
+                      console.log(
+                        'Table ticket_tag_groups created successfully',
+                      );
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
+                });
 
               resolve(db);
             })
@@ -162,5 +230,188 @@ export default class Database {
           console.log(err);
         });
     });
+  }
+
+  addPortion(portion) {
+    return new Promise((resolve) => {
+      this.initDB()
+        .then((db) => {
+          db.transaction((tx) => {
+            tx.executeSql(
+              'INSERT INTO portions (portion_id, product_id, name, price) VALUES (?, ?, ?, ?)',
+              [
+                portion.portionId,
+                portion.productId,
+                portion.portionName,
+                portion.portionPrice,
+              ],
+            ).then(([tx, results]) => {
+              resolve(results);
+            });
+          })
+            .then((result) => {
+              this.closeDatabase(db);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  }
+
+  addOrderTagGroup(orderTagGroupData) {
+    return new Promise((resolve) => {
+      this.initDB()
+        .then((db) => {
+          db.transaction((tx) => {
+            tx.executeSql(
+              'INSERT INTO order_tag_groups (order_tag_group_id, product_id, portion_name, name, color, max, min, hidden) VALUES (?, ?, ?, ?, ?, ?, ? ,?)',
+              [
+                orderTagGroupData.orderTagGroupId,
+                orderTagGroupData.productId,
+                orderTagGroupData.portionName,
+                orderTagGroupData.name,
+                orderTagGroupData.color,
+                orderTagGroupData.max,
+                orderTagGroupData.min,
+                orderTagGroupData.hidden,
+              ],
+            ).then(([tx, results]) => {
+              resolve(results);
+            });
+          })
+            .then((result) => {
+              this.closeDatabase(db);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  }
+
+  addOrderTags(orderTag) {
+    return new Promise((resolve) => {
+      this.initDB()
+        .then((db) => {
+          db.transaction((tx) => {
+            tx.executeSql(
+              'INSERT INTO order_tags (order_tag_group_id, order_tag_id, name, color, price, max_quantity) VALUES (?, ?, ?, ?, ?, ?)',
+              [
+                orderTag.orderTagGroupId,
+                orderTag.orderTagId,
+                orderTag.name,
+                orderTag.color,
+                orderTag.price,
+                orderTag.maxQuantity,
+              ],
+            ).then(([tx, results]) => {
+              resolve(results);
+            });
+          })
+            .then((result) => {
+              this.closeDatabase(db);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  }
+
+  addTicketTagGroup(ticketTagGroup) {
+    return new Promise((resolve) => {
+      this.initDB()
+        .then((db) => {
+          db.transaction((tx) => {
+            tx.executeSql(
+              'INSERT INTO ticket_tag_groups (ticket_tag_group_id, free_tagging, force_value, ask_before_creating_ticket, name, roles) VALUES (?, ?, ?, ?, ?, ?)',
+              [
+                ticketTagGroup.ticketTagGroupId,
+                ticketTagGroup.freeTagging,
+                ticketTagGroup.forceValue,
+                ticketTagGroup.askBefore,
+                ticketTagGroup.name,
+                ticketTagGroup.roles,
+              ],
+            ).then(([tx, results]) => {
+              resolve(results);
+            });
+          })
+            .then((result) => {
+              this.closeDatabase(db);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  }
+
+  deleteTables() {
+    this.initDB()
+      .then((db) => {
+        db.transaction((tx) => {
+          tx.executeSql('DELETE FROM product_groups;').then(([tx, results]) => {
+            // console.log('results', results);
+          });
+        });
+        db.transaction((tx) => {
+          tx.executeSql('DELETE FROM products;').then(([tx, results]) => {
+            // console.log('results', results);
+          });
+        });
+        db.transaction((tx) => {
+          tx.executeSql('DELETE FROM portions;').then(([tx, results]) => {
+            console.log('results', results);
+          });
+        });
+        db.transaction((tx) => {
+          tx.executeSql('DELETE FROM order_tag_groups;').then(
+            ([tx, results]) => {
+              console.log('results', results);
+            },
+          );
+        });
+        db.transaction((tx) => {
+          tx.executeSql('DELETE FROM order_tags;').then(([tx, results]) => {
+            console.log('results', results);
+          });
+        });
+        db.transaction((tx) => {
+          tx.executeSql('DELETE FROM ticket_tag_groups;').then(
+            ([tx, results]) => {
+              console.log('results', results);
+            },
+          );
+        });
+        db.transaction((tx) => {
+          tx.executeSql('DELETE FROM ticket_tags;').then(([tx, results]) => {
+            console.log('results', results);
+          });
+        });
+        // db.transaction((tx) => {
+        //   tx.executeSql('DELETE FROM chat_messages;').then(([tx, results]) => {
+        //     console.log('results', results);
+        //   });
+        // });
+
+        this.closeDatabase(db);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }

@@ -4,6 +4,7 @@ import {Button, Header, PinCodeView} from 'components';
 import {styles} from './style';
 import {isTablet} from 'react-native-device-info';
 import axios from 'axios';
+import Database from '../../db/database';
 
 class PinCode extends PureComponent {
   constructor(props) {
@@ -24,12 +25,13 @@ class PinCode extends PureComponent {
       },
     };
 
-    const sett = await axios.post(
+    const ticketTag = await axios.post(
       'http://78.159.99.84:9000/api/helper',
       requestBody,
       config,
     );
-    // console.log('sett', sett.data);
+    // ticketTag.data.TicketTagGroups.map((ticketTagGroupItem) => {});
+    // console.log('sett', ticketTag.data);
   }
 
   getMenu() {
@@ -55,6 +57,8 @@ class PinCode extends PureComponent {
   }
 
   onPressUpdate() {
+    const db = new Database();
+    db.deleteTables;
     this.getMenu();
     this.getTicketTags();
   }

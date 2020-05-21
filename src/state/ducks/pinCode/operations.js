@@ -3,8 +3,50 @@ import api from '@duck_utils/api';
 import type from './types';
 import Database from '../../../db/database';
 import {func} from 'prop-types';
+import {useState} from 'react';
 const db = new Database();
+
 export function* getMenu(action) {
+  const saveProductGroup = (productGroupData) => {
+    return new Promise((resolve) => {
+      db.addProductGroup(productGroupData)
+        .then((result) => {
+          const group_id = result.insertId;
+          resolve(group_id);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  };
+
+  const saveProduct = (productData) => {
+    db.addProduct(productData).then((productResult) => {
+      // console.log('results_id', productResult);
+    });
+  };
+
+  const savePortion = (portionData) => {
+    db.addPortion(portionData).then((portionResult) => {});
+  };
+
+  const saveOrderTagGroup = (orderTagGroupData) => {
+    return new Promise((resolve) => {
+      db.addOrderTagGroup(orderTagGroupData)
+        .then((result) => {
+          const orderTagGroupId = result.insertId;
+          resolve(orderTagGroupId);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  };
+
+  const saveOrderTag = (orderTagData) => {
+    db.addOrderTags(orderTagData).then((portionResult) => {});
+  };
+
   try {
     const response = yield api.getMenu(action.payload);
     if (response.hasOwnProperty('error')) {
@@ -35,40 +77,103 @@ export function* getMenu(action) {
           isFastMenu,
         };
 
-        item.menuItems.map((menuItem, idx) => {
-          const productId = menuItem.productId;
-          const productName = menuItem.name;
-          const productColor = menuItem.color;
-          const productForeground = menuItem.foreground;
-          const productImage = menuItem.image;
-          const productHeader = menuItem.header;
-          const productCaption = menuItem.caption;
-          const productCategoryId = menuItem.categoryId;
-          const productQuantity = menuItem.quantity;
-          const productData = {
-            productId,
-            name: productName,
-            color: productColor,
-            foreground: productForeground,
-            image: productImage,
-            header: productHeader,
-            caption: productCaption,
-            categoryId: productCategoryId,
-            quantity: productQuantity,
-          };
-          saveProduct(productGroupData, productData);
+        //save product group to local database and get return id to save in product
+        saveProductGroup(productGroupData).then((groupId) => {
+          item.menuItems.map((menuItem, idx) => {
+            const productId = menuItem.productId;
+            const productName = menuItem.name;
+            const productColor = menuItem.color;
+            const productForeground = menuItem.foreground;
+            const productImage = menuItem.image;
+            const productHeader = menuItem.header;
+            const productCaption = menuItem.caption;
+            const productCategoryId = menuItem.categoryId;
+            const productQuantity = menuItem.quantity;
 
-          menuItem.product.portions.map(async function (productItem, idx) {
-            const terminal_setting = 'Server';
-            const payloadOrderTag = {
-              query: `
-                    {getOrderTagGroups(productId: ${menuItem.productId}, portion:"${productItem.name}",terminal:"${terminal_setting}"){id,name,color,max,min,hidden,tags{id,name,color,description,price,maxQuantity,rate}}}
-                  `,
+            const productData = {
+              productId,
+              groupId,
+              name: productName,
+              color: productColor,
+              foreground: productForeground,
+              image: productImage,
+              header: productHeader,
+              caption: productCaption,
+              categoryId: productCategoryId,
+              quantity: productQuantity,
             };
-            const responsePortion = await api.getOrderTagGroups(
-              payloadOrderTag,
-            );
-            // console.log('portionTags', responsePortion);
+
+            //save products to local database
+            saveProduct(productData);
+            menuItem.product.portions.map(async function (portionItem, idx) {
+              const portionId = portionItem.id;
+              const portionName = portionItem.name;
+              const portionPrice = portionItem.price;
+              const productId = portionItem.productId;
+
+              const portionData = {
+                portionId,
+                productId,
+                portionName,
+                portionPrice,
+              };
+
+              //save portions to local database
+              savePortion(portionData);
+              const terminal_setting = 'Server';
+              const payloadOrderTag = {
+                query: `
+                    {getOrderTagGroups(productId: ${menuItem.productId}, portion:"${portionItem.name}",terminal:"${terminal_setting}"){id,name,color,max,min,hidden,tags{id,name,color,description,price,maxQuantity,rate}}}
+                  `,
+              };
+              const responsePortion = await api.getOrderTagGroups(
+                payloadOrderTag,
+              );
+              const orderTagGroup = responsePortion.data.getOrderTagGroups;
+              orderTagGroup.map((orderTagGroupItem, idx) => {
+                const orderTagGroupId = orderTagGroupItem.id;
+                const orderTagGroupName = orderTagGroupItem.name;
+                const orderTagGroupColor = orderTagGroupItem.color;
+                const orderTagGroupMax = orderTagGroupItem.max;
+                const orderTagGroupMin = orderTagGroupItem.min;
+                const orderTagGroupHidden = orderTagGroupItem.hidden;
+                const orderTagGroupData = {
+                  orderTagGroupId,
+                  productId: menuItem.productId,
+                  portionName: portionItem.name,
+                  name: orderTagGroupName,
+                  color: orderTagGroupColor,
+                  max: orderTagGroupMax,
+                  min: orderTagGroupMin,
+                  hidden: orderTagGroupHidden,
+                };
+
+                //save OrderTagGroup to local database and get id to save in order tag
+                saveOrderTagGroup(orderTagGroupData).then((orderTagGroupId) => {
+                  orderTagGroupItem.tags.map((tagItem) => {
+                    if (orderTagGroupId != 0) {
+                      const tagId = tagItem.id;
+                      const tagName = tagItem.name;
+                      const tagColor = tagItem.color;
+                      const tagPrice = tagItem.price;
+                      const tagRate = tagItem.rate;
+                      const tagMaxQuantity = tagItem.maxQuantity;
+                      const orderTagData = {
+                        orderTagGroupId,
+                        orderTagId: tagId,
+                        name: tagName,
+                        color: tagColor,
+                        price: tagPrice,
+                        maxQuantity: tagMaxQuantity,
+                      };
+
+                      //save OrderTag to local database
+                      saveOrderTag(orderTagData);
+                    }
+                  });
+                });
+              });
+            });
           });
         });
       });
@@ -83,22 +188,6 @@ export function* getMenu(action) {
       error,
     });
   }
-}
-
-function saveProduct(productGroupData, productData) {
-  db.addProductGroup(productGroupData)
-    .then((result) => {
-      console.log(result);
-      const groupId = result.insertId;
-      productData.groupId = groupId;
-      db.addProduct(productData).then((productResult) => {
-        console.log('results_id', productResult);
-      });
-      // console.log('results_id', result.insertId);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
 }
 
 function* watch_getMenu() {
