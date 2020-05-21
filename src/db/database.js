@@ -22,8 +22,9 @@ export default class Database {
                 .then(() => {})
                 .catch((error) => {
                   db.transaction((tx) => {
+                    tx.executeSql('DROP TABLE IF EXISTS order_line', []);
                     tx.executeSql(
-                      'CREATE TABLE IF NOT EXISTS order_line (name TEXT, quantity TEXT, price TEXT, productId TEXT, portion TEXT, orderTags TEXT, orderTagGroups TEXT, differentSituation TEXT)',
+                      'CREATE TABLE IF NOT EXISTS order_line (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, quantity TEXT, price TEXT, productId TEXT, portion TEXT, orderTags TEXT, orderTagGroups TEXT, differentSituation TEXT)',
                     );
                   })
                     .then(() => {
@@ -37,8 +38,9 @@ export default class Database {
                 .then(() => {})
                 .catch((error) => {
                   db.transaction((tx) => {
+                    tx.executeSql('DROP TABLE IF EXISTS product_groups', []);
                     tx.executeSql(
-                      'CREATE TABLE IF NOT EXISTS product_groups (group_id TEXT, name TEXT, color TEXT, foreground TEXT, image TEXT, header TEXT, menuId TEXT, isFastMenu TEXT)',
+                      'CREATE TABLE IF NOT EXISTS product_groups (id INTEGER PRIMARY KEY AUTOINCREMENT, group_id TEXT, name TEXT, color TEXT, foreground TEXT, image TEXT, header TEXT, menuId TEXT, isFastMenu TEXT)',
                     );
                   })
                     .then(() => {
@@ -52,8 +54,9 @@ export default class Database {
                 .then(() => {})
                 .catch((error) => {
                   db.transaction((tx) => {
+                    tx.executeSql('DROP TABLE IF EXISTS products', []);
                     tx.executeSql(
-                      'CREATE TABLE IF NOT EXISTS products (group_id TEXT, product_id TEXT, name TEXT, color TEXT, foreground TEXT, image TEXT, header TEXT, caption TEXT, category_id TEXT, quantity TEXT)',
+                      'CREATE TABLE IF NOT EXISTS products (id INTEGER PRIMARY KEY AUTOINCREMENT, group_id TEXT, product_id TEXT, name TEXT, color TEXT, foreground TEXT, image TEXT, header TEXT, caption TEXT, category_id TEXT, quantity TEXT)',
                     );
                   })
                     .then(() => {
@@ -97,7 +100,7 @@ export default class Database {
         .then((db) => {
           db.transaction((tx) => {
             tx.executeSql(
-              'INSERT INTO product_groups VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+              'INSERT INTO product_groups (group_id, name, color,foreground, image, header, menuId, isFastMenu) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
               [
                 prodGroup.groupId,
                 prodGroup.name,
@@ -131,7 +134,7 @@ export default class Database {
         .then((db) => {
           db.transaction((tx) => {
             tx.executeSql(
-              'INSERT INTO products VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+              'INSERT INTO products (group_id, product_id, name, color, foreground, image, header, caption, category_id, quantity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
               [
                 prod.groupId,
                 prod.productId,
