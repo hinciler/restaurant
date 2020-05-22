@@ -329,6 +329,9 @@ export default class Database {
   }
 
   addTicketTagGroup(ticketTagGroup) {
+    // const shouldAdd = true;
+    // if (ticketTagGroup.roles.equals('*')) {
+    // }
     return new Promise((resolve) => {
       this.initDB()
         .then((db) => {

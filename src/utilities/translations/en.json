@@ -4,5 +4,7 @@
   "yes": "Yes",
   "cancel": "Cancel",
   "basic_settings":"BASIC SETTINGS",
-  "options": "OPTIONS"
+  "options": "OPTIONS",
+  "loading": "Loading...",
+  "please_wait": "Please Wait When Updating!",
 }

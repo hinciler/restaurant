@@ -4,6 +4,7 @@
   "yes": "Evet",
   "cancel": "İptal",
   "basic_settings":"TEMEL AYARLAR",
-  "options": "SECENEKLER"
-
+  "options": "SECENEKLER",
+  "loading": "Yükleniyor...",
+  "please_wait": "Güncelleme işlemi yapılırken lütfen bekleyin!"
 }

@@ -4,6 +4,7 @@ import type from './types';
 import Database from '../../../db/database';
 import {func} from 'prop-types';
 import {useState} from 'react';
+import axios from 'axios';
 const db = new Database();
 
 export function* getMenu(action) {
@@ -57,7 +58,6 @@ export function* getMenu(action) {
     } else {
       const categories = response.data.getMenu.categories;
       console.log('categories', categories);
-      let categoryCount = 0;
       categories.map(async function (item, categoryIdx) {
         const groupId = item.id;
         const name = item.name;
@@ -178,6 +178,42 @@ export function* getMenu(action) {
           });
         });
       });
+
+      //Get ticket tags
+      let tagGroupArraylist = [];
+      const requestBody = new URLSearchParams({
+        query: 'tickettags',
+        serial: '111',
+      });
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      };
+
+      const ticketTag = yield axios.post(
+        'http://78.159.99.84:9000/api/helper',
+        requestBody,
+        config,
+      );
+      ticketTag.data[0].TicketTagGroups.map((ticketTagGroupItem) => {
+        const freeTagging = ticketTagGroupItem.FreeTagging;
+        const forceValue = ticketTagGroupItem.ForceValue;
+        const askBeforeCreatingTicket =
+          ticketTagGroupItem.AskBeforeCreatingTicket;
+        const name = ticketTagGroupItem.Name;
+        const id = ticketTagGroupItem.Id;
+        tagGroupArraylist.push(id);
+        const roles = ticketTagGroupItem.Roles;
+
+        if (roles.contains(',')) {
+        } else {
+        }
+      });
+
+      console.log('sett', ticketTag.data[0].TicketTagGroups);
+
       yield put({
         type: type.GET_MENU_SUCCESS,
         data: response.data,

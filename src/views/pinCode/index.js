@@ -19,9 +19,6 @@ class PinCode extends PureComponent {
       modalVisible: false,
     };
   }
-  componentDidMount() {
-    // this.animate();
-  }
 
   animate() {
     this.setState({modalVisible: true});
@@ -37,27 +34,6 @@ class PinCode extends PureComponent {
         this.setState({progress});
       }, 500);
     }, 1500);
-  }
-
-  async getTicketTags() {
-    const requestBody = new URLSearchParams({
-      query: 'tickettags',
-      serial: '111',
-    });
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    };
-
-    const ticketTag = await axios.post(
-      'http://78.159.99.84:9000/api/helper',
-      requestBody,
-      config,
-    );
-    // ticketTag.data.TicketTagGroups.map((ticketTagGroupItem) => {});
-    console.log('sett', ticketTag.data);
   }
 
   getMenu() {
@@ -84,10 +60,9 @@ class PinCode extends PureComponent {
 
   onPressUpdate() {
     this.animate();
-    // const db = new Database();
-    // db.deleteTables;
-    // this.getMenu();
-    // this.getTicketTags();
+    const db = new Database();
+    db.deleteTables;
+    this.getMenu();
   }
 
   render() {
@@ -99,6 +74,32 @@ class PinCode extends PureComponent {
             contentContainerStyle={styles.scrollView}
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}>
+            <Modal isVisible={this.state.modalVisible}>
+              <View style={styles.content}>
+                <View style={{justifyContent: 'flex-start'}}>
+                  <Text
+                    style={styles.contentTitle}
+                    text={lang.loading}
+                    type={Typography.PLB}
+                  />
+                  <Text
+                    style={styles.contentTitle}
+                    text={lang.please_wait}
+                    type={Typography.PL}
+                  />
+                </View>
+                <View
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Progress.Bar
+                    width={normalize(250)}
+                    progress={this.state.progress}
+                  />
+                </View>
+              </View>
+            </Modal>
             <View style={styles.container_landscape}>
               <View style={styles.left}>
                 <Image source={require('assets/img/logo.png')} />
@@ -116,22 +117,16 @@ class PinCode extends PureComponent {
         ) : (
           <View style={styles.container_portrait}>
             <Modal isVisible={this.state.modalVisible}>
-              <View
-                style={{
-                  backgroundColor: 'white',
-                  padding: 22,
-                  borderRadius: 4,
-                  borderColor: 'rgba(0, 0, 0, 0.1)',
-                }}>
+              <View style={styles.content}>
                 <View style={{justifyContent: 'flex-start'}}>
                   <Text
                     style={styles.contentTitle}
-                    text={'Loading..'}
+                    text={lang.loading}
                     type={Typography.PLB}
                   />
                   <Text
                     style={styles.contentTitle}
-                    text={'Please Wait When Updating!'}
+                    text={lang.please_wait}
                     type={Typography.PL}
                   />
                 </View>
