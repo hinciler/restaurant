@@ -1,18 +1,44 @@
 import React, {PureComponent} from 'react';
 import {View, Image, ScrollView} from 'react-native';
-import {Button, Header, PinCodeView} from 'components';
+import {Button, Header, PinCodeView, Text} from 'components';
 import {styles} from './style';
 import {isTablet} from 'react-native-device-info';
 import axios from 'axios';
 import Database from '../../db/database';
+import Modal from 'react-native-modal';
+import * as Progress from 'react-native-progress';
+import {Typography} from 'components/Text';
+import {normalize} from 'react-native-elements';
 
 class PinCode extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      portionsSuccess: false,
+      menuSuccess: false,
+      progress: 0,
+      modalVisible: false,
     };
   }
+  componentDidMount() {
+    // this.animate();
+  }
+
+  animate() {
+    this.setState({modalVisible: true});
+    let progress = 0;
+    this.setState({progress});
+    setTimeout(() => {
+      setInterval(() => {
+        progress += Math.random() / 5;
+        if (progress > 1) {
+          progress = 1;
+          this.setState({modalVisible: false});
+        }
+        this.setState({progress});
+      }, 500);
+    }, 1500);
+  }
+
   async getTicketTags() {
     const requestBody = new URLSearchParams({
       query: 'tickettags',
@@ -31,7 +57,7 @@ class PinCode extends PureComponent {
       config,
     );
     // ticketTag.data.TicketTagGroups.map((ticketTagGroupItem) => {});
-    // console.log('sett', ticketTag.data);
+    console.log('sett', ticketTag.data);
   }
 
   getMenu() {
@@ -57,10 +83,11 @@ class PinCode extends PureComponent {
   }
 
   onPressUpdate() {
-    const db = new Database();
-    db.deleteTables;
-    this.getMenu();
-    this.getTicketTags();
+    this.animate();
+    // const db = new Database();
+    // db.deleteTables;
+    // this.getMenu();
+    // this.getTicketTags();
   }
 
   render() {
@@ -88,6 +115,38 @@ class PinCode extends PureComponent {
           </ScrollView>
         ) : (
           <View style={styles.container_portrait}>
+            <Modal isVisible={this.state.modalVisible}>
+              <View
+                style={{
+                  backgroundColor: 'white',
+                  padding: 22,
+                  borderRadius: 4,
+                  borderColor: 'rgba(0, 0, 0, 0.1)',
+                }}>
+                <View style={{justifyContent: 'flex-start'}}>
+                  <Text
+                    style={styles.contentTitle}
+                    text={'Loading..'}
+                    type={Typography.PLB}
+                  />
+                  <Text
+                    style={styles.contentTitle}
+                    text={'Please Wait When Updating!'}
+                    type={Typography.PL}
+                  />
+                </View>
+                <View
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Progress.Bar
+                    width={normalize(250)}
+                    progress={this.state.progress}
+                  />
+                </View>
+              </View>
+            </Modal>
             <Header />
             <ScrollView contentContainerStyle={styles.scrollView}>
               <View style={styles.container_landscape}>

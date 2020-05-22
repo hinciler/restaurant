@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {colors} from 'config';
+import {normalize} from 'react-native-elements';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -22,7 +23,20 @@ export const styles = StyleSheet.create({
   },
   scrollView: {
     flexGrow: 1,
-
     backgroundColor: colors.background1,
+  },
+
+  content: {
+    backgroundColor: 'white',
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
+
+  contentTitle: {
+    fontSize: 20,
+    marginBottom: normalize(15),
   },
 });

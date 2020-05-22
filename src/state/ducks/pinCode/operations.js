@@ -43,8 +43,8 @@ export function* getMenu(action) {
     });
   };
 
-  const saveOrderTag = (orderTagData) => {
-    db.addOrderTags(orderTagData).then((portionResult) => {});
+  const saveOrderTag = async (orderTagData) => {
+    await db.addOrderTags(orderTagData).then((portionResult) => {});
   };
 
   try {
@@ -57,7 +57,8 @@ export function* getMenu(action) {
     } else {
       const categories = response.data.getMenu.categories;
       console.log('categories', categories);
-      categories.map((item, categoryIdx) => {
+      let categoryCount = 0;
+      categories.map(async function (item, categoryIdx) {
         const groupId = item.id;
         const name = item.name;
         const color = item.color;
@@ -78,7 +79,7 @@ export function* getMenu(action) {
         };
 
         //save product group to local database and get return id to save in product
-        saveProductGroup(productGroupData).then((groupId) => {
+        await saveProductGroup(productGroupData).then((groupId) => {
           item.menuItems.map((menuItem, idx) => {
             const productId = menuItem.productId;
             const productName = menuItem.name;
@@ -150,7 +151,7 @@ export function* getMenu(action) {
 
                 //save OrderTagGroup to local database and get id to save in order tag
                 saveOrderTagGroup(orderTagGroupData).then((orderTagGroupId) => {
-                  orderTagGroupItem.tags.map((tagItem) => {
+                  orderTagGroupItem.tags.map(async function (tagItem) {
                     if (orderTagGroupId != 0) {
                       const tagId = tagItem.id;
                       const tagName = tagItem.name;
@@ -168,7 +169,7 @@ export function* getMenu(action) {
                       };
 
                       //save OrderTag to local database
-                      saveOrderTag(orderTagData);
+                      await saveOrderTag(orderTagData);
                     }
                   });
                 });

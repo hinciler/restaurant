@@ -24,10 +24,10 @@ const router = () => (
     <Overlay key="overlay" panHandlers={null}>
       <Modal key="modal" transitionConfig={transitionConfig} hideNavBar>
         <Scene component={Users} key="users" />
-        <Scene component={PinCode} key="pinCode" />
+        <Scene component={PinCode} key="pinCode" initial />
         <Scene component={Settings} key="settings" />
         <Scene component={Order} key="order" />
-        <Scene component={Progress} key="progress" initial />
+        <Scene component={Progress} key="progress" />
       </Modal>
     </Overlay>
   </Router>
