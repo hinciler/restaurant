@@ -15,7 +15,7 @@ export default function () {
 
   const [selectedIndex, updateIndex] = useState(0);
   const [is_disabled, setDisabled] = useState(false);
-  const [_settings, useSettings] = useState({});
+  const [_settings, useSettings] = useState([]);
   const {settings, options} = data;
 
   for (let _idx = 0; _idx < options.length; _idx++) {
@@ -42,7 +42,6 @@ export default function () {
     );
     if (sett.data) {
       setDisabled(true);
-      useSettings(sett.data);
       const setting = sett.data;
       setting.map((item) => {
         settings.map((_sett) => {
@@ -55,6 +54,15 @@ export default function () {
           }
         });
       });
+      const _options = [];
+      const _option = {};
+      options.data.map((option) => {
+        option.text = option.tr;
+        option.value = options.en;
+        option.type = 'radio';
+        option.list = options.options;
+      });
+
       useSettings(settings);
     }
   };
@@ -95,9 +103,9 @@ export default function () {
           </View>
 
           <FlatList
-            data={selectedIndex === 0 ? _settings : _settings}
+            data={selectedIndex === 0 ? _settings : options}
             renderItem={({item}) => <PickerItem item={item} />}
-            keyExtractor={(item) => item.key}
+            keyExtractor={(item, index) => index + ''}
           />
 
           <Button text={'KAYDET'} onPress={Actions.pop} />

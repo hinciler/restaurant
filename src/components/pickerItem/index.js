@@ -11,11 +11,21 @@ const PickerItem = ({item}) => {
   const [_value, setValue] = useState(item.value);
   const onSave = (data) => {
     if (item.type === 'radio') {
-      setVisible(false);
       setValue(item.list[data].Name);
     } else {
+      console.log('data', data);
+      if (data.length > 0) {
+        let _values = '';
+        data.map((check, index) => {
+          _values += index === 0 ? check.text : ', ' + check.text;
+        });
 
-     }
+        setValue(_values);
+      } else {
+        setValue('Seciniz');
+      }
+    }
+    setVisible(false);
   };
   return (
     <View style={styles.container}>

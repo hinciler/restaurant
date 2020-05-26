@@ -43,17 +43,13 @@ export default function ({
   const [selectIndex, selectRadio] = useState(0);
   const checked = (data) => {
     const _index = _.findIndex(checklist, ['_key', data._key]);
-    if (_index >= 0) {
-      if (data.value) {
-        checklist[_index] = data;
-      } else {
-        _.pullAt(checklist, [_index]);
-      }
-    } else {
+    if (_index === -1) {
       checklist.push(data);
+    } else {
+      _.pullAt(checklist, [_index]);
     }
   };
-   return (
+  return (
     <Modal
       isVisible={visible}
       onBackdropPress={() => setVisible(false)}
@@ -74,10 +70,10 @@ export default function ({
       <View style={styles.contentWrapper}>
         <FlatList
           data={list}
-          contentcontainerStyle={styles.flatListContainer}
+          contentContainerStyle={styles.flatListContainer}
           renderItem={({item, index}) =>
             type === 'check' ? (
-              <CheckBox text={item.Name} onPress={checked} _key={item.id} />
+              <CheckBox text={item.Name} onPress={checked} _key={item.Id} />
             ) : (
               <RadioItem
                 text={item.Name}

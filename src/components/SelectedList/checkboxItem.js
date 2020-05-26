@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import {CheckBox} from 'react-native-elements';
 import {colors} from 'config';
 
-export default function ({text, _key, onPress}) {
-  const [checked, set_checked] = useState(false);
+function CheckBoxItem({text, _key, onPress, isCheck = true}) {
+  const [checked, set_checked] = useState(isCheck);
   const pressed = () => {
     const data = {checked: !checked, text, _key};
     set_checked(!checked);
@@ -18,3 +18,4 @@ export default function ({text, _key, onPress}) {
     />
   );
 }
+export default memo(CheckBoxItem);

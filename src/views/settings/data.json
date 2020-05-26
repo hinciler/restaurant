@@ -25,48 +25,101 @@
       "tr": "Masa Varlik Tipi",
       "key": "EntityType",
       "en": "Entity Type",
-      "id": "3",
+      "id": "4",
+      "type": "check"
+    },
+    {
+      "tr": "EntityScreen",
+      "key": "EntityScreen",
+      "en": "EntityScreen",
+      "id": "5",
+      "type": "check"
+    },
+    {
+      "tr": "ScreenMenu",
+      "key": "ScreenMenu",
+      "en": "ScreenMenu",
+      "id": "6",
+      "type": "check"
+    },
+    {
+      "tr": "AutomationCommand",
+      "key": "AutomationCommand",
+      "en": "AutomationCommand",
+      "id": "7",
       "type": "check"
     }
   ],
-  "options": [
-    {
-      "text": "Table Degistir",
-      "value": "Hayir"
-    },
-    {
-      "text": "Customer Sec",
-      "value": "Hayir"
-    },
-    {
-      "text": "Ticket Note",
-      "value": "Evet"
-    },
-    {
-      "text": "Print Bill",
-      "value": "Evet"
-    },
-    {
-      "text": "Add Ticket",
-      "value": "Hayir"
-    },
-    {
-      "text": "Customer Sec",
-      "value": "Hayir"
-    },
-    {
-      "text": "Ticket Note",
-      "value": "Hayir"
-    },
-    {
-      "text": "Print Bill",
-      "value": "Hayir"
-    },
-    {
-      "text": "Add Ticket",
-      "value": "Evet"
-    }
-  ],
+  "options": {
+    "data": [
+      {
+        "tr": "Otomatik Cikis",
+        "key": "autoQuit",
+        "en": "Auto Quit",
+        "id": "1"
+      },
+      {
+        "tr": "Musteri sec",
+        "key": "selectCustomer",
+        "en": "Select Customer",
+        "id": "2"
+      },
+      {
+        "tr": "Siparis Birlestir",
+        "key": "mergeOrder",
+        "en": "Merge Order",
+        "id": "3"
+      },
+      {
+        "tr": "Masa Degistir",
+        "key": "changeTable",
+        "en": "Change Table",
+        "id": "4"
+      },
+      {
+        "tr": "Diger Personellerin Belgelerini Degistirebilir",
+        "key": "changeOtherStafDocs",
+        "en": "Can Change the Documents of Other Staff",
+        "id": "5"
+      },
+      {
+        "tr": "Oto Sec",
+        "key": "otoSelect",
+        "en": "Auto Select",
+        "id": "6"
+      },
+      {
+        "tr": "Kurum Ici Haberlesme",
+        "key": "inHouseCommunication",
+        "en": "in-house communication",
+        "id": "7"
+      },
+      {
+        "tr": "Odeme",
+        "key": "payment",
+        "en": "PAyment",
+        "id": "8"
+      },
+      {
+        "tr": "Odeme Tipleri",
+        "key": "paymentType",
+        "en": "PAyment Type",
+        "id": "9"
+      }
+    ],
+    "options": [
+      {
+        "tr": "Evet",
+        "type": 1,
+        "en": "Yes"
+      },
+      {
+        "tr": "Hayir",
+        "type": 2,
+        "en": "No"
+      }
+    ]
+  },
   "orange": [
     "Breakfast",
     "Soup",
