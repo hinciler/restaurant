@@ -4,9 +4,7 @@ import Modal from 'react-native-modal';
 import CheckBox from './checkboxItem';
 import RadioItem from './radioItem';
 import Button from '../Button';
-import Text from '../Text';
-import {colors} from 'config';
-import {Header, normalize} from 'react-native-elements';
+import {normalize} from 'react-native-elements';
 import _ from 'lodash';
 const styles = StyleSheet.create({
   modalContainer: {
@@ -29,7 +27,14 @@ const styles = StyleSheet.create({
   },
 });
 const checklist = [];
-export default function ({visible = false, setVisible, list, onSave, type}) {
+export default function ({
+  visible = false,
+  setVisible,
+  list,
+  onSave,
+  type,
+  textKey = 'Name',
+}) {
   const [selectIndex, selectRadio] = useState(0);
   const checked = (data) => {
     const _index = _.findIndex(checklist, ['_key', data._key]);
@@ -53,20 +58,17 @@ export default function ({visible = false, setVisible, list, onSave, type}) {
           contentContainerStyle={styles.flatListContainer}
           renderItem={({item, index}) =>
             type === 'check' ? (
-              <CheckBox text={item.Name} onPress={checked} _key={item.Id} />
+              <CheckBox text={item[textKey]} onPress={checked} _key={item.Id} />
             ) : (
               <RadioItem
-                text={item.Name}
+                text={item[textKey]}
                 onPress={(data) => selectRadio(data.index)}
                 index={index}
                 selectedIndex={selectIndex}
               />
             )
           }
-          keyExtractor={(item) => {
-            console.log('item', item);
-            return item.Id;
-          }}
+          keyExtractor={(item) => item.Id}
         />
         <Button
           text={'KAYDET'}

@@ -54,15 +54,14 @@ export default function () {
           }
         });
       });
-      const _options = [];
-      const _option = {};
+
       options.data.map((option) => {
         option.text = option.tr;
-        option.value = options.en;
+        option.value = options.options[1].en;
         option.type = 'radio';
         option.list = options.options;
       });
-
+      console.log('options', options);
       useSettings(settings);
     }
   };
@@ -103,8 +102,10 @@ export default function () {
           </View>
 
           <FlatList
-            data={selectedIndex === 0 ? _settings : options}
-            renderItem={({item}) => <PickerItem item={item} />}
+            data={selectedIndex === 0 ? _settings : options.data}
+            renderItem={({item}) => (
+              <PickerItem item={item} options={options.options} />
+            )}
             keyExtractor={(item, index) => index + ''}
           />
 

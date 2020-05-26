@@ -111,12 +111,14 @@
       {
         "tr": "Evet",
         "type": 1,
-        "en": "Yes"
+        "en": "Yes",
+        "Id": 1
       },
       {
         "tr": "Hayir",
         "type": 2,
-        "en": "No"
+        "en": "No",
+        "Id": 2
       }
     ]
   },

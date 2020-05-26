@@ -6,12 +6,15 @@ import {Icon, Button} from 'react-native-elements';
 import ModalSelectList from '../SelectedList';
 import {colors} from 'config';
 
-const PickerItem = ({item}) => {
+const PickerItem = ({item, options}) => {
   const [visible, setVisible] = useState(false);
+
+  const textKey = options ? 'tr' : 'Name';
   const [_value, setValue] = useState(item.value);
+  console.log('item', item);
   const onSave = (data) => {
     if (item.type === 'radio') {
-      setValue(item.list[data].Name);
+      setValue(item.list[data][textKey]);
     } else {
       console.log('data', data);
       if (data.length > 0) {
@@ -44,7 +47,8 @@ const PickerItem = ({item}) => {
       <ModalSelectList
         visible={visible}
         setVisible={setVisible}
-        list={item.list}
+        list={options ? options : item.list}
+        textKey={textKey}
         onSave={onSave}
         type={item.type}
         headerText={item.text}
