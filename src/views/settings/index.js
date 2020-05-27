@@ -9,21 +9,21 @@ import DomainSelect from './domain';
 import _ from 'lodash';
 import {Actions} from 'react-native-router-flux';
 const data = require('./data.json');
-
+const initial_state = {
+  settings_data: [],
+  loading: false,
+  is_disabled: false,
+};
 export default function () {
   let IPRef = useRef();
-
   const [selectedIndex, updateIndex] = useState(0);
-  const [is_disabled, setDisabled] = useState(false);
-  const [_settings, useSettings] = useState([]);
-  const {settings, options} = data;
+  const [settings_state, useSettings] = useState(initial_state);
+  let {settings, options} = data;
 
-  for (let _idx = 0; _idx < options.length; _idx++) {
-    const element = options[_idx];
-    element.id = _idx.toString();
-    options[_idx] = element;
-  }
-  const getSettings = async () => {
+  async function GetSettings() {
+    useSettings({
+      loading: true,
+    });
     const requestBody = new URLSearchParams({
       query: 'baseconfig',
       serial: '1111',
@@ -35,15 +35,14 @@ export default function () {
       },
     };
 
-    const sett = await axios.post(
+    const api_settings = await axios.post(
       'http://78.159.99.84:9000/api/helper',
       requestBody,
       config,
     );
-    if (sett.data) {
-      setDisabled(true);
-      const setting = sett.data;
-      setting.map((item) => {
+    const api_settings_data = api_settings.data;
+    if (api_settings_data) {
+      api_settings_data.map((item) => {
         settings.map((_sett) => {
           if (item[_sett.key]) {
             const selected = item[_sett.key];
@@ -61,10 +60,16 @@ export default function () {
         option.type = 'radio';
         option.list = options.options;
       });
-      console.log('options', options);
-      useSettings(settings);
+    } else {
+      settings = [];
     }
-  };
+    useSettings({
+      settings_data: settings,
+      loading: false,
+      is_disabled: true,
+    });
+  }
+  const {is_disabled, settings_data = [], loading} = settings_state;
   return (
     <View style={styles.container}>
       <Header />
@@ -72,11 +77,12 @@ export default function () {
 
       <Button
         text={'Ayarlari Bul'}
-        onPress={getSettings}
+        onPress={GetSettings}
         color={is_disabled ? colors.grey : colors.active}
         disabled={is_disabled}
+        loading={loading}
       />
-      {_settings.length > 0 ? (
+      {settings_data.length > 0 ? (
         <View style={{flex: 1}}>
           <View style={styles.btngroup}>
             <NativeButton
@@ -102,9 +108,12 @@ export default function () {
           </View>
 
           <FlatList
-            data={selectedIndex === 0 ? _settings : options.data}
+            data={selectedIndex === 0 ? settings_data : options.data}
             renderItem={({item}) => (
-              <PickerItem item={item} options={options.options} />
+              <PickerItem
+                item={item}
+                options={selectedIndex === 1 ? options.options : null}
+              />
             )}
             keyExtractor={(item, index) => index + ''}
           />

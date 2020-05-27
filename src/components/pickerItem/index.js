@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import {View} from 'react-native';
 import {styles} from './style';
 import {Text} from 'components';
@@ -6,15 +6,16 @@ import {Icon, Button} from 'react-native-elements';
 import ModalSelectList from '../SelectedList';
 import {colors} from 'config';
 
-const PickerItem = ({item, options}) => {
+const PickerItem = memo(({item, options}) => {
   const [visible, setVisible] = useState(false);
-
   const textKey = options ? 'tr' : 'Name';
   const [_value, setValue] = useState(item.value);
-  console.log('item', item);
+
   const onSave = (data) => {
     if (item.type === 'radio') {
-      setValue(item.list[data][textKey]);
+      options
+        ? setValue(options[data][textKey])
+        : setValue(item.list[data][textKey]);
     } else {
       console.log('data', data);
       if (data.length > 0) {
@@ -55,6 +56,6 @@ const PickerItem = ({item, options}) => {
       />
     </View>
   );
-};
+});
 
 export default PickerItem;

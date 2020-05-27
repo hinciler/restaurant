@@ -15,6 +15,7 @@ const Buttons = ({
   color = colors.active,
   disabled = false,
   onPress,
+  loading = false,
 }) => {
   return (
     <Button
@@ -22,6 +23,7 @@ const Buttons = ({
       buttonStyle={[styles.buttonStyle, {backgroundColor}]}
       disabled={disabled}
       onPress={onPress}
+      loading={loading}
     />
   );
 };

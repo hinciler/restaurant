@@ -29,23 +29,23 @@
       "type": "check"
     },
     {
-      "tr": "EntityScreen",
+      "tr": "Entity Screen",
       "key": "EntityScreen",
-      "en": "EntityScreen",
+      "en": "Entity Screen",
       "id": "5",
       "type": "check"
     },
     {
-      "tr": "ScreenMenu",
+      "tr": "Screen Menu",
       "key": "ScreenMenu",
       "en": "ScreenMenu",
       "id": "6",
       "type": "check"
     },
     {
-      "tr": "AutomationCommand",
+      "tr": "Automation Command",
       "key": "AutomationCommand",
-      "en": "AutomationCommand",
+      "en": "Automation Command",
       "id": "7",
       "type": "check"
     }
