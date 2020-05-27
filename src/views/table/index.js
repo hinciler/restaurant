@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {Button, Header, Text} from 'components';
 import {Typography} from 'components/Text';
-import debounce from 'utils/helpers/debounce';
+import debounce from 'utilities/helpers/debounce';
 import _ from 'lodash';
 import {styles} from './style';
 
@@ -38,7 +38,7 @@ class Table extends PureComponent {
               <TouchableOpacity
                 onPress={debounce(() => changeBackground(index))}
                 key={index}
-                style={[styles.horizontalButton, {backgroundColor: color}]}>
+                style={[styles.horizontalButton]}>
                 <Text
                   text={'All Tables ' + item}
                   textAlign="center"

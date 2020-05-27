@@ -1,6 +1,7 @@
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import {colors} from 'config';
 import {normalize} from 'react-native-elements';
+const {width} = Dimensions.get('window');
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.background1,
@@ -37,7 +38,7 @@ export const styles = StyleSheet.create({
   },
   verticalButton: {
     height: normalize(50),
-    width: normalize(44),
+    width: width > 600 ? normalize(85) : normalize(44),
     borderColor: colors.border,
     borderWidth: 1,
     justifyContent: 'center',
