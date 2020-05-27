@@ -69,37 +69,40 @@ class PinCode extends PureComponent {
     const {lang} = this.props;
     return (
       <View style={styles.container}>
+        <Modal
+          isVisible={this.state.modalVisible}
+          animationOutTiming={800}
+          backdropTransitionOutTiming={600}>
+          <View style={styles.content}>
+            <View style={{justifyContent: 'flex-start'}}>
+              <Text
+                style={styles.contentTitle}
+                text={lang.loading}
+                type={Typography.PLB}
+              />
+              <Text
+                style={styles.contentTitle}
+                text={lang.please_wait}
+                type={Typography.PL}
+              />
+            </View>
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Progress.Bar
+                width={normalize(250)}
+                progress={this.state.progress}
+              />
+            </View>
+          </View>
+        </Modal>
         {isTablet() ? (
           <ScrollView
             contentContainerStyle={styles.scrollView}
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}>
-            <Modal isVisible={this.state.modalVisible}>
-              <View style={styles.content}>
-                <View style={{justifyContent: 'flex-start'}}>
-                  <Text
-                    style={styles.contentTitle}
-                    text={lang.loading}
-                    type={Typography.PLB}
-                  />
-                  <Text
-                    style={styles.contentTitle}
-                    text={lang.please_wait}
-                    type={Typography.PL}
-                  />
-                </View>
-                <View
-                  style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <Progress.Bar
-                    width={normalize(250)}
-                    progress={this.state.progress}
-                  />
-                </View>
-              </View>
-            </Modal>
             <View style={styles.container_landscape}>
               <View style={styles.left}>
                 <Image source={require('assets/img/logo.png')} />
@@ -116,34 +119,10 @@ class PinCode extends PureComponent {
           </ScrollView>
         ) : (
           <View style={styles.container_portrait}>
-            <Modal isVisible={this.state.modalVisible}>
-              <View style={styles.content}>
-                <View style={{justifyContent: 'flex-start'}}>
-                  <Text
-                    style={styles.contentTitle}
-                    text={lang.loading}
-                    type={Typography.PLB}
-                  />
-                  <Text
-                    style={styles.contentTitle}
-                    text={lang.please_wait}
-                    type={Typography.PL}
-                  />
-                </View>
-                <View
-                  style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <Progress.Bar
-                    width={normalize(250)}
-                    progress={this.state.progress}
-                  />
-                </View>
-              </View>
-            </Modal>
             <Header />
-            <ScrollView contentContainerStyle={styles.scrollView}>
+            <ScrollView
+              contentContainerStyle={styles.scrollView}
+              showsVerticalScrollIndicator={false}>
               <View style={styles.container_landscape}>
                 <PinCodeView
                   lang={lang}

@@ -7,17 +7,23 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.background1,
     flex: 1,
   },
+  scrollHorizontal: {
+    flex: 0.1,
+    marginBottom: normalize(10),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   scrollContainer: {
+    flex: 1,
     marginBottom: normalize(10),
     justifyContent: 'center',
     alignItems: 'center',
   },
   horizontalButton: {
     height: normalize(50),
-    width: normalize(85),
+    width: width / 2 - 15,
     flex: 1,
     borderColor: colors.border,
-    backgroundColor: colors.white,
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -26,7 +32,7 @@ export const styles = StyleSheet.create({
   },
   horizontalButtonActive: {
     height: normalize(50),
-    width: normalize(85),
+    width: width / 2 - 15,
     flex: 1,
     borderColor: colors.border,
     borderWidth: 1,
@@ -38,7 +44,7 @@ export const styles = StyleSheet.create({
   },
   verticalButton: {
     height: normalize(50),
-    width: width > 600 ? normalize(85) : normalize(44),
+    width: width > 600 ? normalize(85) : width / 3 - 15,
     borderColor: colors.border,
     borderWidth: 1,
     justifyContent: 'center',

@@ -1,5 +1,4 @@
-
-import { put, takeLatest } from 'redux-saga/effects';
+import {put, takeLatest} from 'redux-saga/effects';
 import api from '@duck_utils/api';
 import type from './types';
 export function* table(action) {
@@ -26,4 +25,4 @@ export function* table(action) {
 
 export default function* watch_table() {
   yield takeLatest(type.TABLE, table);
-}  
+}
