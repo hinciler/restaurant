@@ -58,7 +58,13 @@ class PinCode extends PureComponent {
     this.getMenu();
     this.getTicketTags();
   }
-
+  async onLogin(code) {
+    const _data = new URLSearchParams({
+      query: 'conn',
+      serial: '1111',
+    });
+    this.props.connection_control(_data);
+  }
   render() {
     const {lang} = this.props;
     return (
@@ -92,6 +98,7 @@ class PinCode extends PureComponent {
                   onPressUpdate={() => {
                     this.onPressUpdate();
                   }}
+                  onLogin={(code) => this.onLogin(code)}
                 />
               </View>
             </ScrollView>

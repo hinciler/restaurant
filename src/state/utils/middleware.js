@@ -4,6 +4,7 @@ import {
   watch_getMenu,
   watch_getProductPortion,
   watch_getOrderTagGroups,
+  watch_connectionControl,
 } from '@pinCode/operations';
 export default function* Sagas() {
   yield all([
@@ -11,5 +12,6 @@ export default function* Sagas() {
     watch_getMenu(),
     watch_getProductPortion(),
     watch_getOrderTagGroups(),
+    watch_connectionControl(),
   ]);
 }

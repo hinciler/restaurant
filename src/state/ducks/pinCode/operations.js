@@ -157,4 +157,43 @@ function* watch_getOrderTagGroups() {
   yield takeLatest(type.GET_ORDER_TAG, getOrderTagGroups);
 }
 
-export {watch_getMenu, watch_getProductPortion, watch_getOrderTagGroups};
+export function* connectionControl(action) {
+  try {
+    const {data = {}, error, status} = yield api.connection_control(
+      action.payload,
+    );
+
+    if (status === 200 || status) {
+      yield put({
+        type: type.CONNECTION_CONTROL_SUCCESS,
+        data: data,
+      });
+    } else if (error) {
+      yield put({
+        type: type.CONNECTION_CONTROL_FAILED,
+        error: error,
+      });
+    } else {
+      yield put({
+        type: type.CONNECTION_CONTROL_FAILED,
+        error: {msg: 'Something was wrong'},
+      });
+    }
+  } catch (error) {
+    yield put({
+      type: type.CONNECTION_CONTROL_FAILED,
+      error,
+    });
+  }
+}
+
+function* watch_connectionControl() {
+  yield takeLatest(type.CONNECTION_CONTROL, connectionControl);
+}
+
+export {
+  watch_getMenu,
+  watch_getProductPortion,
+  watch_getOrderTagGroups,
+  watch_connectionControl,
+};

@@ -5,6 +5,7 @@ import {
   getMenu,
   getProductPortion,
   getOrderTagGroups,
+  connectionControl,
 } from '@pinCode/actions';
 
 const mapStateToProps = (state) => {
@@ -24,6 +25,7 @@ const mapStateToDispatch = (dispatch) => {
     getMenu: (payload) => dispatch(getMenu(payload)),
     getProductPortion: (payload) => dispatch(getProductPortion(payload)),
     getOrderTagGroups: (payload) => dispatch(getOrderTagGroups(payload)),
+    connection_control: (payload) => dispatch(connectionControl(payload)),
   };
 };
 

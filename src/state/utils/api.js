@@ -1,4 +1,5 @@
 import axios from './fetch';
+import api_helper from './fetch_helper';
 
 export default {
   getUsers(data) {
@@ -12,5 +13,8 @@ export default {
   },
   getOrderTagGroups(data) {
     return axios.post('getOrderTagGroups', data);
+  },
+  connection_control(data) {
+    return api_helper.post('helper/', data);
   },
 };

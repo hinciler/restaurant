@@ -6,6 +6,8 @@ const INITIAL_STATE = {
   menuSuccess: false,
   productPortion: [],
   orderTags: [],
+  connectionControl: [],
+  connectionControlError: null,
 };
 const pinCode = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -60,6 +62,24 @@ const pinCode = (state = INITIAL_STATE, action) => {
         ...state,
         loader: false,
         orderTagError: action.error,
+      };
+
+    case type.CONNECTION_CONTROL:
+      return {
+        ...state,
+        loader: true,
+      };
+    case type.CONNECTION_CONTROL_SUCCESS:
+      return {
+        ...state,
+        loader: false,
+        connectionControl: action.data,
+      };
+    case type.CONNECTION_CONTROL_FAILED:
+      return {
+        ...state,
+        loader: false,
+        connectionControlError: action.error,
       };
 
     default:

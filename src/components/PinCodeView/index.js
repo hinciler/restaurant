@@ -11,7 +11,7 @@ import debounce from 'utilities/helpers/debounce';
 import {Actions} from 'react-native-router-flux';
 import {Typography} from 'components/Text';
 
-export default function ({lang, onPressUpdate}) {
+export default function ({lang, onPressUpdate, onLogin}) {
   const [code, setCode] = useState('');
   function numPress(num) {
     const concatCode = code.concat(num);
@@ -20,7 +20,10 @@ export default function ({lang, onPressUpdate}) {
   function backPress() {
     setCode(code.slice(0, code.length - 1));
   }
-
+  const login = () => {
+    onLogin(code);
+    setCode('');
+  };
   const alertUpdateData = () => {
     Alert.alert(
       lang.update_data,
@@ -87,9 +90,7 @@ export default function ({lang, onPressUpdate}) {
             style={styles.numOverlay}>
             <Text text={0} />
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={debounce(() => Alert.alert('merhaba'))}
-            style={styles.numOverlay}>
+          <TouchableOpacity onPress={debounce(login)} style={styles.numOverlay}>
             <Icon name={'arrow-right-circle'} size={normalize(18)} />
           </TouchableOpacity>
         </View>

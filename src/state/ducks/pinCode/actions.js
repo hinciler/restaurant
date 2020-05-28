@@ -13,3 +13,7 @@ export const getOrderTagGroups = (payload) => ({
   type: type.GET_ORDER_TAG,
   payload,
 });
+export const connectionControl = (payload) => ({
+  type: type.CONNECTION_CONTROL,
+  payload,
+});
