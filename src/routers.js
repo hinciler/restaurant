@@ -6,6 +6,7 @@ import Users from 'views/users/container.js';
 import PinCode from 'views/pinCode/container';
 import Settings from 'views/settings/container';
 import Order from 'views/order';
+import QrCode from 'views/pinCode/qrCode';
 
 const stateHandler = (prevState, newState, action) => {
   console.log('onStateChange: ACTION:', action);
@@ -26,7 +27,8 @@ const router = () => (
         <Scene component={PinCode} key="pinCode" initial />
         <Scene component={Settings} key="settings" />
         <Scene component={Order} key="order" />
-        </Modal>
+        <Scene component={QrCode} key="qrCode" />
+      </Modal>
     </Overlay>
   </Router>
 );
