@@ -30,18 +30,6 @@ export const styles = StyleSheet.create({
     marginLeft: normalize(5),
     marginRight: normalize(5),
   },
-  horizontalButtonActive: {
-    height: normalize(50),
-    width: width / 2 - 15,
-    flex: 1,
-    borderColor: colors.border,
-    borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.black,
-    marginLeft: normalize(5),
-    marginRight: normalize(5),
-  },
   verticalButton: {
     height: normalize(50),
     width: width > 600 ? normalize(85) : width / 3 - 15,

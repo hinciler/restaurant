@@ -1,11 +1,6 @@
-import React, {PureComponent, useEffect} from 'react';
-import {
-  Alert,
-  FlatList,
-  ScrollView,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, {useEffect, useCallback} from 'react';
+import {ScrollView, TouchableOpacity, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import {Header, Text} from 'components';
 import {Typography} from 'components/Text';
 import debounce from 'utilities/helpers/debounce';
@@ -18,6 +13,7 @@ export default function () {
   const [selected, setSelected] = React.useState(new Map());
   const [oldId, setOldId] = React.useState(0);
   const [table, updateTables] = React.useState([]);
+  const lang = useSelector((state) => state.translate.lang);
 
   async function getTables() {
     const payloadTable = {
@@ -36,7 +32,7 @@ export default function () {
     // console.log('tables', tables.data.getEntityScreenItems);
   }
 
-  const onSelect = React.useCallback(
+  const onSelect = useCallback(
     (id) => {
       const newSelected = new Map(selected);
       setOldId(id);
@@ -88,7 +84,6 @@ export default function () {
 
       <View style={styles.scrollContainer}>
         <ScrollView
-          style={{flex: 1}}
           showsVerticalScrollIndicator={false}
           snapToAlignment={'start'}>
           <View style={styles.verticalView}>

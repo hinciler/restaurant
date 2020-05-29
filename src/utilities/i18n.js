@@ -4,7 +4,7 @@ import memoize from 'lodash/memoize';
 // Supported languages for moment
 import 'moment/locale/en';
 
-import { en, tr } from './translations';
+import {en, tr} from './translations';
 
 const translate = memoize(
   (key, config) => i18nJS.t(key, config),
@@ -12,9 +12,9 @@ const translate = memoize(
 );
 
 // fallback if no available language fits
-const fallback = { languageTag: 'en', isRTL: false };
+const fallback = {languageTag: 'en', isRTL: false};
 
-const { languageTag } =
+const {languageTag} =
   RNLocalize.findBestAvailableLanguage(['en', 'tr', 'ca']) || fallback;
 
 // clear translation cache
