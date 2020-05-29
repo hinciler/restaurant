@@ -4,32 +4,13 @@ import {Button, Header, PinCodeView} from 'components';
 import {styles} from './style';
 import {isTablet} from 'react-native-device-info';
 import axios from 'axios';
-
+import Spinner from 'react-native-loading-spinner-overlay';
 class PinCode extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       portionsSuccess: false,
     };
-  }
-  async getTicketTags() {
-    const requestBody = new URLSearchParams({
-      query: 'tickettags',
-      serial: '111',
-    });
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    };
-
-    const sett = await axios.post(
-      'http://78.159.99.84:9000/api/helper',
-      requestBody,
-      config,
-    );
-    // console.log('sett', sett.data);
   }
 
   getMenu() {
@@ -56,17 +37,35 @@ class PinCode extends PureComponent {
 
   onPressUpdate() {
     this.getMenu();
-    this.getTicketTags();
   }
   async onLogin(code) {
     const _data = new URLSearchParams({
       query: 'conn',
       serial: '1111',
     });
-    this.props.connection_control(_data);
+    this.props.connection_control(_data, code);
+    const requestBody = new URLSearchParams({
+      grant_type: 'password',
+      username: 'pda',
+      password: '1111',
+      client_id: 'pda',
+    });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+
+    const api_settings = await axios.post(
+      'http://78.159.99.84:9000/Token',
+      requestBody,
+      config,
+    );
+    console.log('api_settings', api_settings);
   }
   render() {
-    const {lang} = this.props;
+    const {lang, loading} = this.props;
     return (
       <View style={styles.container}>
         {isTablet() ? (
@@ -104,6 +103,14 @@ class PinCode extends PureComponent {
             </ScrollView>
           </View>
         )}
+        <Spinner
+          visible={loading}
+          animation="none"
+          size="large"
+          color="#fff"
+          textContent={lang.pleaseWait}
+          overlayColor="rgba(0,0,0,.80)"
+        />
       </View>
     );
   }

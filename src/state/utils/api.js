@@ -8,6 +8,9 @@ export default {
   getMenu(data) {
     return axios.post('getMenu', data);
   },
+  getUser(data) {
+    return axios.post('getUser', data);
+  },
   getProductPortion(data) {
     return axios.post('getProductPortions', data);
   },
@@ -15,6 +18,9 @@ export default {
     return axios.post('getOrderTagGroups', data);
   },
   connection_control(data) {
-    return api_helper.post('helper/', data);
+    return api_helper.post('api/helper/', data);
+  },
+  token(data) {
+    return api_helper.post('Token', data);
   },
 };

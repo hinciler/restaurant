@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 
-const host = 'http://78.159.99.84:9000/api/';
-import {store} from '../store';
+const host = 'http://78.159.99.84:9000/';
 
 const axiosInstance = axios.create({
   baseURL: `${host}`,
@@ -10,7 +9,6 @@ const axiosInstance = axios.create({
 });
 axiosInstance.defaults.headers['Content-Type'] =
   'application/x-www-form-urlencoded';
-console.log('store', store);
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => Promise.reject(error),

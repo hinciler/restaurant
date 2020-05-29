@@ -39,17 +39,12 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>We want to use your camera for read the qrCode </string>
-
-  <!-- Include this only if you are planning to use the camera roll -->
-  <key>NSPhotoLibraryUsageDescription</key>
-  <string>Your message to user when the photo library is accessed for the first time</string>
-
-  <!-- Include this only if you are planning to use the microphone for video recording -->
-  <key>NSMicrophoneUsageDescription</key>
-  <string>Your message to user when the microsphone is accessed for the first time</string>
-  
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Your message to user when the microsphone is accessed for the first time</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Your message to user when the photo library is accessed for the first time</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -74,6 +69,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleDarkContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

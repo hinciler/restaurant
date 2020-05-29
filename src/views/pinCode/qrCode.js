@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {StyleSheet, Text, TouchableOpacity, Linking, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, Linking, View} from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {RNCamera} from 'react-native-camera';
-import {Header} from 'components';
-import {Button} from 'react-native-elements';
+import {Header, Text} from 'components';
+import {Typography} from 'components/Text';
+import {Button, normalize} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {connectionControl} from '@pinCode/actions';
+import {Actions} from 'react-native-router-flux';
 import {colors} from 'config';
 const initialState = {
   flash_title: 'off',
@@ -16,36 +18,65 @@ function QrCode() {
   const {
     loader,
     connectionControl: stateConn,
-    connectionControlError,
+    connectionControlError = true,
   } = useSelector((state) => state.pinCode);
-  console.log('loader', loader);
-  console.log('stateConn', stateConn);
+  const {lang} = useSelector((state) => state.translate);
+  console.log('lang', lang);
   const dispatch = useDispatch();
+  const [flashOptions, useFlash] = useState({
+    flashText: lang.flashOff,
+    flashMode: RNCamera.Constants.FlashMode.off,
+    type: false,
+    flashIIconName: 'ios-flash',
+  });
   const onSuccess = (code) => {
-    console.log('code', code.data);
     const _data = new URLSearchParams({
       query: 'conn',
       serial: '1111',
     });
-    dispatch(connectionControl(_data));
+
+    dispatch(connectionControl(_data, code.data));
   };
+  const PressFlash = () => {
+    if (flashOptions.type) {
+      useFlash({
+        flashText: lang.flashOff,
+        flashMode: RNCamera.Constants.FlashMode.off,
+        type: false,
+        flashIIconName: 'ios-flash',
+      });
+    } else {
+      useFlash({
+        flashText: lang.flashOn,
+        flashMode: RNCamera.Constants.FlashMode.torch,
+        type: true,
+        flashIIconName: 'ios-flash',
+      });
+    }
+  };
+  console.log('flashOptions', flashOptions);
   return (
     <View style={styles.container}>
-      <Header />
+      <Header rightIconName="close" onRightPress={Actions.pop} />
+      <View style={styles.errorWrapper}>
+        <Text text={'Hello'} color="red" type={Typography.PSM} />
+      </View>
       <QRCodeScanner
         onRead={onSuccess}
-        flashMode={RNCamera.Constants.FlashMode.off}
+        flashMode={flashOptions.flashMode}
         reactivate={true}
         reactivateTimeout={5000}
       />
+
       <Button
         buttonStyle={styles.buttonContainer}
-        icon={<Icon name="flash" size={34} color="white" />}
-        title="Flash off"
+        icon={<Icon name="flash" size={34} color="white" type="Entypo" />}
+        onPress={PressFlash}
+        title={flashOptions.flashText}
         iconContainerStyle={styles.iconContainer}
         titleStyle={styles.iconContainer}
-        loading={!loader}
-        disabled={!loader}
+        loading={loader}
+        disabled={loader}
         loadingProps={{size: 'large', color: 'red'}}
       />
     </View>
@@ -68,5 +99,8 @@ const styles = StyleSheet.create({
   },
   buttonTouchable: {
     padding: 16,
+  },
+  errorWrapper: {
+    padding: normalize(10),
   },
 });

@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   orderTags: [],
   connectionControl: [],
   connectionControlError: null,
+  token: null,
 };
 const pinCode = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -80,6 +81,11 @@ const pinCode = (state = INITIAL_STATE, action) => {
         ...state,
         loader: false,
         connectionControlError: action.error,
+      };
+    case type.token:
+      return {
+        ...state,
+        token: action.token,
       };
 
     default:

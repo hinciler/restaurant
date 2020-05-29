@@ -1,12 +1,12 @@
 import React, {PureComponent} from 'react';
 import {styles} from './style';
 import {Image, Text, View} from 'react-native';
-import {Button, Header} from 'react-native-elements';
+import {normalize, Header, Icon} from 'react-native-elements';
 
 export default function ({
   rightText,
   rightIconName,
-  rightIconColor,
+  rightIconColor = 'black',
   onRightPress,
 }) {
   return (
@@ -19,7 +19,13 @@ export default function ({
         rightText ? (
           <Text> rightText </Text>
         ) : rightIconName ? (
-          <Button title={rightIconName} />
+          <Icon
+            name={rightIconName}
+            type="fontAwesome"
+            onPress={onRightPress}
+            color={rightIconColor}
+            size={normalize(26)}
+          />
         ) : (
           <View />
         )

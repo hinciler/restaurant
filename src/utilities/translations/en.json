@@ -3,6 +3,9 @@
   "update_data": "Do you want to update data?",
   "yes": "Yes",
   "cancel": "Cancel",
-  "basic_settings":"BASIC SETTINGS",
-  "options": "OPTIONS"
+  "basic_settings": "BASIC SETTINGS",
+  "options": "OPTIONS",
+  "flashOn": "Flash On",
+  "flashOff": "Flash Off",
+  "pleaseWait": "Please Wait..."
 }

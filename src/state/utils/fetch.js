@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 const token =
-  'AQAAANCMnd8BFdERjHoAwE_Cl-sBAAAAA5ppupYS3U-AMXbpIDI_fQAAAAACAAAAAAAQZgAAAAEAACAAAADhzUjmTFcn1FEpX5kPa4joCtbx41zMUjFJKVn5VF4iVgAAAAAOgAAAAAIAACAAAAAGhkLQ6cRBCRDcsFKaEVBweZ4rylcdwr8kQiwDZkdiTuAAAAAkd1BEcDWdy5w8sy-pqBgZ2mDamaozoLkdZ6HJnJP7RXxWOXztuDXu55GGxNxBNjsrr1AQCb9TZoaMcQ4oBLsC7cOMsuqoQ2t8Ivj1md0gTzTqOQ71LRQboYuYr2VQNg76n2HxM8HZWRguTBI9uH1p3yYsCig_oXReJJkgyY80lLvLzoURZea_JnwWJ4_tVBslARZ9ruRz0Erz_J8lzE0s57I1nwfijGDdbSiULX00m1NIm9JVBa0mpKtucK0QYRIulR4Pr0zuLLzB7iITtOEdlFfoELxfk7wCjcmMT4K970AAAAAeyMpxT_qQnOPrgLbHoU_o-enxIHoOK6-5yC95o-Hr3KZHsE1LeXJG799FEG9aMOTDpaovx8j0m1TAhcLYyMcg';
-
+  'AQAAANCMnd8BFdERjHoAwE_Cl-sBAAAAA5ppupYS3U-AMXbpIDI_fQAAAAACAAAAAAAQZgAAAAEAACAAAAA_KZFYa6L2M-U5ChoEJd80BL0i8fnFXqksrpNwD588OgAAAAAOgAAAAAIAACAAAABYfmQzM33UqSiQh9RlceGvcAsFGFRTfGz7jxNfHQZBI-AAAADK1uJ3YKIFt35fJ8Z2zOtZZXZ-mGL4H476SRtrhCmxPXGdTu-csnRK-v4xrD7DvAUNn2T0kDz6BhhfcIo5E4fJXybcH4GwsY5_LPyF_ksRbkoIw1FWlmfQ8YwRTpo5NbYr3XA2Rg8w8nF_dDhs88UW66RK4wqJQUwLxqaUmp1jowIKldRzai4cGNa8Zi8uZGv_8jNzCHYk1PlcEtqicLSDnI6rEYQLUzxTkUxhjCcsEdU0hHD5KdRdohJd0sEhr0cbmp0rfRW61E-6Ig4aW0l6Iklj78sunMj5RY75Hd1v50AAAAC3oKQAmf2eo_SNJlQGETF7VOUCbvRQxTAT_gwYqkfIQvxsuBfTvLGt989PPyXBQdurYDSZU0ABbrqe0OM1Lprn';
 export const host = 'http://78.159.99.84:9000/api/graphql';
 import {store} from '../store';
 export const path = 'mobile/';
@@ -20,7 +19,6 @@ axiosInstance.interceptors.request.use((config) => {
 
 axiosInstance.interceptors.response.use(
   (response) => {
-    // console.log('axiosInstance response', response);
     return response.data;
   },
   (error) => {

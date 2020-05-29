@@ -3,7 +3,9 @@
   "update_data": "Veri Güncellemesi Yapmak İstediğinizden Emin misiniz?",
   "yes": "Evet",
   "cancel": "İptal",
-  "basic_settings":"TEMEL AYARLAR",
-  "options": "SECENEKLER"
-
+  "basic_settings": "TEMEL AYARLAR",
+  "options": "SECENEKLER",
+  "flashOn": "Flash Acik",
+  "flashOff": "Flash Kapali",
+  "pleaseWait": "Lutfen Bekleyiniz..."
 }

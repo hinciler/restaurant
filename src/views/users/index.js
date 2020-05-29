@@ -21,11 +21,7 @@ class Users extends PureComponent {
       }
         `,
     };
-    /*
-    const payload2 = {
-      query: `q{menu:getMenu(name:${menu_ayar}){categories{id,name,color,foreground,image,header,menuId,isFastMenu,menuItems{productId,name,color,caption,foreground,image, header,quantity,categoryId}}}}`,
-    };
-    */
+
     this.props.getUsers(payload);
   }
   render() {

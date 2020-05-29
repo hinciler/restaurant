@@ -1,5 +1,6 @@
 import {put, takeLatest} from 'redux-saga/effects';
 import api from '@duck_utils/api';
+import {getUser} from '@duck_utils/queries';
 import type from './types';
 import Database from '../../../db/database';
 import {func} from 'prop-types';
@@ -162,8 +163,25 @@ export function* connectionControl(action) {
     const {data = {}, error, status} = yield api.connection_control(
       action.payload,
     );
+    console.log('data', data);
+    if (status === 200 || (status && data)) {
+      const getUserPayload = getUser(action.code);
+      const get_user = yield api.getUser(getUserPayload);
+      console.log('getUser', get_user);
+      if (getUser.data) {
+        const requestBody = new URLSearchParams({
+          grant_type: 'password',
+          username: 'pda',
+          password: '1111',
+          client_id: 'pda',
+        });
 
-    if (status === 200 || status) {
+        const {data: token} = yield api.token(requestBody);
+        yield put({
+          type: 'token',
+          token: token?.access_token,
+        });
+      }
       yield put({
         type: type.CONNECTION_CONTROL_SUCCESS,
         data: data,
@@ -180,6 +198,7 @@ export function* connectionControl(action) {
       });
     }
   } catch (error) {
+    console.log('error.response', error.response);
     yield put({
       type: type.CONNECTION_CONTROL_FAILED,
       error,
