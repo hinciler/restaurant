@@ -22,7 +22,6 @@ class PinCode extends PureComponent {
       const defaultBaseUrl = 'https://androiddemo.sambapos.com:9000';
       this.props.setBaseUrl(defaultBaseUrl);
     }
-    console.log('value', value);
   }
   getMenu() {
     this.props.getMenu(getMenuQueries('Menu'));

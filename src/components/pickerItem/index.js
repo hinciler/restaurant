@@ -17,7 +17,6 @@ const PickerItem = memo(({item, options}) => {
         ? setValue(options[data][textKey])
         : setValue(item.list[data][textKey]);
     } else {
-      console.log('data', data);
       if (data.length > 0) {
         let _values = '';
         data.map((check, index) => {

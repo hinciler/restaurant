@@ -21,7 +21,6 @@ function QrCode() {
     connectionControlError = true,
   } = useSelector((state) => state.pinCode);
   const {lang} = useSelector((state) => state.translate);
-  console.log('lang', lang);
   const dispatch = useDispatch();
   const [flashOptions, useFlash] = useState({
     flashText: lang.flashOff,

@@ -15,7 +15,6 @@ export function* getMenu(action) {
       });
     } else {
       const categories = response.data.getMenu.categories;
-      console.log('categories', categories);
       categories.map((item, categoryIdx) => {
         const groupId = item.id;
         const name = item.name;
@@ -69,7 +68,6 @@ export function* getMenu(action) {
             const responsePortion = await api.getOrderTagGroups(
               payloadOrderTag,
             );
-            // console.log('portionTags', responsePortion);
           });
         });
       });
@@ -89,13 +87,9 @@ export function* getMenu(action) {
 function saveProduct(productGroupData, productData) {
   db.addProductGroup(productGroupData)
     .then((result) => {
-      console.log(result);
       const groupId = result.insertId;
       productData.groupId = groupId;
-      db.addProduct(productData).then((productResult) => {
-        console.log('results_id', productResult);
-      });
-      // console.log('results_id', result.insertId);
+      db.addProduct(productData).then((productResult) => {});
     })
     .catch((err) => {
       console.log(err);
@@ -171,14 +165,12 @@ export function* connectionControl(action) {
         client_id: 'pda',
       });
       const {data: token} = yield api.token(requestBody);
-      console.log('token', token);
       if (token?.access_token) {
         const getUserPayload = getUserQueries(action.code);
         yield put({
           type: type.TOKEN,
           token: token?.access_token,
         });
-        console.log('getUserPayload', getUserPayload);
         const get_user = yield api.getUser(getUserPayload);
         yield put({
           type: type.PIN_CODE_SUCCESS,

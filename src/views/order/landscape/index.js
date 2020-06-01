@@ -6,7 +6,6 @@ import {Button} from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
 
 const dummy = require('./data.json');
-console.log('dummy', dummy);
 export default class index extends PureComponent {
   constructor(props) {
     super(props);

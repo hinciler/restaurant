@@ -11,12 +11,7 @@ import debounce from 'utilities/helpers/debounce';
 import {Actions} from 'react-native-router-flux';
 import {Typography} from 'components/Text';
 import {colors} from 'config';
-export default function ({
-  lang,
-  onPressUpdate,
-  onLogin,
-  errorMessage = 'There was an error updating',
-}) {
+export default function ({lang, onPressUpdate, onLogin, errorMessage}) {
   const [code, setCode] = useState('');
   function numPress(num) {
     const concatCode = code.concat(num);
