@@ -179,6 +179,7 @@ export function* getMenu(action) {
         });
       });
 
+      //This part will be added on server side, we will look this part later after server updated
       //Get ticket tags
       let tagGroupArraylist = [];
       const requestBody = new URLSearchParams({
@@ -208,6 +209,10 @@ export function* getMenu(action) {
         const roles = ticketTagGroupItem.Roles;
 
         if (roles.contains(',')) {
+          const splitRoles = roles.split(',');
+
+          for (const role of splitRoles) {
+          }
         } else {
         }
       });

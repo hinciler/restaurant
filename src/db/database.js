@@ -363,6 +363,9 @@ export default class Database {
     });
   }
 
+  selectTicketTagGroup(id) {
+    let count = 0;
+  }
   deleteTables() {
     this.initDB()
       .then((db) => {
