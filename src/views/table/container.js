@@ -1,19 +1,18 @@
-
-import { connect } from 'react-redux';
-import  Table from './index'; 
-import { table } from '@table/actions' ; 
-const mapStateToProps = state => {
+import {connect} from 'react-redux';
+import Table from './index';
+import {table} from '@table/actions';
+const mapStateToProps = (state) => {
   return {
     data: state.table.data,
-    error:state.table.error,
-    loading:state.table.loading
+    error: state.table.error,
+    loading: state.table.loading,
+    lang: state.translate.lang,
   };
 };
-const mapStateToDispatch = dispatch => {
+const mapStateToDispatch = (dispatch) => {
   return {
-     table: (payload) => dispatch( table(payload)),
-};
+    table: (payload) => dispatch(table(payload)),
+  };
 };
 
-export default connect(mapStateToProps, mapStateToDispatch)( Table);
-        
+export default connect(mapStateToProps, mapStateToDispatch)(Table);

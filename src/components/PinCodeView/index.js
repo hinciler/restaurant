@@ -100,7 +100,7 @@ export default function ({lang, onPressUpdate, onLogin, errorMessage}) {
             <Icon name={'arrow-right-circle'} size={normalize(18)} />
           </TouchableOpacity>
         </View>
-        <View style={[styles.row, {marginTop: normalize(30)}]}>
+        <View style={[styles.row, styles.bottomBtn]}>
           <TouchableOpacity
             onPress={debounce(() => Actions.settings())}
             style={[styles.numOverlay, {borderBottomColor: 'red'}]}>

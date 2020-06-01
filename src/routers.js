@@ -7,6 +7,7 @@ import PinCode from 'views/pinCode/container';
 import Settings from 'views/settings/container';
 import Order from 'views/order';
 import QrCode from 'views/pinCode/qrCode';
+import Table from 'views/table/container';
 
 const stateHandler = (prevState, newState, action) => {
   console.log('onStateChange: ACTION:', action);
@@ -28,6 +29,8 @@ const router = () => (
         <Scene component={Settings} key="settings" />
         <Scene component={Order} key="order" />
         <Scene component={QrCode} key="qrCode" />
+      </Modal>
+        <Scene component={Table} key="table"  />
       </Modal>
     </Overlay>
   </Router>

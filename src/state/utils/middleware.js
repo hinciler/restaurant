@@ -14,4 +14,4 @@ export default function* Sagas() {
     watch_getOrderTagGroups(),
     watch_connectionControl(),
   ]);
-}
+ }

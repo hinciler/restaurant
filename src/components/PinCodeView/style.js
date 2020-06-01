@@ -1,7 +1,11 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 import {normalize} from 'react-native-elements';
 import {colors} from 'config';
-
+const {width, height} = Dimensions.get('window');
+const flexSize =
+  width > 380
+    ? normalize(20)
+    : (width > 321 ? normalize(14) : normalize(1)) || 20;
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -12,7 +16,10 @@ export const styles = StyleSheet.create({
     borderWidth: normalize(2),
     height: normalize(50),
     backgroundColor: colors.white,
-    marginTop: normalize(40),
+    marginTop:
+      width > 380
+        ? normalize(40)
+        : (width > 321 ? normalize(30) : normalize(5)) || 40,
     marginLeft: normalize(30),
     marginRight: normalize(30),
     justifyContent: 'center',
@@ -26,18 +33,21 @@ export const styles = StyleSheet.create({
     color: colors.text,
   },
   demoInfo: {
-    height: normalize(20),
+    height: flexSize,
     alignItems: 'center',
     marginTop: normalize(5),
   },
   footer: {
     alignItems: 'center',
     justifyContent: 'flex-end',
-    marginTop: normalize(20),
+    marginTop: flexSize,
   },
   grid: {
     flexDirection: 'column',
-    padding: normalize(30),
+    padding:
+      width > 380
+        ? normalize(30)
+        : (width > 321 ? normalize(20) : normalize(15)) || 30,
     justifyContent: 'space-between',
   },
   row: {
@@ -57,5 +67,11 @@ export const styles = StyleSheet.create({
   errorWrapper: {
     marginLeft: normalize(30),
     paddingTop: normalize(5),
+  },
+  bottomBtn: {
+    marginTop:
+      width > 380
+        ? normalize(30)
+        : (width > 321 ? normalize(20) : normalize(5)) || 30,
   },
 });

@@ -1,76 +1,107 @@
-import React, {PureComponent} from 'react';
-import {
-  Alert,
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-  TouchableHighlight,
-  View,
-} from 'react-native';
-import {Button, Header, Text} from 'components';
+import React, {useEffect, useCallback} from 'react';
+import {ScrollView, TouchableOpacity, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {Header, Text} from 'components';
 import {Typography} from 'components/Text';
-import debounce from 'utils/helpers/debounce';
+import debounce from 'utilities/helpers/debounce';
 import _ from 'lodash';
+import axios from '../../state/utils/fetch';
 import {styles} from './style';
+import {colors} from 'config';
 
-class Table extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {};
+export default function () {
+  const [selected, setSelected] = React.useState(new Map());
+  const [oldId, setOldId] = React.useState(0);
+  const [table, updateTables] = React.useState([]);
+  const lang = useSelector((state) => state.translate.lang);
+
+  async function getTables() {
+    const payloadTable = {
+      query: `
+        {getEntityScreenItems(name:"All Tables")
+          {
+            name
+            caption
+            color
+            labelColor
+          }}
+        `,
+    };
+    const tables = await axios.post('getOrderTagGroups', payloadTable);
+    updateTables(tables.data.getEntityScreenItems);
+    // console.log('tables', tables.data.getEntityScreenItems);
   }
 
-  render() {
-    function changeBackground(index) {
-      console.log('Here is the touched cat: ', index);
+  const onSelect = useCallback(
+    (id) => {
+      const newSelected = new Map(selected);
+      setOldId(id);
+      if (selected.get(id) !== true) {
+        newSelected.set(id, !selected.get(id));
+      }
+      if (id !== oldId) {
+        newSelected.delete(oldId, !selected.get(oldId));
+      }
+      setSelected(newSelected);
+    },
+    [oldId, selected],
+  );
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {};
+  // }
 
-      // if (!active) {
-      //   setActive(true);
-      // }
-      // setIndex(idx === index);
-      // setColor(color === '#000');
-    }
-    return (
-      <View style={styles.container}>
-        <Header />
-        <View style={styles.scrollContainer}>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            {_.range(1, 12).map((item, index) => (
+  useEffect(function effectFunction() {
+    getTables();
+    onSelect(0);
+  }, []);
+  return (
+    <View style={styles.container}>
+      <Header />
+      <View style={styles.scrollHorizontal}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          {_.range(1, 12).map((item, index) => (
+            <TouchableOpacity
+              onPress={debounce(() => onSelect(index))}
+              key={index}
+              style={[
+                styles.horizontalButton,
+                {
+                  backgroundColor: selected.get(index)
+                    ? colors.grey0
+                    : colors.white,
+                },
+              ]}>
+              <Text
+                text={'All Tables ' + item}
+                textAlign="center"
+                type={Typography.PS}
+              />
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </View>
+
+      <View style={styles.scrollContainer}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          snapToAlignment={'start'}>
+          <View style={styles.verticalView}>
+            {table.map((item, idx) => (
               <TouchableOpacity
-                onPress={debounce(() => changeBackground(index))}
-                key={index}
-                style={[styles.horizontalButton, {backgroundColor: color}]}>
+                onPress={debounce(getTables)}
+                key={idx}
+                style={styles.verticalButton}>
                 <Text
-                  text={'All Tables ' + item}
+                  text={item.name}
                   textAlign="center"
                   type={Typography.PS}
                 />
               </TouchableOpacity>
             ))}
-          </ScrollView>
-        </View>
-
-        <View style={styles.scrollContainer}>
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            snapToAlignment={'start'}>
-            <View style={styles.verticalView}>
-              {_.range(1, 44).map((item) => (
-                <TouchableOpacity
-                  onPress={debounce(() => Alert.alert('merhaba'))}
-                  key={item}
-                  style={styles.verticalButton}>
-                  <Text
-                    text={'B' + item}
-                    textAlign="center"
-                    type={Typography.PS}
-                  />
-                </TouchableOpacity>
-              ))}
-            </View>
-          </ScrollView>
-        </View>
+          </View>
+        </ScrollView>
       </View>
-    );
-  }
+    </View>
+  );
 }
-export default Table;

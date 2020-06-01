@@ -19,7 +19,7 @@ const mapStateToProps = (state) => {
     loading: state.pinCode.loader,
     productPortion: state.pinCode.productPortion,
     orderTags: state.pinCode.orderTags,
-  };
+   };
 };
 const mapStateToDispatch = (dispatch) => {
   return {
