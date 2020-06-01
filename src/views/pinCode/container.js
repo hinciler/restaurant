@@ -12,14 +12,13 @@ import {setBaseUrl} from '@settings/actions';
 const mapStateToProps = (state) => {
   return {
     menuSuccess: state.pinCode.menuSuccess,
-
     menu: state.pinCode.menu,
     lang: state.translate.lang,
     error: state.pinCode.error,
     loading: state.pinCode.loader,
     productPortion: state.pinCode.productPortion,
     orderTags: state.pinCode.orderTags,
-   };
+  };
 };
 const mapStateToDispatch = (dispatch) => {
   return {

@@ -29,8 +29,7 @@ const router = () => (
         <Scene component={Settings} key="settings" />
         <Scene component={Order} key="order" />
         <Scene component={QrCode} key="qrCode" />
-      </Modal>
-        <Scene component={Table} key="table"  />
+        <Scene component={Table} key="table" />
       </Modal>
     </Overlay>
   </Router>

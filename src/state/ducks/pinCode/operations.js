@@ -289,4 +289,4 @@ export function* connectionControl(action) {
 function* watch_connectionControl() {
   yield takeLatest(type.PIN_CODE, connectionControl);
 }
-export {watch_getMenu,  watch_connectionControl};
+export {watch_getMenu, watch_connectionControl};

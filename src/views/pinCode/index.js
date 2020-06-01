@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {View, Image, ScrollView} from 'react-native';
- import {Button, Header, PinCodeView, Text} from 'components';
+import {Button, Header, PinCodeView, Text} from 'components';
 import {styles} from './style';
 import {isTablet} from 'react-native-device-info';
 import {getMenuQueries} from '@queries';
@@ -22,6 +22,7 @@ class PinCode extends PureComponent {
       modalVisible: false,
     };
   }
+
   async componentDidMount() {
     const value = await AsyncStorage.getItem('@baseUrl');
     if (value) {
@@ -30,6 +31,7 @@ class PinCode extends PureComponent {
       const defaultBaseUrl = 'https://androiddemo.sambapos.com:9000';
       this.props.setBaseUrl(defaultBaseUrl);
     }
+  }
 
   animate() {
     this.setState({modalVisible: true});
@@ -46,6 +48,7 @@ class PinCode extends PureComponent {
       }, 500);
     }, 1500);
   }
+
   getMenu() {
     this.props.getMenu(getMenuQueries('Menu'));
   }
@@ -56,6 +59,7 @@ class PinCode extends PureComponent {
     db.deleteTables;
     this.getMenu();
   }
+
   async onLogin(code) {
     const _data = new URLSearchParams({
       query: 'conn',
@@ -63,6 +67,7 @@ class PinCode extends PureComponent {
     });
     this.props.getPinCode(_data, code);
   }
+
   render() {
     const {lang, loading} = this.props;
     return (
@@ -145,4 +150,5 @@ class PinCode extends PureComponent {
     );
   }
 }
+
 export default PinCode;
