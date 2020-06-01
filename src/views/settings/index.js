@@ -79,7 +79,6 @@ export default function () {
       const {port, domain} = IPRef.current.getDomain();
       const value = `http://${domain}:${port}`;
       dispatch(setBaseUrl(value));
-
       await AsyncStorage.setItem('@baseUrl', value);
     } catch (e) {
       console.log('e', e);
