@@ -1,4 +1,4 @@
 import colors from './colors';
-import fonts, { fontList } from './fonts';
+import fonts, {fontList} from './fonts';
 
-export { colors, fonts, fontList };
+export {colors, fonts, fontList};

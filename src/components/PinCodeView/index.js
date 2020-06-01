@@ -10,8 +10,13 @@ import _ from 'lodash';
 import debounce from 'utilities/helpers/debounce';
 import {Actions} from 'react-native-router-flux';
 import {Typography} from 'components/Text';
-
-export default function ({lang, onPressUpdate, onLogin}) {
+import {colors} from 'config';
+export default function ({
+  lang,
+  onPressUpdate,
+  onLogin,
+  errorMessage = 'There was an error updating',
+}) {
   const [code, setCode] = useState('');
   function numPress(num) {
     const concatCode = code.concat(num);
@@ -48,6 +53,12 @@ export default function ({lang, onPressUpdate, onLogin}) {
           editable={false}
         />
       </View>
+      {errorMessage && (
+        <View style={styles.errorWrapper}>
+          <Text text={errorMessage} color={colors.error} textAlign="center" />
+        </View>
+      )}
+
       <View style={styles.grid}>
         <View style={styles.row}>
           {_.range(1, 4).map((item) => (

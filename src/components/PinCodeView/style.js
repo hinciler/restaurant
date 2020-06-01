@@ -54,4 +54,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.white,
   },
+  errorWrapper: {
+    marginLeft: normalize(30),
+    paddingTop: normalize(5),
+  },
 });

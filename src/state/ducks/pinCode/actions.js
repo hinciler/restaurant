@@ -13,8 +13,8 @@ export const getOrderTagGroups = (payload) => ({
   type: type.GET_ORDER_TAG,
   payload,
 });
-export const connectionControl = (payload, code) => ({
-  type: type.CONNECTION_CONTROL,
+export const pinCodeAction = (payload, code) => ({
+  type: type.PIN_CODE,
   payload,
   code,
 });

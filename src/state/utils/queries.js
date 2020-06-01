@@ -1,4 +1,4 @@
-export const getUser = (pin) => ({
+export const getUserQueries = (pin) => ({
   query: `
         {
           getUser(pin:${pin}){ 

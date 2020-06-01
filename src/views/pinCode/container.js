@@ -5,8 +5,9 @@ import {
   getMenu,
   getProductPortion,
   getOrderTagGroups,
-  connectionControl,
+  pinCodeAction,
 } from '@pinCode/actions';
+import {setBaseUrl} from '@settings/actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -26,8 +27,8 @@ const mapStateToDispatch = (dispatch) => {
     getMenu: (payload) => dispatch(getMenu(payload)),
     getProductPortion: (payload) => dispatch(getProductPortion(payload)),
     getOrderTagGroups: (payload) => dispatch(getOrderTagGroups(payload)),
-    connection_control: (payload, code) =>
-      dispatch(connectionControl(payload, code)),
+    getPinCode: (payload, code) => dispatch(pinCodeAction(payload, code)),
+    setBaseUrl: (payload) => dispatch(setBaseUrl(payload)),
   };
 };
 

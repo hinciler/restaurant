@@ -1,6 +1,6 @@
 import {put, takeLatest} from 'redux-saga/effects';
 import api from '@duck_utils/api';
-import {getUser} from '@duck_utils/queries';
+import {getUserQueries} from '@queries';
 import type from './types';
 import Database from '../../../db/database';
 import {func} from 'prop-types';
@@ -163,51 +163,54 @@ export function* connectionControl(action) {
     const {data = {}, error, status} = yield api.connection_control(
       action.payload,
     );
-    console.log('data', data);
     if (status === 200 || (status && data)) {
-      const getUserPayload = getUser(action.code);
-      const get_user = yield api.getUser(getUserPayload);
-      console.log('getUser', get_user);
-      if (getUser.data) {
-        const requestBody = new URLSearchParams({
-          grant_type: 'password',
-          username: 'pda',
-          password: '1111',
-          client_id: 'pda',
-        });
-
-        const {data: token} = yield api.token(requestBody);
+      const requestBody = new URLSearchParams({
+        grant_type: 'password',
+        username: 'pda',
+        password: '1111',
+        client_id: 'pda',
+      });
+      const {data: token} = yield api.token(requestBody);
+      console.log('token', token);
+      if (token?.access_token) {
+        const getUserPayload = getUserQueries(action.code);
         yield put({
-          type: 'token',
+          type: type.TOKEN,
           token: token?.access_token,
         });
+        console.log('getUserPayload', getUserPayload);
+        const get_user = yield api.getUser(getUserPayload);
+        yield put({
+          type: type.PIN_CODE_SUCCESS,
+          user: get_user,
+        });
+      } else {
+        yield put({
+          type: type.PIN_CODE_FAILED,
+          error: {msg: 'Something was wrong'},
+        });
       }
-      yield put({
-        type: type.CONNECTION_CONTROL_SUCCESS,
-        data: data,
-      });
     } else if (error) {
       yield put({
-        type: type.CONNECTION_CONTROL_FAILED,
+        type: type.PIN_CODE_FAILED,
         error: error,
       });
     } else {
       yield put({
-        type: type.CONNECTION_CONTROL_FAILED,
+        type: type.PIN_CODE_FAILED,
         error: {msg: 'Something was wrong'},
       });
     }
   } catch (error) {
-    console.log('error.response', error.response);
     yield put({
-      type: type.CONNECTION_CONTROL_FAILED,
+      type: type.PIN_CODE_FAILED,
       error,
     });
   }
 }
 
 function* watch_connectionControl() {
-  yield takeLatest(type.CONNECTION_CONTROL, connectionControl);
+  yield takeLatest(type.PIN_CODE, connectionControl);
 }
 
 export {

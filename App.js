@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Text} from 'react-native';
 import {Provider} from 'react-redux';
 import Index from './src/routers';
 import {store} from './src/state/store';
 import {isTablet} from 'react-native-device-info';
 import Orientation from 'react-native-orientation-locker';
+
 console.disableYellowBox = true;
 
 //ios font size değişse de fontlar değişmesin diye

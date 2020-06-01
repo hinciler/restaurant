@@ -9,6 +9,7 @@ const INITIAL_STATE = {
   connectionControl: [],
   connectionControlError: null,
   token: null,
+  user: null,
 };
 const pinCode = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -65,29 +66,29 @@ const pinCode = (state = INITIAL_STATE, action) => {
         orderTagError: action.error,
       };
 
-    case type.CONNECTION_CONTROL:
+    case type.PIN_CODE:
       return {
         ...state,
         loader: true,
       };
-    case type.CONNECTION_CONTROL_SUCCESS:
+    case type.PIN_CODE_SUCCESS:
       return {
         ...state,
         loader: false,
-        connectionControl: action.data,
+        user: action.user,
+        token: action.token,
       };
-    case type.CONNECTION_CONTROL_FAILED:
+    case type.PIN_CODE_FAILED:
       return {
         ...state,
         loader: false,
         connectionControlError: action.error,
       };
-    case type.token:
+    case type.TOKEN:
       return {
         ...state,
         token: action.token,
       };
-
     default:
       return state;
   }

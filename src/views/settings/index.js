@@ -6,6 +6,10 @@ import {Button as NativeButton} from 'react-native-elements';
 const axios = require('axios');
 import {colors} from 'config';
 import DomainSelect from './domain';
+import AsyncStorage from '@react-native-community/async-storage';
+import {useSelector, useDispatch} from 'react-redux';
+import {setBaseUrl} from '@settings/actions';
+
 import _ from 'lodash';
 import {Actions} from 'react-native-router-flux';
 const data = require('./data.json');
@@ -19,6 +23,7 @@ export default function () {
   const [selectedIndex, updateIndex] = useState(0);
   const [settings_state, useSettings] = useState(initial_state);
   let {settings, options} = data;
+  const dispatch = useDispatch();
 
   async function GetSettings() {
     useSettings({
@@ -69,6 +74,17 @@ export default function () {
       is_disabled: true,
     });
   }
+  const save = async () => {
+    try {
+      const {port, domain} = IPRef.current.getDomain();
+      const value = `http://${domain}:${port}`;
+      dispatch(setBaseUrl(value));
+
+      await AsyncStorage.setItem('@baseUrl', value);
+    } catch (e) {
+      console.log('e', e);
+    }
+  };
   const {is_disabled, settings_data = [], loading} = settings_state;
   return (
     <View style={styles.container}>
@@ -118,7 +134,7 @@ export default function () {
             keyExtractor={(item, index) => index + ''}
           />
 
-          <Button text={'KAYDET'} onPress={Actions.pop} />
+          <Button text={'KAYDET'} onPress={save} />
         </View>
       ) : (
         <View />

@@ -1,10 +1,12 @@
 import React, {PureComponent} from 'react';
 import {View, Image, ScrollView} from 'react-native';
-import {Button, Header, PinCodeView} from 'components';
+import {Header, PinCodeView} from 'components';
 import {styles} from './style';
 import {isTablet} from 'react-native-device-info';
-import axios from 'axios';
+import {getMenuQueries} from '@queries';
 import Spinner from 'react-native-loading-spinner-overlay';
+import AsyncStorage from '@react-native-community/async-storage';
+
 class PinCode extends PureComponent {
   constructor(props) {
     super(props);
@@ -12,27 +14,18 @@ class PinCode extends PureComponent {
       portionsSuccess: false,
     };
   }
-
+  async componentDidMount() {
+    const value = await AsyncStorage.getItem('@baseUrl');
+    if (value) {
+      this.props.setBaseUrl(value);
+    } else {
+      const defaultBaseUrl = 'https://androiddemo.sambapos.com:9000';
+      this.props.setBaseUrl(defaultBaseUrl);
+    }
+    console.log('value', value);
+  }
   getMenu() {
-    const menu_setup = 'Menu';
-    const payloadMenu = {
-      query: `
-        {getMenu(name:"${menu_setup}")
-          {categories{
-              id,
-              name,
-              color,
-              foreground,
-              image,
-              header,
-              menuId,
-              isFastMenu,
-              menuItems{productId,name,color,caption,foreground,image, header,quantity,categoryId,product{portions{name,id,productId,price}}}
-              }
-          }}
-        `,
-    };
-    this.props.getMenu(payloadMenu);
+    this.props.getMenu(getMenuQueries('Menu'));
   }
 
   onPressUpdate() {
@@ -43,26 +36,7 @@ class PinCode extends PureComponent {
       query: 'conn',
       serial: '1111',
     });
-    this.props.connection_control(_data, code);
-    const requestBody = new URLSearchParams({
-      grant_type: 'password',
-      username: 'pda',
-      password: '1111',
-      client_id: 'pda',
-    });
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    };
-
-    const api_settings = await axios.post(
-      'http://78.159.99.84:9000/Token',
-      requestBody,
-      config,
-    );
-    console.log('api_settings', api_settings);
+    this.props.getPinCode(_data, code);
   }
   render() {
     const {lang, loading} = this.props;

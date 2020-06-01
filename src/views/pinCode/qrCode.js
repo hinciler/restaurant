@@ -54,7 +54,6 @@ function QrCode() {
       });
     }
   };
-  console.log('flashOptions', flashOptions);
   return (
     <View style={styles.container}>
       <Header rightIconName="close" onRightPress={Actions.pop} />
