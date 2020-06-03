@@ -5,7 +5,8 @@ import {Header, Text} from 'components';
 import {Typography} from 'components/Text';
 import {Button, normalize} from 'react-native-elements';
 import OrderList from './orderList';
-import Number from './number';
+import Bill from './bill';
+import PaymentType from './paymentType';
 import {payTerminalTicket} from '@payment/actions';
 import {styles} from './style';
 function Payment() {
@@ -18,10 +19,11 @@ function Payment() {
 
   return (
     <View style={styles.container}>
-      <Header rightIconName="close" />
+      <Header />
       <View style={styles.content}>
         <OrderList />
-        <Number />
+        <Bill />
+        <PaymentType />
       </View>
     </View>
   );
