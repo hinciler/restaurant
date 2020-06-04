@@ -2,9 +2,8 @@ import type from './types';
 const INITIAL_STATE = {
   loader: false,
   error: '',
-  menu: [],
   menuSuccess: false,
-
+  userSuccess: false,
   connectionControl: [],
   connectionControlError: null,
   token: null,
@@ -41,12 +40,13 @@ const pinCode = (state = INITIAL_STATE, action) => {
         ...state,
         loader: false,
         user: action.user,
-        token: action.token,
+        userSuccess: true,
       };
     case type.PIN_CODE_FAILED:
       return {
         ...state,
         loader: false,
+        userSuccess: false,
         connectionControlError: action.error,
       };
     case type.TOKEN:

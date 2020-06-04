@@ -188,17 +188,7 @@ export function* getMenu(action) {
         serial: '111',
       });
 
-      const config = {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      };
-
-      const ticketTag = yield axios.post(
-        'http://78.159.99.84:9000/api/helper',
-        requestBody,
-        config,
-      );
+      const ticketTag = yield api.getTicketTag(requestBody);
       ticketTag.data[0].TicketTagGroups.map((ticketTagGroupItem) => {
         const freeTagging = ticketTagGroupItem.FreeTagging;
         const forceValue = ticketTagGroupItem.ForceValue;

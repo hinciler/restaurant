@@ -12,6 +12,7 @@ import Modal from 'react-native-modal';
 import * as Progress from 'react-native-progress';
 import {Typography} from 'components/Text';
 import {normalize} from 'react-native-elements';
+import {Actions} from 'react-native-router-flux';
 
 class PinCode extends PureComponent {
   constructor(props) {
@@ -20,6 +21,7 @@ class PinCode extends PureComponent {
       menuSuccess: false,
       progress: 0,
       modalVisible: false,
+      errorMessage: null,
     };
   }
 
@@ -30,6 +32,23 @@ class PinCode extends PureComponent {
     } else {
       const defaultBaseUrl = 'https://androiddemo.sambapos.com:9000';
       this.props.setBaseUrl(defaultBaseUrl);
+    }
+  }
+
+  componentDidUpdate(prevProps: Readonly<P>) {
+    console.log('prevProps', prevProps.userSuccess);
+    console.log('this.props', this.props.userSuccess);
+    if (
+      this.props.userSuccess &&
+      prevProps.userSuccess !== this.props.userSuccess
+    ) {
+      Actions.table();
+    }
+
+    if (this.props.error && prevProps.error !== this.props.error) {
+      this.setState({
+        errorMessage: 'Pin Code Hatalı',
+      });
     }
   }
 
@@ -70,6 +89,7 @@ class PinCode extends PureComponent {
 
   render() {
     const {lang, loading} = this.props;
+    const {errorMessage} = this.state;
     return (
       <View style={styles.container}>
         <Modal
@@ -116,6 +136,7 @@ class PinCode extends PureComponent {
                   onPressUpdate={() => {
                     this.onPressUpdate();
                   }}
+                  onLogin={(code) => this.onLogin(code)}
                 />
               </View>
             </View>
@@ -133,6 +154,7 @@ class PinCode extends PureComponent {
                     this.onPressUpdate();
                   }}
                   onLogin={(code) => this.onLogin(code)}
+                  errorMessage={errorMessage}
                 />
               </View>
             </ScrollView>

@@ -17,6 +17,12 @@ export default {
   getOrderTagGroups(data) {
     return axios.post('getOrderTagGroups', data);
   },
+  getTable(data) {
+    return axios.post('getEntityScreenItems', data);
+  },
+  getTicketTag(data) {
+    return api_helper.post('api/helper/', data);
+  },
   connection_control(data) {
     return api_helper.post('api/helper/', data);
   },

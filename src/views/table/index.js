@@ -5,32 +5,17 @@ import {Header, Text} from 'components';
 import {Typography} from 'components/Text';
 import debounce from 'utilities/helpers/debounce';
 import _ from 'lodash';
-import axios from '../../state/utils/fetch';
+import {table} from '@table/actions';
 import {styles} from './style';
 import {colors} from 'config';
 
 export default function () {
   const [selected, setSelected] = React.useState(new Map());
   const [oldId, setOldId] = React.useState(0);
-  const [table, updateTables] = React.useState([]);
+  const [tableState, updateTables] = React.useState([]);
   const lang = useSelector((state) => state.translate.lang);
-
-  async function getTables() {
-    const payloadTable = {
-      query: `
-        {getEntityScreenItems(name:"All Tables")
-          {
-            name
-            caption
-            color
-            labelColor
-          }}
-        `,
-    };
-    const tables = await axios.post('getOrderTagGroups', payloadTable);
-    updateTables(tables.data.getEntityScreenItems);
-    // console.log('tables', tables.data.getEntityScreenItems);
-  }
+  const tableData = useSelector((state) => state.table.data);
+  const dispatch = useDispatch();
 
   const onSelect = useCallback(
     (id) => {
@@ -46,15 +31,28 @@ export default function () {
     },
     [oldId, selected],
   );
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {};
-  // }
+
+  function getTables() {
+    dispatch(table());
+  }
 
   useEffect(function effectFunction() {
     getTables();
     onSelect(0);
   }, []);
+
+  useEffect(
+    function getTable() {
+      if (
+        typeof tableData.getEntityScreenItems !== 'undefined' &&
+        tableData.getEntityScreenItems.length > 0
+      ) {
+        updateTables(tableData.getEntityScreenItems);
+      }
+    },
+    [tableData],
+  );
+
   return (
     <View style={styles.container}>
       <Header />
@@ -87,7 +85,7 @@ export default function () {
           showsVerticalScrollIndicator={false}
           snapToAlignment={'start'}>
           <View style={styles.verticalView}>
-            {table.map((item, idx) => (
+            {tableState.map((item, idx) => (
               <TouchableOpacity
                 onPress={debounce(getTables)}
                 key={idx}
