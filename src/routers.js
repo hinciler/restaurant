@@ -5,7 +5,7 @@ import {Scene, Router, Overlay, Modal} from 'react-native-router-flux';
 import Users from 'views/users/container.js';
 import PinCode from 'views/pinCode/container';
 import Settings from 'views/settings/container';
-import Order from 'views/order';
+import OrderList from 'views/orderList';
 import QrCode from 'views/pinCode/qrCode';
 import Table from 'views/table/container';
 import Payment from 'views/payment';
@@ -28,10 +28,10 @@ const router = () => (
         <Scene component={Users} key="users" />
         <Scene component={PinCode} key="pinCode" initial />
         <Scene component={Settings} key="settings" />
-        <Scene component={Order} key="order" />
+        <Scene component={OrderList} key="orderList" initial />
         <Scene component={QrCode} key="qrCode" />
         <Scene component={Table} key="table" />
-        <Scene component={Payment} key="payment" initial />
+        <Scene component={Payment} key="payment" />
       </Modal>
     </Overlay>
   </Router>

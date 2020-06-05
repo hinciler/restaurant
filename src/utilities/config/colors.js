@@ -11,7 +11,7 @@ const light = {
   white: '#fff',
   text: '#000',
   black: '#1a1917',
-  grey: '#8E8E92',
+  grey: '#dcdcdc',
   grey0: '#888888',
   grey1: '#8E8E92',
   grey2: '#F2F4F7',

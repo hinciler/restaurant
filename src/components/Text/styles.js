@@ -107,7 +107,7 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
   },
   PSB: {
-    color: colors.text2,
+    color: colors.text0,
     fontSize: normalize(10),
     fontWeight: 'bold',
   },
