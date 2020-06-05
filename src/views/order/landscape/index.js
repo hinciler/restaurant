@@ -4,6 +4,7 @@ import {styles} from './style.js';
 import LeftButton from './leftButton';
 import {Button} from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
+import {OrangeButton, GreenButton} from 'components';
 
 const dummy = require('./data.json');
 export default class index extends PureComponent {
@@ -64,57 +65,8 @@ export default class index extends PureComponent {
           </View>
 
           <View style={styles.rightBtnWrapper}>
-            <View style={styles.orange}>
-              <ScrollView>
-                {orange.map((item, index) => (
-                  <Button
-                    key={index}
-                    title={item}
-                    containerStyle={{
-                      flex: 1,
-                      padding: 10,
-                      backgroundColor: 'orange',
-                      marginTop: 5,
-                    }}
-                    buttonStyle={{backgroundColor: 'orange'}}
-                    titleStyle={{
-                      color: 'white',
-                      fontWeight: 'bold',
-                    }}
-                  />
-                ))}
-              </ScrollView>
-            </View>
-            <View style={styles.green}>
-              <ScrollView contentContainerStyle={{}}>
-                <View
-                  style={{
-                    flex: 1,
-                    backgroundColor: 'white',
-                    flexWrap: 'wrap',
-                    flexDirection: 'row',
-                  }}>
-                  {green.map((item, index) => (
-                    <Button
-                      key={index}
-                      title={item}
-                      containerStyle={{
-                        padding: 10,
-                        backgroundColor: 'green',
-                        margin: '1%',
-                        flexGrow: 1,
-                        width: '30%',
-                      }}
-                      buttonStyle={{backgroundColor: 'green'}}
-                      titleStyle={{
-                        color: 'white',
-                        fontWeight: 'bold',
-                      }}
-                    />
-                  ))}
-                </View>
-              </ScrollView>
-            </View>
+            <OrangeButton orange_btn={orange} />
+            <GreenButton green_btn={green} />
           </View>
         </View>
       </View>

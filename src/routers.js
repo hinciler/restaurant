@@ -26,12 +26,12 @@ const router = () => (
     <Overlay key="overlay" panHandlers={null}>
       <Modal key="modal" transitionConfig={transitionConfig} hideNavBar>
         <Scene component={Users} key="users" />
-        <Scene component={PinCode} key="pinCode" initial />
+        <Scene component={PinCode} key="pinCode" />
         <Scene component={Settings} key="settings" />
-        <Scene component={Order} key="order" />
+        <Scene component={Order} key="order" initial />
         <Scene component={QrCode} key="qrCode" />
         <Scene component={Table} key="table" />
-        <Scene component={Payment} key="payment" initial />
+        <Scene component={Payment} key="payment" />
       </Modal>
     </Overlay>
   </Router>
