@@ -8,6 +8,10 @@ export const styles = StyleSheet.create({
     fontSize: normalize(35),
     fontWeight: 'bold',
   },
+  H1R: {
+    color: colors.text0,
+    fontSize: normalize(35),
+  },
   H2: {
     color: colors.text0,
     fontSize: normalize(30),

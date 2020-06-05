@@ -8,6 +8,7 @@ import Settings from 'views/settings/container';
 import Order from 'views/order';
 import QrCode from 'views/pinCode/qrCode';
 import Table from 'views/table/container';
+import Payment from 'views/payment';
 
 const stateHandler = (prevState, newState, action) => {
   console.log('onStateChange: ACTION:', action);
@@ -30,6 +31,7 @@ const router = () => (
         <Scene component={Order} key="order" />
         <Scene component={QrCode} key="qrCode" />
         <Scene component={Table} key="table" />
+        <Scene component={Payment} key="payment" initial />
       </Modal>
     </Overlay>
   </Router>

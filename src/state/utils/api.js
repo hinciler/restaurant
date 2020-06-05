@@ -14,6 +14,9 @@ export default {
   getProductPortion(data) {
     return axios.post('getProductPortions', data);
   },
+  payTerminalTicket(data) {
+    return axios.post('payTerminalTicket', data);
+  },
   getOrderTagGroups(data) {
     return axios.post('getOrderTagGroups', data);
   },

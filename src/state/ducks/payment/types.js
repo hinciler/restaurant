@@ -1,0 +1,4 @@
+const PAYMENT = 'PAYMENT/payment';
+const PAYMENT_FAILED = 'PAYMENT_FAILED/payment';
+const PAYMENT_SUCCESS = 'PAYMENT_SUCCESS/payment';
+export default {PAYMENT, PAYMENT_SUCCESS, PAYMENT_FAILED};

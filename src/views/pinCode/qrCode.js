@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {StyleSheet, TouchableOpacity, Linking, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {RNCamera} from 'react-native-camera';
 import {Header, Text} from 'components';
