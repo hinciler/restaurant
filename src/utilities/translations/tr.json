@@ -9,5 +9,9 @@
   "flashOff": "Flash Kapali",
   "pleaseWait": "Lutfen Bekleyiniz...",
   "loading": "Yükleniyor...",
-  "please_wait": "Güncelleme işlemi yapılırken lütfen bekleyin!"
+  "please_wait": "Güncelleme işlemi yapılırken lütfen bekleyin!",
+  "balance": "Bakiye",
+  "close": "Kapat",
+  "table": "Masa",
+  "settle": "Odeme"
 }

@@ -1,0 +1,5 @@
+const ORDER_LIST = 'ORDER_LIST/orderList';
+const ORDER_LIST_FAILED = 'ORDER_LIST_FAILED/orderList';
+const ORDER_LIST_SUCCESS = 'ORDER_LIST_SUCCESS/orderList';
+export default{  ORDER_LIST, ORDER_LIST_SUCCESS, ORDER_LIST_FAILED }
+        

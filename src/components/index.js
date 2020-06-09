@@ -4,6 +4,8 @@ import Text from './Text';
 import PickerItem from './pickerItem';
 import Button from './Button';
 import OptionsMenu from './OptionsMenu';
+import LeftOrderButton from './Order/LeftButton';
+import List from './Order/List';
 import OrangeButton from './OrangeButton';
 import GreenButton from './GreenButton';
 
@@ -16,4 +18,6 @@ export {
   OptionsMenu,
   GreenButton,
   OrangeButton,
+    LeftOrderButton,
+    List,
 };
