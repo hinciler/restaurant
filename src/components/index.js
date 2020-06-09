@@ -6,8 +6,8 @@ import Button from './Button';
 import OptionsMenu from './OptionsMenu';
 import LeftOrderButton from './Order/LeftButton';
 import List from './Order/List';
-import OrangeButton from './OrangeButton';
-import GreenButton from './GreenButton';
+import OrangeButton from './Order/OrangeButton';
+import GreenButton from './Order/GreenButton';
 
 export {
   Header,
@@ -18,6 +18,6 @@ export {
   OptionsMenu,
   GreenButton,
   OrangeButton,
-    LeftOrderButton,
-    List,
+  LeftOrderButton,
+  List,
 };
