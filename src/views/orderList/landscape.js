@@ -4,7 +4,7 @@ import {StyleSheet, View, FlatList} from 'react-native';
 const dummy = require('./dummy.json');
 const {leftDummy, orange, green} = dummy;
 
-import {Header, List, LeftOrderButton} from 'components';
+import {OrangeButton, List, LeftOrderButton, GreenButton} from 'components';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
   },
   right: {
     flex: 5,
+    flexDirection: 'row',
   },
 });
 function OrderList() {
@@ -38,7 +39,10 @@ function OrderList() {
         keyExtractor={(item) => item.pay}
       />
       <List />
-      <View style={styles.right} />
+      <View style={styles.right}>
+        <OrangeButton orange_btn={orange} />
+        <GreenButton green_btn={green} />
+      </View>
     </View>
   );
 }

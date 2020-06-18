@@ -2,6 +2,8 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {normalize, Button} from 'react-native-elements';
 import {colors} from 'config';
+import {Actions} from 'react-native-router-flux';
+
 import Text, {Typography} from 'components/Text';
 const styles = StyleSheet.create({
   container: {
@@ -61,6 +63,9 @@ const list = [
   },
 ];
 const paymentType = () => {
+  const pressed = () => {
+    Actions.pop();
+  };
   return (
     <View style={styles.container}>
       {list.map((item, index) => (
@@ -72,6 +77,7 @@ const paymentType = () => {
           ]}
           key={index}
           disabled={item.isDisabled}
+          onPress={pressed}
           title={
             <Text
               text={item.title}

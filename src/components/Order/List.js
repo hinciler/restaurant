@@ -121,6 +121,7 @@ const OrderList = () => {
           containerStyle={styles.settleButtonContainer}
           buttonStyle={styles.settleButtonStyle}
           titleStyle={styles.settleTextStyle}
+          onPress={Actions.payment}
         />
         <Button
           title={lang.close}
