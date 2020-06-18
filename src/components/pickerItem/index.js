@@ -7,8 +7,9 @@ import ModalSelectList from '../SelectedList';
 import {colors} from 'config';
 
 const PickerItem = memo(({item, options}) => {
+  console.log('item', item);
   const [visible, setVisible] = useState(false);
-  const textKey = options ? 'tr' : 'Name';
+  const textKey = 'title';
   const [_value, setValue] = useState(item.value);
 
   const onSave = (data) => {
@@ -33,7 +34,7 @@ const PickerItem = memo(({item, options}) => {
   return (
     <View style={styles.container}>
       <View style={styles.text}>
-        <Text text={item.text} type="PSM" />
+        <Text text={item.title} type="PSM" />
       </View>
       <Button
         containerStyle={styles.valueWrapper}

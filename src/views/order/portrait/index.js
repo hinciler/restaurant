@@ -12,8 +12,6 @@ import {
 } from 'react-native';
 import {styles} from './style';
 import {Actions} from 'react-native-router-flux';
-import LeftButton from '../landscape/leftButton';
-import {NavigationActions} from 'react-navigation';
 const buttons = require('./data.json');
 const logo = require('assets/img/logo.png');
 
