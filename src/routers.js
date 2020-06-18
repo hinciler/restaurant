@@ -29,7 +29,7 @@ const router = () => (
         <Scene component={Users} key="users" />
         <Scene component={PinCode} key="pinCode" initial />
         <Scene component={Settings} key="settings" />
-        <Scene component={OrderList} key="orderList" initial />
+        <Scene component={OrderList} key="orderList" />
         <Scene component={Order} key="order" />
         <Scene component={QrCode} key="qrCode" />
         <Scene component={Table} key="table" />
