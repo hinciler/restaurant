@@ -8,6 +8,8 @@ import _ from 'lodash';
 import {table} from '@table/actions';
 import {styles} from './style';
 import {colors} from 'config';
+import {Actions} from 'react-native-router-flux';
+import OrderList from '../orderList';
 
 export default function () {
   const [selected, setSelected] = React.useState(new Map());
@@ -87,7 +89,7 @@ export default function () {
           <View style={styles.verticalView}>
             {tableState.map((item, idx) => (
               <TouchableOpacity
-                onPress={debounce(getTables)}
+                onPress={debounce(() => Actions.orderList())}
                 key={idx}
                 style={styles.verticalButton}>
                 <Text

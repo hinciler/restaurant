@@ -7,6 +7,7 @@ import PinCode from 'views/pinCode/container';
 import Settings from 'views/settings/container';
 import Order from 'views/order';
 import OrderList from 'views/orderList';
+import AddOrder from 'views/orderList/addOrder';
 import QrCode from 'views/pinCode/qrCode';
 import Table from 'views/table/container';
 import Payment from 'views/payment';
@@ -27,6 +28,7 @@ const router = () => (
     <Overlay key="overlay" panHandlers={null}>
       <Modal key="modal" transitionConfig={transitionConfig} hideNavBar>
         <Scene component={Users} key="users" />
+        <Scene component={AddOrder} key="addOrder" />
         <Scene component={PinCode} key="pinCode" initial />
         <Scene component={Settings} key="settings" />
         <Scene component={OrderList} key="orderList" />

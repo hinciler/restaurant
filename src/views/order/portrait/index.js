@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {styles} from './style';
 import {Actions} from 'react-native-router-flux';
-const buttons = require('./data.json');
+const buttons = require('../../orderList/data.json');
 const logo = require('assets/img/logo.png');
 
 class Portrait extends PureComponent {

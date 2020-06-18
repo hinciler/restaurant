@@ -1,10 +1,17 @@
 import React, {PureComponent} from 'react';
-import {Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from 'react-native';
-import {styles} from './style';
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {styles} from '../order/portrait/style';
 import {Actions} from 'react-native-router-flux';
 const buttons = require('./data.json');
 
-const logo = require('assets/img/sambaPosLogo.png');
+const logo = require('assets/img/logo.png');
 class AddOrder extends PureComponent {
   render() {
     const {addMenu, addFood} = buttons;
@@ -68,23 +75,33 @@ class AddOrder extends PureComponent {
                 flexDirection: 'row',
               }}>
               <TouchableOpacity style={styles.addFoodButton}>
-                <Text style={[styles.orderText, {color: '#fff', fontSize: 14}]}>Breakfast</Text>
+                <Text style={[styles.orderText, {color: '#fff', fontSize: 14}]}>
+                  Breakfast
+                </Text>
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.addFoodButton}>
-                <Text style={[styles.orderText, {color: '#fff', fontSize: 14}]}>Soup</Text>
+                <Text style={[styles.orderText, {color: '#fff', fontSize: 14}]}>
+                  Soup
+                </Text>
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.addFoodButton}>
-                <Text style={[styles.orderText, {color: '#fff', fontSize: 14}]}>Wraps</Text>
+                <Text style={[styles.orderText, {color: '#fff', fontSize: 14}]}>
+                  Wraps
+                </Text>
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.addFoodButton}>
-                <Text style={[styles.orderText, {color: '#fff', fontSize: 14}]}>Sandwiches</Text>
+                <Text style={[styles.orderText, {color: '#fff', fontSize: 14}]}>
+                  Sandwiches
+                </Text>
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.addFoodButton}>
-                <Text style={[styles.orderText, {color: '#fff', fontSize: 14}]}>Sandwiches</Text>
+                <Text style={[styles.orderText, {color: '#fff', fontSize: 14}]}>
+                  Sandwiches
+                </Text>
               </TouchableOpacity>
             </View>
             <View

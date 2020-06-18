@@ -1,46 +1,84 @@
-import React, {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {StyleSheet, View, FlatList} from 'react-native';
-const dummy = require('./dummy.json');
-const {leftDummy, orange, green} = dummy;
+import React, {PureComponent} from 'react';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Image,
+  SafeAreaView,
+  Text,
+  Button,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
+import {styles} from './style';
+import {Actions} from 'react-native-router-flux';
+const buttons = require('./data.json');
+const logo = require('assets/img/logo.png');
 
-import {Header, List, LeftOrderButton} from 'components';
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingBottom: 20,
-    flexDirection: 'row',
-  },
-  contentContainerStyle: {
-    flex: 1,
-  },
-  right: {
-    flex: 5,
-  },
-});
-function OrderList() {
-  const {lang} = useSelector((state) => state.translate);
+class Portrait extends PureComponent {
+  render() {
+    const {indexButtons} = buttons;
+    return (
+      <SafeAreaView style={{flex: 1, backgroundColor: '#ddd'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+          <Image source={logo} style={{height: 40, width: 80}} />
+          <Text style={{marginTop: 12}}> 11.05.2020 </Text>
+        </View>
 
-  return (
-    <View style={styles.container}>
-      <FlatList
-        contentContainerStyle={styles.contentContainerStyle}
-        style={styles.container}
-        data={leftDummy}
-        renderItem={({item, index}) => (
-          <LeftOrderButton
-            containerStyle={styles.leftButtons}
-            item={item}
-            text={item.text}
-            disabled={item.disabled}
-          />
-        )}
-        keyExtractor={(item) => item.pay}
-      />
-      <List />
-      <View style={styles.right} />
-    </View>
-  );
+        <View style={{flexDirection: 'row', flexGrow: 1}}>
+          <View
+            style={{
+              flex: 6,
+              marginLeft: 10,
+              flexDirection: 'column',
+            }}>
+            <View style={{flex: 3, backgroundColor: '#fff', padding: 5}}>
+              <Text>This screen for order</Text>
+            </View>
+            <View
+              style={{
+                marginTop: 10,
+                flexDirection: 'row',
+                marginBottom: 30,
+              }}>
+              <TouchableOpacity
+                style={[styles.orderButton, {flex: 1}]}
+                underlayColor="#fff">
+                <Text style={styles.orderText}>Settle</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[
+                  styles.orderButton,
+                  {backgroundColor: '#e63619', flex: 1},
+                ]}
+                underlayColor="#fff">
+                <Text style={[styles.orderText, {color: '#fff'}]}>Close</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={{flex: 2, marginLeft: 10, marginRight: 10}}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <View>
+                {indexButtons.map((item, index) => (
+                  <TouchableOpacity
+                    style={styles.orderButton}
+                    underlayColor="#fff"
+                    onPress={Actions[item.onPress]}>
+                    <Text style={styles.orderText}>{item.text}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </ScrollView>
+          </View>
+        </View>
+      </SafeAreaView>
+    );
+  }
 }
 
-export default OrderList;
+export default Portrait;
