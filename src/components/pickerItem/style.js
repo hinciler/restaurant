@@ -19,7 +19,6 @@ export const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   btnStyle: {
-    flex: 1,
     backgroundColor: 'transparent',
     justifyContent: 'space-between',
   },

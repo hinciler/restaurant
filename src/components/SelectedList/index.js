@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 });
 const checklist = [];
 const CustomModal = memo(
-  ({visible = false, setVisible, list, onSave, type, textKey = 'Name'}) => {
+  ({visible = false, setVisible, list, onSave, type, textKey = 'title'}) => {
     const [selectIndex, selectRadio] = useState(0);
     const checked = (data) => {
       const _index = _.findIndex(checklist, ['_key', data._key]);
