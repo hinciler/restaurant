@@ -1,6 +1,7 @@
 import {Dimensions, StyleSheet} from 'react-native';
 import {colors} from 'config';
 import {normalize} from 'react-native-elements';
+import {isTablet} from 'react-native-device-info';
 const {width} = Dimensions.get('window');
 export const styles = StyleSheet.create({
   container: {
@@ -49,15 +50,17 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
   },
-  searchLeftContainer: {flex: 0.9, margin: 10, alignItems: 'flex-start'},
+  searchLeftContainer: {
+    flex: isTablet() ? 0.9 : 0.8,
+    margin: 10,
+    alignItems: 'flex-start',
+  },
 
   searchInputContainer: {
     alignItems: 'center',
     flexDirection: 'row',
     flex: 0.1,
   },
-
-  searchTextStyle: {flex: 0.08},
 
   searchTextInputStyle: {
     height: normalize(25),
@@ -84,10 +87,14 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
   },
 
+  searchTextStyle: {flex: isTablet() ? 0.08 : 0.15},
+
   tableHeaderStyle: {
     borderColor: colors.grey0,
     borderWidth: 1,
     padding: normalize(3),
     width: normalize(85),
   },
+
+  rightBtnContainer: {flex: isTablet() ? 0.15 : 0.27},
 });

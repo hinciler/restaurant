@@ -17,6 +17,8 @@ import {colors} from 'config';
 import {Actions} from 'react-native-router-flux';
 import {Button} from 'react-native-elements';
 import RightButton from './rightButton';
+import {isTablet} from 'react-native-device-info';
+
 const dummy = require('./dummy.json');
 const {rightDummy, containerItems} = dummy;
 
@@ -154,7 +156,7 @@ export default function () {
                     </View>
                   </ScrollView>
                 </View>
-                <View style={{flex: 0.15}}>
+                <View style={styles.rightBtnContainer}>
                   <FlatList
                     contentContainerStyle={{flex: 1}}
                     style={styles.container}
