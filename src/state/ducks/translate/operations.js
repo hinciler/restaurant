@@ -1,21 +1,30 @@
+import {put, takeLatest} from 'redux-saga/effects';
+import AsyncStorage from '@react-native-community/async-storage';
 
-import { put, takeLatest } from 'redux-saga/effects';
 import api from '@duck_utils/api';
 import type from './types';
+import _ from 'lodash';
+import {en, languages} from 'utilities/translations';
 export function* translate(action) {
   try {
-    const response = yield api.translate(action.payload);
-    if (response.hasOwnProperty('error')) {
-      yield put({
-        type: type.TRANSLATE_FAILED,
-        err: response.error,
-      });
-    } else {
-      yield put({
-        type: type.TRANSLATE_SUCCESS,
-        data: response.data,
-      });
+    let defaultLang = en;
+    let defaultShortLangTitle = 'en';
+    const {lang} = action;
+    const response = _.filter(languages, {value: lang});
+    if (response.length > 0) {
+      defaultLang = response[0].file;
+      defaultShortLangTitle = response[0].value;
     }
+    var index = languages.findIndex((s) => s.value === lang);
+    //  const response = yield api.translate(action.payload);
+
+    yield put({
+      type: type.TRANSLATE_SUCCESS,
+      lang: defaultLang,
+      shortTitle: defaultShortLangTitle,
+      selectLangIndex: index > 0 ? index : 0,
+    });
+    yield AsyncStorage.setItem('@lang', defaultShortLangTitle);
   } catch (err) {
     yield put({
       type: type.TRANSLATE_FAILED,
@@ -26,4 +35,4 @@ export function* translate(action) {
 
 export default function* watch_translate() {
   yield takeLatest(type.TRANSLATE, translate);
-}  
+}

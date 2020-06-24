@@ -81,7 +81,6 @@ const OrderList = () => {
         sections={DATA}
         keyExtractor={(item, index) => item + index}
         renderItem={({item, index}) => {
-          console.log(item);
           return (
             <ListItem
               leftElement={<Text text={index + 1} type={Typography.PMB} />}

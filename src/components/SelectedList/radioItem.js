@@ -7,7 +7,6 @@ export default function ({text, index, onPress, selectedIndex}) {
     const data = {index};
     onPress(data);
   };
-  console.log('selectedIndex', selectedIndex);
   return (
     <CheckBox
       title={text}

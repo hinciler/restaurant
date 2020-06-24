@@ -6,29 +6,14 @@ import {Icon, Button} from 'react-native-elements';
 import ModalSelectList from '../SelectedList';
 import {colors} from 'config';
 
-const PickerItem = memo(({item, options}) => {
-  console.log('item', item);
+const PickerItem = memo(({item, options, selectedIndex = 0, onSelect}) => {
   const [visible, setVisible] = useState(false);
   const textKey = 'title';
   const [_value, setValue] = useState(item.value);
 
-  const onSave = (data) => {
-    if (item.type === 'radio') {
-      options
-        ? setValue(options[data][textKey])
-        : setValue(item.list[data][textKey]);
-    } else {
-      if (data.length > 0) {
-        let _values = '';
-        data.map((check, index) => {
-          _values += index === 0 ? check.text : ', ' + check.text;
-        });
-
-        setValue(_values);
-      } else {
-        setValue('Seciniz');
-      }
-    }
+  const onSave = (index) => {
+    onSelect(options[index]);
+    setValue(options[index].title);
     setVisible(false);
   };
   return (
@@ -53,6 +38,7 @@ const PickerItem = memo(({item, options}) => {
         onSave={onSave}
         type={item.type}
         headerText={item.text}
+        selectedIndex={selectedIndex}
       />
     </View>
   );

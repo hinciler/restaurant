@@ -14,5 +14,8 @@
   "close": "Kapat",
   "table": "Masa",
   "settle": "Odeme",
-  "save": "Kaydet"
+  "save": "Kaydet",
+  "language": "Dil",
+  "en": "English",
+  "tr": "Turkce"
 }

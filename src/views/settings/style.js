@@ -36,4 +36,7 @@ export const styles = StyleSheet.create({
     borderBottomColor: 'red',
     borderBottomWidth: 1,
   },
+  scroll: {
+    padding: normalize(10),
+  },
 });

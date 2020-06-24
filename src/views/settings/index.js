@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {View, FlatList} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import {styles} from './style.js';
 import {Header, PickerItem, Button} from 'components';
 import {Button as NativeButton} from 'react-native-elements';
@@ -8,7 +8,8 @@ import DomainSelect from './domain';
 import AsyncStorage from '@react-native-community/async-storage';
 import {useSelector, useDispatch} from 'react-redux';
 import {setBaseUrl} from '@settings/actions';
-const {languages} = require('./data.json');
+import {translate} from '@translate/actions';
+
 import _ from 'lodash';
 import {Actions} from 'react-native-router-flux';
 const initial_state = {
@@ -20,8 +21,13 @@ export default function () {
   let IPRef = useRef();
   const [selectedIndex, updateIndex] = useState(0);
   const [settings_state, useSettings] = useState(initial_state);
-  const {lang} = useSelector((state) => state.translate);
-
+  const {lang, shortTitle, languages: testLang, selectLangIndex} = useSelector(
+    (state) => state.translate,
+  );
+  const languages = testLang.map((_lang) => ({
+    title: _lang.title,
+    value: _lang.value,
+  }));
   const dispatch = useDispatch();
   const save = async () => {
     console.log('language', languages);
@@ -35,12 +41,23 @@ export default function () {
     }
     Actions.pop();
   };
+  const onSelect = (option) => {
+    dispatch(translate(option.value));
+  };
   const {is_disabled, settings_data = [], loading} = settings_state;
   return (
     <View style={styles.container}>
       <Header />
       <DomainSelect ref={IPRef} />
-      <PickerItem options={languages} item={{value: 'English', title: 'Dil'}} />
+      <ScrollView style={styles.scroll}>
+        <PickerItem
+          options={languages}
+          item={{title: lang.language, value: lang[shortTitle]}}
+          onSelect={(option) => onSelect(option)}
+          selectedIndex={selectLangIndex}
+        />
+      </ScrollView>
+
       <Button text={lang.save} onPress={save} />
     </View>
   );

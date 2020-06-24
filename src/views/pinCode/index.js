@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {View, Image, ScrollView} from 'react-native';
+import {View, Image, ScrollView, Platform, NativeModules} from 'react-native';
 import {Button, Header, PinCodeView, Text} from 'components';
 import {styles} from './style';
 import {isTablet} from 'react-native-device-info';
@@ -26,6 +26,25 @@ class PinCode extends PureComponent {
   }
 
   async componentDidMount() {
+    let lang = '';
+    const deviceLang = await AsyncStorage.getItem('@lang');
+    console.log('deviceLang', deviceLang);
+    if (deviceLang) {
+      this.props.translate(deviceLang);
+    } else {
+      const deviceLanguage =
+        Platform.OS === 'ios'
+          ? NativeModules.SettingsManager.settings.AppleLocale ||
+            NativeModules.SettingsManager.settings.AppleLanguages[0] //iOS 13
+          : NativeModules.I18nManager.localeIdentifier;
+      if (deviceLanguage.split('_').length > 1) {
+        //en_US
+        lang = deviceLanguage.split('_')[0];
+      } else {
+        lang = deviceLanguage;
+      }
+      this.props.translate(lang);
+    }
     const value = await AsyncStorage.getItem('@baseUrl');
     if (value) {
       this.props.setBaseUrl(value);
@@ -36,8 +55,6 @@ class PinCode extends PureComponent {
   }
 
   componentDidUpdate(prevProps: Readonly<P>) {
-    console.log('prevProps', prevProps.userSuccess);
-    console.log('this.props', this.props.userSuccess);
     if (
       this.props.userSuccess &&
       prevProps.userSuccess !== this.props.userSuccess

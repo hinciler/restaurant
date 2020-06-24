@@ -7,6 +7,7 @@ import {
   getOrderTagGroups,
   pinCodeAction,
 } from '@pinCode/actions';
+import {translate} from '@translate/actions';
 import {setBaseUrl} from '@settings/actions';
 
 const mapStateToProps = (state) => {
@@ -29,6 +30,7 @@ const mapStateToDispatch = (dispatch) => {
     getOrderTagGroups: (payload) => dispatch(getOrderTagGroups(payload)),
     getPinCode: (payload, code) => dispatch(pinCodeAction(payload, code)),
     setBaseUrl: (payload) => dispatch(setBaseUrl(payload)),
+    translate: (lang) => dispatch(translate(lang)),
   };
 };
 

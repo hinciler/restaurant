@@ -14,5 +14,8 @@
   "close": "Close",
   "table": "Table",
   "settle": "Settle",
-  "save": "Save"
+  "save": "Save",
+  "language": "Language",
+  "en": "English",
+  "tr": "Turkce"
 }

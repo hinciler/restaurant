@@ -1,9 +1,13 @@
 import type from './types';
-import {en, tr} from 'utilities/translations';
+import {en, languages} from 'utilities/translations';
+
 const INITIAL_STATE = {
   loader: false,
   error: '',
-  lang: tr,
+  lang: en,
+  shortTitle: 'en',
+  languages: languages,
+  selectLangIndex: 0,
 };
 const translate = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -17,6 +21,8 @@ const translate = (state = INITIAL_STATE, action) => {
         ...state,
         loader: false,
         lang: action.lang,
+        shortTitle: action.shortTitle,
+        selectLangIndex: action.selectLangIndex,
       };
     case type.TRANSLATE_FAILED:
       return {

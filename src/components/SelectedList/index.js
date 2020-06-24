@@ -1,4 +1,6 @@
 import React, {useState, memo} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+
 import {View, StyleSheet, FlatList} from 'react-native';
 import Modal from 'react-native-modal';
 import CheckBox from './checkboxItem';
@@ -29,8 +31,17 @@ const styles = StyleSheet.create({
 });
 const checklist = [];
 const CustomModal = memo(
-  ({visible = false, setVisible, list, onSave, type, textKey = 'title'}) => {
-    const [selectIndex, selectRadio] = useState(0);
+  ({
+    visible = false,
+    setVisible,
+    list,
+    onSave,
+    type,
+    textKey = 'title',
+    selectedIndex = 0,
+  }) => {
+    const {lang} = useSelector((state) => state.translate);
+    const [selectIndex, selectRadio] = useState(selectedIndex);
     const checked = (data) => {
       const _index = _.findIndex(checklist, ['_key', data._key]);
       if (_index === -1) {
@@ -71,7 +82,7 @@ const CustomModal = memo(
             keyExtractor={(item) => item.Id}
           />
           <Button
-            text={'KAYDET'}
+            text={lang.save}
             onPress={() => onSave(type === 'check' ? checklist : selectIndex)}
           />
         </View>
