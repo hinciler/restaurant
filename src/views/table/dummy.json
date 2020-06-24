@@ -1,0 +1,34 @@
+{
+    "rightDummy": [
+        {
+            "text": "Select Customer",
+            "disabled": true
+        },
+        {
+            "text": "Edit Customer",
+            "disabled": true
+        },
+        {
+            "text": "New Customer",
+            "disabled": false
+        },
+        {
+            "text": "Account Details",
+            "disabled": true
+        }
+    ],
+
+    "containerItems": [
+        "Name",
+        "Phone",
+        "Address",
+        "FirstName",
+        "LastName",
+        "Email",
+        "Street",
+        "StreetNumber",
+        "PostalCode",
+        "City",
+        "Extra",
+    ]
+}

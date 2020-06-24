@@ -14,5 +14,8 @@
   "close": "Kapat",
   "table": "Masa",
   "settle": "Odeme",
-  "save": "Kaydet"
+  "save": "Kaydet",
+  "customerSearch": "Müşteri Ara",
+  "pleaseSearch": "Ara...",
+  "search": "Ara"
 }

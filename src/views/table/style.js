@@ -16,8 +16,6 @@ export const styles = StyleSheet.create({
   scrollContainer: {
     flex: 1,
     marginBottom: normalize(10),
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   horizontalButton: {
     height: normalize(50),
@@ -46,5 +44,50 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
     flexDirection: 'row',
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    flex: 1,
+  },
+  searchLeftContainer: {flex: 0.9, margin: 10, alignItems: 'flex-start'},
+
+  searchInputContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    flex: 0.1,
+  },
+
+  searchTextStyle: {flex: 0.08},
+
+  searchTextInputStyle: {
+    height: normalize(25),
+    borderColor: colors.grey0,
+    borderWidth: 1,
+    flex: 0.94,
+    backgroundColor: colors.white,
+  },
+
+  searchBtnStyle: {
+    paddingBottom: normalize(2.5),
+    paddingTop: normalize(2.5),
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: colors.grey0,
+  },
+
+  searchBtnTextStyle: {color: colors.black, fontWeight: 'bold'},
+
+  tableContainerStyle: {
+    flexGrow: 1,
+    backgroundColor: colors.white,
+    borderColor: colors.grey0,
+    borderWidth: 1,
+  },
+
+  tableHeaderStyle: {
+    borderColor: colors.grey0,
+    borderWidth: 1,
+    padding: normalize(3),
+    width: normalize(85),
   },
 });

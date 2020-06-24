@@ -14,5 +14,9 @@
   "close": "Close",
   "table": "Table",
   "settle": "Settle",
-  "save": "Save"
+  "save": "Save",
+  "customerSearch": "Customer Search",
+  "pleaseSearch": "Please Search",
+  "search": "Search"
+
 }
