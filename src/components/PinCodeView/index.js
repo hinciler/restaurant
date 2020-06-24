@@ -16,7 +16,7 @@ export default function ({lang, onPressUpdate, onLogin, errorMessage}) {
   function numPress(num) {
     const concatCode = code.concat(num);
 
-    setCode('2122520634'); // concatCode
+    setCode(concatCode); // concatCode
   }
   function backPress() {
     setCode(code.slice(0, code.length - 1));

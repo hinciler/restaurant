@@ -17,5 +17,10 @@
   "save": "Save",
   "language": "Language",
   "en": "English",
-  "tr": "Turkce"
+  "tr": "Turkce",
+  "save": "Save",
+  "customerSearch": "Customer Search",
+  "pleaseSearch": "Please Search",
+  "search": "Search"
+
 }

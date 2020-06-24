@@ -17,5 +17,9 @@
   "save": "Kaydet",
   "language": "Dil",
   "en": "English",
-  "tr": "Turkce"
+  "tr": "Turkce",
+  "save": "Kaydet",
+  "customerSearch": "Müşteri Ara",
+  "pleaseSearch": "Ara...",
+  "search": "Ara"
 }

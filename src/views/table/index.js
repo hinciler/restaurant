@@ -1,5 +1,11 @@
 import React, {useEffect, useCallback} from 'react';
-import {ScrollView, TouchableOpacity, View} from 'react-native';
+import {
+  ScrollView,
+  TouchableOpacity,
+  View,
+  TextInput,
+  FlatList,
+} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {Header, Text} from 'components';
 import {Typography} from 'components/Text';
@@ -9,12 +15,18 @@ import {table} from '@table/actions';
 import {styles} from './style';
 import {colors} from 'config';
 import {Actions} from 'react-native-router-flux';
-import OrderList from '../orderList';
+import {Button} from 'react-native-elements';
+import RightButton from './rightButton';
+import {isTablet} from 'react-native-device-info';
+
+const dummy = require('./dummy.json');
+const {rightDummy, containerItems} = dummy;
 
 export default function () {
   const [selected, setSelected] = React.useState(new Map());
   const [oldId, setOldId] = React.useState(0);
   const [tableState, updateTables] = React.useState([]);
+  const [value, onChangeText] = React.useState('');
   const lang = useSelector((state) => state.translate.lang);
   const tableData = useSelector((state) => state.table.data);
   const dispatch = useDispatch();
@@ -30,6 +42,9 @@ export default function () {
         newSelected.delete(oldId, !selected.get(oldId));
       }
       setSelected(newSelected);
+      // setNewId(id);
+      // console.log('id', newId);
+      // console.log('selected_id', oldId);
     },
     [oldId, selected],
   );
@@ -60,6 +75,21 @@ export default function () {
       <Header />
       <View style={styles.scrollHorizontal}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <TouchableOpacity
+            onPress={debounce(() => onSelect(-1))}
+            key={-1}
+            style={[
+              styles.horizontalButton,
+              {
+                backgroundColor: selected.get(-1) ? colors.grey0 : colors.white,
+              },
+            ]}>
+            <Text
+              text={lang.customerSearch}
+              textAlign="center"
+              type={Typography.PS}
+            />
+          </TouchableOpacity>
           {_.range(1, 12).map((item, index) => (
             <TouchableOpacity
               onPress={debounce(() => onSelect(index))}
@@ -86,19 +116,79 @@ export default function () {
         <ScrollView
           showsVerticalScrollIndicator={false}
           snapToAlignment={'start'}>
-          <View style={styles.verticalView}>
-            {tableState.map((item, idx) => (
-              <TouchableOpacity
-                onPress={debounce(() => Actions.orderList())}
-                key={idx}
-                style={styles.verticalButton}>
-                <Text
-                  text={item.name}
-                  textAlign="center"
-                  type={Typography.PS}
-                />
-              </TouchableOpacity>
-            ))}
+          <View>
+            {oldId === -1 ? (
+              <View style={styles.searchContainer}>
+                <View style={styles.searchLeftContainer}>
+                  <View style={styles.searchInputContainer}>
+                    <Text style={styles.searchTextStyle} text={lang.search} />
+                    <TextInput
+                      style={styles.searchTextInputStyle}
+                      placeholder={lang.pleaseSearch}
+                      onChangeText={(text) => onChangeText(text)}
+                      value={value}
+                    />
+                    <Button
+                      title={'x'}
+                      style={{flex: 0.05}}
+                      buttonStyle={styles.searchBtnStyle}
+                      titleStyle={styles.searchBtnTextStyle}
+                    />
+                  </View>
+                  <ScrollView
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}>
+                    <View style={styles.tableContainerStyle}>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                        }}>
+                        {containerItems.map((item, idx) => (
+                          <View style={styles.tableHeaderStyle}>
+                            <Text
+                              text={item}
+                              type={Typography.PSB}
+                              numberOfLines={1}
+                            />
+                          </View>
+                        ))}
+                      </View>
+                    </View>
+                  </ScrollView>
+                </View>
+                <View style={styles.rightBtnContainer}>
+                  <FlatList
+                    contentContainerStyle={{flex: 1}}
+                    style={styles.container}
+                    data={rightDummy}
+                    renderItem={({item, index}) => (
+                      <RightButton
+                        containerStyle={styles.leftButtons}
+                        item={item}
+                        text={item.text}
+                        disabled={item.disabled}
+                      />
+                    )}
+                    keyExtractor={(item) => item.pay}
+                  />
+                </View>
+              </View>
+            ) : (
+              <View style={styles.verticalView}>
+                {tableState.map((item, idx) => (
+                  <TouchableOpacity
+                    onPress={debounce(() => Actions.orderList())}
+                    key={idx}
+                    style={styles.verticalButton}>
+                    <Text
+                      text={item.name}
+                      textAlign="center"
+                      type={Typography.PS}
+                    />
+                  </TouchableOpacity>
+                ))}
+              </View>
+            )}
           </View>
         </ScrollView>
       </View>
