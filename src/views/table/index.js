@@ -112,6 +112,28 @@ export default function () {
         </ScrollView>
       </View>
 
+      {!isTablet() ? (
+        <View style={styles.scrollHorizontalPortrait}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <FlatList
+              contentContainerStyle={{flex: 1, flexDirection: 'row'}}
+              data={rightDummy}
+              renderItem={({item, index}) => (
+                <RightButton
+                  containerStyle={styles.leftButtons}
+                  item={item}
+                  text={item.text}
+                  disabled={item.disabled}
+                />
+              )}
+              keyExtractor={(item) => item.pay}
+            />
+          </ScrollView>
+        </View>
+      ) : (
+        <View />
+      )}
+
       <View style={styles.scrollContainer}>
         <ScrollView
           showsVerticalScrollIndicator={false}
@@ -156,22 +178,26 @@ export default function () {
                     </View>
                   </ScrollView>
                 </View>
-                <View style={styles.rightBtnContainer}>
-                  <FlatList
-                    contentContainerStyle={{flex: 1}}
-                    style={styles.container}
-                    data={rightDummy}
-                    renderItem={({item, index}) => (
-                      <RightButton
-                        containerStyle={styles.leftButtons}
-                        item={item}
-                        text={item.text}
-                        disabled={item.disabled}
-                      />
-                    )}
-                    keyExtractor={(item) => item.pay}
-                  />
-                </View>
+                {isTablet() ? (
+                  <View style={styles.rightBtnContainer}>
+                    <FlatList
+                      contentContainerStyle={{flex: 1}}
+                      style={styles.container}
+                      data={rightDummy}
+                      renderItem={({item, index}) => (
+                        <RightButton
+                          containerStyle={styles.leftButtons}
+                          item={item}
+                          text={item.text}
+                          disabled={item.disabled}
+                        />
+                      )}
+                      keyExtractor={(item) => item.pay}
+                    />
+                  </View>
+                ) : (
+                  <View />
+                )}
               </View>
             ) : (
               <View style={styles.verticalView}>

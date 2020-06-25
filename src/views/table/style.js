@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   searchLeftContainer: {
-    flex: isTablet() ? 0.9 : 0.8,
+    flex: isTablet() ? 0.9 : 1,
     margin: 10,
     alignItems: 'flex-start',
   },
@@ -59,6 +59,7 @@ export const styles = StyleSheet.create({
   searchInputContainer: {
     alignItems: 'center',
     flexDirection: 'row',
+    marginBottom: normalize(5),
     flex: 0.1,
   },
 
@@ -85,9 +86,10 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderColor: colors.grey0,
     borderWidth: 1,
+    height: normalize(250),
   },
 
-  searchTextStyle: {flex: isTablet() ? 0.08 : 0.15},
+  searchTextStyle: {flex: isTablet() ? 0.08 : 0.18},
 
   tableHeaderStyle: {
     borderColor: colors.grey0,
@@ -97,4 +99,10 @@ export const styles = StyleSheet.create({
   },
 
   rightBtnContainer: {flex: isTablet() ? 0.15 : 0.27},
+
+  scrollHorizontalPortrait: {
+    flex: 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
