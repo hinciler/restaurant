@@ -1,6 +1,7 @@
 import Header from './Header';
 import PinCodeView from './PinCodeView';
 import Text from './Text';
+import CustomerSearch from './CustomerSearch';
 import PickerItem from './pickerItem';
 import Button from './Button';
 import OptionsMenu from './OptionsMenu';
@@ -20,4 +21,5 @@ export {
   OrangeButton,
   LeftOrderButton,
   List,
+  CustomerSearch,
 };

@@ -1,13 +1,7 @@
 import React, {useEffect, useCallback} from 'react';
-import {
-  ScrollView,
-  TouchableOpacity,
-  View,
-  TextInput,
-  FlatList,
-} from 'react-native';
+import {ScrollView, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {Header, Text} from 'components';
+import {Header, Text, CustomerSearch} from 'components';
 import {Typography} from 'components/Text';
 import debounce from 'utilities/helpers/debounce';
 import _ from 'lodash';
@@ -15,12 +9,6 @@ import {table} from '@table/actions';
 import {styles} from './style';
 import {colors} from 'config';
 import {Actions} from 'react-native-router-flux';
-import {Button} from 'react-native-elements';
-import RightButton from './rightButton';
-import {isTablet} from 'react-native-device-info';
-
-const dummy = require('./dummy.json');
-const {rightDummy, containerItems} = dummy;
 
 export default function () {
   const [selected, setSelected] = React.useState(new Map());
@@ -112,93 +100,13 @@ export default function () {
         </ScrollView>
       </View>
 
-      {!isTablet() ? (
-        <View style={styles.scrollHorizontalPortrait}>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <FlatList
-              contentContainerStyle={{flex: 1, flexDirection: 'row'}}
-              data={rightDummy}
-              renderItem={({item, index}) => (
-                <RightButton
-                  containerStyle={styles.leftButtons}
-                  item={item}
-                  text={item.text}
-                  disabled={item.disabled}
-                />
-              )}
-              keyExtractor={(item) => item.pay}
-            />
-          </ScrollView>
-        </View>
-      ) : (
-        <View />
-      )}
-
       <View style={styles.scrollContainer}>
         <ScrollView
           showsVerticalScrollIndicator={false}
           snapToAlignment={'start'}>
           <View>
             {oldId === -1 ? (
-              <View style={styles.searchContainer}>
-                <View style={styles.searchLeftContainer}>
-                  <View style={styles.searchInputContainer}>
-                    <Text style={styles.searchTextStyle} text={lang.search} />
-                    <TextInput
-                      style={styles.searchTextInputStyle}
-                      placeholder={lang.pleaseSearch}
-                      onChangeText={(text) => onChangeText(text)}
-                      value={value}
-                    />
-                    <Button
-                      title={'x'}
-                      style={{flex: 0.05}}
-                      buttonStyle={styles.searchBtnStyle}
-                      titleStyle={styles.searchBtnTextStyle}
-                    />
-                  </View>
-                  <ScrollView
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}>
-                    <View style={styles.tableContainerStyle}>
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                        }}>
-                        {containerItems.map((item, idx) => (
-                          <View style={styles.tableHeaderStyle}>
-                            <Text
-                              text={item}
-                              type={Typography.PSB}
-                              numberOfLines={1}
-                            />
-                          </View>
-                        ))}
-                      </View>
-                    </View>
-                  </ScrollView>
-                </View>
-                {isTablet() ? (
-                  <View style={styles.rightBtnContainer}>
-                    <FlatList
-                      contentContainerStyle={{flex: 1}}
-                      style={styles.container}
-                      data={rightDummy}
-                      renderItem={({item, index}) => (
-                        <RightButton
-                          containerStyle={styles.leftButtons}
-                          item={item}
-                          text={item.text}
-                          disabled={item.disabled}
-                        />
-                      )}
-                      keyExtractor={(item) => item.pay}
-                    />
-                  </View>
-                ) : (
-                  <View />
-                )}
-              </View>
+              <CustomerSearch />
             ) : (
               <View style={styles.verticalView}>
                 {tableState.map((item, idx) => (
