@@ -2,13 +2,14 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Button, normalize} from 'react-native-elements';
 
-export default function ({text, disabled = false}) {
+export default function ({text, disabled = false, onPress}) {
   return (
     <Button
       title={text}
       type="clear"
       disabled={disabled}
       titleStyle={styles.button}
+      onPress={onPress}
       containerStyle={styles.buttonContainer}
     />
   );

@@ -16,8 +16,6 @@ export function* translate(action) {
       defaultShortLangTitle = response[0].value;
     }
     var index = languages.findIndex((s) => s.value === lang);
-    //  const response = yield api.translate(action.payload);
-
     yield put({
       type: type.TRANSLATE_SUCCESS,
       lang: defaultLang,

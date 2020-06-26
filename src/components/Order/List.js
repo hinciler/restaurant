@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, SectionList, View} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {useSelector, useDispatch} from 'react-redux';
+import {isTablet} from 'react-native-device-info';
 
 import {Text} from 'components';
 import {Typography} from 'components/Text';
@@ -27,6 +28,10 @@ const DATA = [
 ];
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: colors.background1,
+  },
+  sectionContainer: {
     flexGrow: 3,
     backgroundColor: colors.background1,
   },
@@ -77,7 +82,7 @@ const OrderList = () => {
       />
       <SectionList
         contentContainerStyle={styles.contentContainerStyle}
-        style={styles.container}
+        style={styles.sectionContainer}
         sections={DATA}
         keyExtractor={(item, index) => item + index}
         renderItem={({item, index}) => {
@@ -115,13 +120,15 @@ const OrderList = () => {
         bottomDivider
       />
       <View style={styles.textAreaButtons}>
-        <Button
-          title={lang.settle}
-          containerStyle={styles.settleButtonContainer}
-          buttonStyle={styles.settleButtonStyle}
-          titleStyle={styles.settleTextStyle}
-          onPress={Actions.payment}
-        />
+        {isTablet() && (
+          <Button
+            title={lang.settle}
+            containerStyle={styles.settleButtonContainer}
+            buttonStyle={styles.settleButtonStyle}
+            titleStyle={styles.settleTextStyle}
+            onPress={Actions.payment}
+          />
+        )}
         <Button
           title={lang.close}
           containerStyle={styles.closeButtonWrapper}

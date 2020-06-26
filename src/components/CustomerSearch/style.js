@@ -4,6 +4,9 @@ import {normalize} from 'react-native-elements';
 import {isTablet} from 'react-native-device-info';
 const {width} = Dimensions.get('window');
 export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   searchContainer: {
     flexDirection: 'row',
     flex: 1,

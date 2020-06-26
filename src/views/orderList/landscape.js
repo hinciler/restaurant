@@ -1,10 +1,19 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {StyleSheet, View, FlatList} from 'react-native';
-const dummy = require('./dummy.json');
-const {leftDummy, orange, green} = dummy;
+import {StyleSheet, View, FlatList, Text} from 'react-native';
+import Modal from 'react-native-modal';
+import {Actions} from 'react-native-router-flux';
 
-import {OrangeButton, List, LeftOrderButton, GreenButton} from 'components';
+import {
+  OrangeButton,
+  List,
+  LeftOrderButton,
+  GreenButton,
+  CustomerSearch,
+} from 'components';
+const dummy = require('./dummy.json');
+
+const {leftDummy, orange, green} = dummy;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -18,10 +27,25 @@ const styles = StyleSheet.create({
     flex: 5,
     flexDirection: 'row',
   },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  listWrapper: {flex: 3},
 });
 function OrderList() {
+  const [visible, setVisible] = useState(false);
   const {lang} = useSelector((state) => state.translate);
-
+  const pressLeftButton = (key) => {
+    switch (key) {
+      case 'selectCustomer':
+        Actions.customerSearch();
+        setVisible(true);
+        break;
+      default:
+        break;
+    }
+  };
   return (
     <View style={styles.container}>
       <FlatList
@@ -30,15 +54,18 @@ function OrderList() {
         data={leftDummy}
         renderItem={({item, index}) => (
           <LeftOrderButton
+            onPress={() => pressLeftButton(item.key)}
             containerStyle={styles.leftButtons}
             item={item}
             text={item.text}
             disabled={item.disabled}
           />
         )}
-        keyExtractor={(item) => item.pay}
+        keyExtractor={(item) => item.key}
       />
-      <List />
+      <View style={styles.listWrapper}>
+        <List />
+      </View>
       <View style={styles.right}>
         <OrangeButton orange_btn={orange} />
         <GreenButton green_btn={green} />
