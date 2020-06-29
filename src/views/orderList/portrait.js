@@ -1,84 +1,70 @@
-import React, {PureComponent} from 'react';
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  Image,
-  SafeAreaView,
-  Text,
-  Button,
-  Alert,
-  TouchableOpacity,
-} from 'react-native';
-import {styles} from './style';
+import React, {useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {StyleSheet, View, FlatList, SafeAreaView} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 const buttons = require('./data.json');
 const logo = require('assets/img/logo.png');
+import {normalize} from 'react-native-elements';
+import {List, LeftOrderButton} from 'components';
+const dummy = require('./dummy.json');
 
-class Portrait extends PureComponent {
-  render() {
-    const {indexButtons} = buttons;
-    return (
-      <SafeAreaView style={{flex: 1, backgroundColor: '#ddd'}}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
-          <Image source={logo} style={{height: 40, width: 80}} />
-          <Text style={{marginTop: 12}}> 11.05.2020 </Text>
-        </View>
+const {leftDummy, orange, green} = dummy;
+const styles = StyleSheet.create({
+  listContainer: {
+    flex: 1,
+    paddingBottom: 20,
+    flexDirection: 'row',
+  },
+  contentContainerStyle: {
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  right: {
+    flex: 5,
+    flexDirection: 'row',
+  },
 
-        <View style={{flexDirection: 'row', flexGrow: 1}}>
-          <View
-            style={{
-              flex: 6,
-              marginLeft: 10,
-              flexDirection: 'column',
-            }}>
-            <View style={{flex: 3, backgroundColor: '#fff', padding: 5}}>
-              <Text>This screen for order</Text>
-            </View>
-            <View
-              style={{
-                marginTop: 10,
-                flexDirection: 'row',
-                marginBottom: 30,
-              }}>
-              <TouchableOpacity
-                style={[styles.orderButton, {flex: 1}]}
-                underlayColor="#fff">
-                <Text style={styles.orderText}>Settle</Text>
-              </TouchableOpacity>
+  listWrapper: {flex: 3},
+});
+function Portrait() {
+  const [visible, setVisible] = useState(false);
+  const {lang} = useSelector((state) => state.translate);
+  const pressLeftButton = (key) => {
+    switch (key) {
+      case 'selectCustomer':
+        Actions.customerSearch();
+        setVisible(true);
+        break;
+      default:
+        break;
+    }
+  };
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.listWrapper}>
+        <List />
+      </View>
 
-              <TouchableOpacity
-                style={[
-                  styles.orderButton,
-                  {backgroundColor: '#e63619', flex: 1},
-                ]}
-                underlayColor="#fff">
-                <Text style={[styles.orderText, {color: '#fff'}]}>Close</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={{flex: 2, marginLeft: 10, marginRight: 10}}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <View>
-                {indexButtons.map((item, index) => (
-                  <TouchableOpacity
-                    style={styles.orderButton}
-                    underlayColor="#fff"
-                    onPress={Actions[item.onPress]}>
-                    <Text style={styles.orderText}>{item.text}</Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
-            </ScrollView>
-          </View>
-        </View>
-      </SafeAreaView>
-    );
-  }
+      <FlatList
+        contentContainerStyle={styles.contentContainerStyle}
+        style={styles.listContainer}
+        data={leftDummy}
+        renderItem={({item, index}) => (
+          <LeftOrderButton
+            onPress={() => pressLeftButton(item.key)}
+            containerStyle={styles.leftButtons}
+            item={item}
+            text={item.text}
+            disabled={item.disabled}
+          />
+        )}
+        keyExtractor={(item) => item.key}
+      />
+    </SafeAreaView>
+  );
 }
 
 export default Portrait;

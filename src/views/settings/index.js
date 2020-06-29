@@ -2,8 +2,6 @@ import React, {useState, useRef} from 'react';
 import {View, ScrollView} from 'react-native';
 import {styles} from './style.js';
 import {Header, PickerItem, Button} from 'components';
-import {Button as NativeButton} from 'react-native-elements';
-import {colors} from 'config';
 import DomainSelect from './domain';
 import AsyncStorage from '@react-native-community/async-storage';
 import {useSelector, useDispatch} from 'react-redux';
@@ -30,7 +28,6 @@ export default function () {
   }));
   const dispatch = useDispatch();
   const save = async () => {
-    console.log('language', languages);
     try {
       const {port, domain} = IPRef.current.getDomain();
       const value = `http://${domain}:${port}`;

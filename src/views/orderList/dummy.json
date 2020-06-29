@@ -2,39 +2,28 @@
     "leftDummy": [
         {
             "text": "Table Degistir",
-            "disabled": false
+            "disabled": false,
+            "key": "changeTable"
         },
         {
             "text": "Customer Sec",
-            "disabled": false
+            "disabled": false,
+            "key": "selectCustomer"
         },
         {
             "text": "Ticket Note",
-            "disabled": false
+            "disabled": false,
+            "key": "ticketNote"
         },
         {
             "text": "Print Bill",
-            "disabled": true
+            "disabled": true,
+            "key": "printBill"
         },
         {
             "text": "Add Ticket",
-            "disabled": true
-        },
-        {
-            "text": "Customer Sec",
-            "disabled": false
-        },
-        {
-            "text": "Ticket Note",
-            "disabled": false
-        },
-        {
-            "text": "Print Bill",
-            "disabled": false
-        },
-        {
-            "text": "Add Ticket",
-            "disabled": false
+            "disabled": true,
+            "key": "addTicket"
         }
     ],
     "orange": [

@@ -1,5 +1,6 @@
 {
-  "indexButtons": [{
+  "indexButtons": [
+    {
       "text": "Adisyona Siparis Ekle",
       "disabled": false,
       "onPress": "addOrder"
@@ -12,7 +13,7 @@
     {
       "text": "Customer Sec",
       "disabled": false,
-      "onPress": ""
+      "onPress": "customerSearch"
     },
     {
       "text": "Ticket Note",
@@ -23,12 +24,12 @@
       "text": "Print Bill",
       "disabled": true,
       "onPress": ""
-    }, {
+    },
+    {
       "text": "Add Ticket",
       "disabled": true,
       "onPress": ""
     },
-
     {
       "text": "Add Test",
       "disabled": false,
@@ -38,12 +39,75 @@
       "text": "Add Test2",
       "disabled": false,
       "onPress": ""
-    }, {
+    },
+    {
       "text": "Add Test3",
       "disabled": false,
       "onPress": ""
     }
   ],
-  "addMenu": ["Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches"],
-  "addFood": ["Breakfast", "Soup Drink", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches", "Breakfast", "Soup", "Weaps", "Sandwiches"]
+  "addMenu": [
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches"
+  ],
+  "addFood": [
+    "Breakfast",
+    "Soup Drink",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches",
+    "Breakfast",
+    "Soup",
+    "Weaps",
+    "Sandwiches"
+  ]
 }
