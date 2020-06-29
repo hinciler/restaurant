@@ -65,7 +65,6 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   errorWrapper: {
-    marginLeft: normalize(30),
     paddingTop: normalize(5),
   },
   bottomBtn: {

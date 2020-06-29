@@ -11,6 +11,7 @@ export default function ({
 }) {
   return (
     <Header
+      statusBarProps={{translucent: true}}
       containerStyle={styles.header}
       leftComponent={
         <Image style={styles.logo} source={require('assets/img/logo.png')} />

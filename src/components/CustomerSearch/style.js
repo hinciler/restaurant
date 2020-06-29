@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
 
   searchTextInputStyle: {
     height: normalize(25),
+    padding: 3,
     borderColor: colors.grey0,
     borderWidth: 1,
     flex: 0.94,

@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     marginBottom: normalize(10),
   },
   horizontalButton: {
-    height: normalize(50),
+    height: width > 380 ? normalize(50) : normalize(45),
     width: width / 2 - 15,
     flex: 1,
     borderColor: colors.border,
@@ -45,5 +45,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
     flexDirection: 'row',
+    justifyContent: 'center',
   },
 });

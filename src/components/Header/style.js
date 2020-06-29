@@ -7,8 +7,8 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.background1,
   },
   logo: {
-    width: 150,
-    resizeMode: 'center',
+    width: 100,
+    height: 20,
   },
   header_right: {
     justifyContent: 'center',

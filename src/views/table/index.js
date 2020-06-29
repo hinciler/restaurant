@@ -9,6 +9,7 @@ import {table} from '@table/actions';
 import {styles} from './style';
 import {colors} from 'config';
 import {Actions} from 'react-native-router-flux';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 export default function () {
   const [selected, setSelected] = React.useState(new Map());
@@ -59,7 +60,10 @@ export default function () {
   );
 
   return (
-    <View style={styles.container}>
+    <KeyboardAwareScrollView
+      style={styles.container}
+      behavior="padding"
+      extraScrollHeight={50}>
       <Header />
       <View style={styles.scrollHorizontal}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -126,6 +130,6 @@ export default function () {
           </View>
         </ScrollView>
       </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 }
