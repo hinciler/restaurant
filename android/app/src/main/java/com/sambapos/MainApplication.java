@@ -2,6 +2,9 @@ package com.sambapos;
 
 import android.app.Application;
 import android.content.Context;
+
+import androidx.multidex.MultiDex;
+
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import org.reactnative.camera.RNCameraPackage;
@@ -48,7 +51,11 @@ public class MainApplication extends Application implements ReactApplication {
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }
-
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
   /**
    * Loads Flipper in React Native templates. Call this in the onCreate method with something like
    * initializeFlipper(this, getReactNativeHost().getReactInstanceManager());

@@ -134,7 +134,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        missingDimensionStrategy 'react-native-camera', 'general' 
+        missingDimensionStrategy 'react-native-camera', 'general'
+        multiDexEnabled true
 
     }
     splits {
@@ -193,6 +194,9 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+
+    def multidex_version = "2.0.1"
+    implementation "androidx.multidex:multidex:$multidex_version"
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
