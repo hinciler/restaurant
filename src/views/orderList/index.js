@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {StyleSheet, View} from 'react-native';
+import {BackHandler, View, Alert} from 'react-native';
 import {isTablet} from 'react-native-device-info';
 
 import {Actions} from 'react-native-router-flux';
@@ -16,10 +16,20 @@ function Orderlist() {
   const getData = () => {
     dispatch(orderList());
   };
+  useEffect(() => {
+    const backAction = () => {
+      return true;
+    };
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
 
+    return () => backHandler.remove();
+  }, []);
   return (
     <>
-      <Header rightIconName="close" onRightPress={Actions.pop} />
+      <Header />
       <View style={styles.container}>
         {isTablet() ? <LandScape /> : <Portrait />}
       </View>
