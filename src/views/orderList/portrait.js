@@ -35,7 +35,7 @@ function Portrait() {
   const pressLeftButton = (key) => {
     switch (key) {
       case 'selectCustomer':
-        Actions.customerSearch();
+        Actions.customerSearch({showHeader: true});
         setVisible(true);
         break;
       default:

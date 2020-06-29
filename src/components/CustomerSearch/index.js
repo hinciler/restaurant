@@ -7,10 +7,13 @@ import {styles} from './style';
 import {Header} from 'components';
 import {Actions} from 'react-native-router-flux';
 
-export default function () {
+export default function ({showHeader = false}) {
+  console.log('showHeader', showHeader);
   return (
     <View style={styles.container}>
-      <Header rightIconName="close" onRightPress={Actions.pop} />
+      {showHeader && (
+        <Header rightIconName="close" onRightPress={Actions.pop} />
+      )}
       {!isTablet() ? (
         <View style={styles.scrollHorizontalPortrait}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
