@@ -6,7 +6,9 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingBottom: 30,
   },
-
+  paddingHorizontal: {
+    paddingHorizontal: normalize(10),
+  },
   buttonStyle: {
     backgroundColor: colors.secondary,
   },

@@ -54,8 +54,9 @@ export default function () {
           selectedIndex={selectLangIndex}
         />
       </ScrollView>
-
-      <Button text={lang.save} onPress={save} />
+      <View style={styles.paddingHorizontal}>
+        <Button text={lang.save} onPress={save} />
+      </View>
     </View>
   );
 }

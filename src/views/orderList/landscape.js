@@ -39,7 +39,7 @@ function OrderList() {
   const pressLeftButton = (key) => {
     switch (key) {
       case 'selectCustomer':
-        Actions.customerSearch();
+        Actions.customerSearch({showHeader: false});
         setVisible(true);
         break;
       default:
