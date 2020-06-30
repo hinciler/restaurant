@@ -30,9 +30,14 @@ export default function () {
   const save = async () => {
     try {
       const {port, domain} = IPRef.current.getDomain();
-      const value = `http://${domain}:${port}`;
-      dispatch(setBaseUrl(value));
-      await AsyncStorage.setItem('@baseUrl', value);
+      const baseUrl = `http://${domain}:${port}`;
+
+      dispatch(setBaseUrl({domain, port, baseUrl}));
+      const data = {
+        domain,
+        port,
+      };
+      await AsyncStorage.setItem('@baseUrl', JSON.stringify(data));
     } catch (e) {
       console.log('e', e);
     }

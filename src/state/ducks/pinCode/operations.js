@@ -229,16 +229,18 @@ function* watch_getMenu() {
 
 export function* connectionControl(action) {
   try {
+    debugger;
     const {data = {}, error, status} = yield api.connection_control(
       action.payload,
     );
-    if (status === 200 || (status && data)) {
+    if (data) {
       const requestBody = new URLSearchParams({
         grant_type: 'password',
         username: 'pda',
         password: '1111',
         client_id: 'pda',
       });
+
       const {data: token} = yield api.token(requestBody);
       if (token?.access_token) {
         const getUserPayload = getUserQueries(action.code);

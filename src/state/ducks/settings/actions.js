@@ -4,7 +4,9 @@ export const settings = (payload) => ({
   type: type.settings,
   payload,
 });
-export const setBaseUrl = (payload) => ({
+export const setBaseUrl = ({baseUrl, domain, port}) => ({
   type: type.BASE_URL,
-  baseUrl: payload,
+  baseUrl,
+  domain,
+  port,
 });

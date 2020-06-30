@@ -1,5 +1,7 @@
 import React, {useState, forwardRef, useImperativeHandle} from 'react';
 import {View, TextInput, StyleSheet} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
+
 import {Divider, normalize} from 'react-native-elements';
 import {colors} from 'config';
 const styles = StyleSheet.create({
@@ -31,14 +33,17 @@ const styles = StyleSheet.create({
   },
 });
 const IPComponent = forwardRef((props, ref) => {
-  const [domain, onChangeDomain] = useState('androiddemo.sambapos.com');
-  const [port, onChangePort] = useState('9000');
+  const {domain, port} = useSelector((state) => state.settings);
+  const [domain_text, onChangeDomain] = useState(
+    domain || 'androiddemo.sambapos.com',
+  );
+  const [port_text, onChangePort] = useState(port || '9000');
 
   useImperativeHandle(ref, () => ({
     getDomain() {
       return {
-        port,
-        domain,
+        port: port_text,
+        domain: domain_text,
       };
     },
   }));
@@ -48,7 +53,7 @@ const IPComponent = forwardRef((props, ref) => {
         <TextInput
           style={styles.domain_input}
           onChangeText={(text) => onChangeDomain(text)}
-          value={domain}
+          value={domain_text}
         />
         <Divider backgroundColor={colors.text} />
       </View>
@@ -56,7 +61,7 @@ const IPComponent = forwardRef((props, ref) => {
         <TextInput
           style={styles.port_input}
           onChangeText={(text) => onChangePort(text)}
-          value={port}
+          value={port_text}
         />
         <Divider backgroundColor={colors.text} />
       </View>

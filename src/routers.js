@@ -14,7 +14,7 @@ import Payment from 'views/payment';
 import {CustomerSearch} from 'components';
 
 const stateHandler = (prevState, newState, action) => {
-  console.log('onStateChange: ACTION:', action);
+  // console.log('onStateChange: ACTION:', action);
 };
 
 // on Android, the URI prefix typically contains a host in addition to scheme
