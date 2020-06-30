@@ -11,6 +11,7 @@ import {
   GreenButton,
   CustomerSearch,
 } from 'components';
+import {normalize} from 'react-native-elements';
 const dummy = require('./dummy.json');
 
 const {leftDummy, orange, green} = dummy;
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
   right: {
     flex: 5,
     flexDirection: 'row',
+    marginLeft: normalize(4),
   },
   modalContainer: {
     flex: 1,

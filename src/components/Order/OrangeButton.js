@@ -5,7 +5,7 @@ import {Button, normalize} from 'react-native-elements';
 export default function ({orange_btn}) {
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {orange_btn.map((item, index) => (
           <Button
             key={index}
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   titleStyle: {
     color: 'white',
     fontWeight: 'bold',
+    fontFamily: 'Roboto-Medium',
   },
   buttonStyle: {
     backgroundColor: 'orange',

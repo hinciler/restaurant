@@ -3,6 +3,10 @@ import {normalize} from 'react-native-elements';
 import {colors} from 'config';
 
 export const styles = StyleSheet.create({
+  all: {
+    fontFamily: 'Roboto-Regular',
+  },
+
   H1: {
     color: colors.text0,
     fontSize: normalize(35),

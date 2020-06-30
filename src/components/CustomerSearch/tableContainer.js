@@ -1,6 +1,6 @@
 import React from 'react';
-import {ScrollView, StyleSheet, TextInput, View} from 'react-native';
-import {Button, normalize} from 'react-native-elements';
+import {ScrollView, TextInput, View} from 'react-native';
+import {Button} from 'react-native-elements';
 import {Text} from 'components';
 import {Typography} from 'components/Text';
 import {styles} from './style';
@@ -24,7 +24,7 @@ export default function () {
         />
         <Button
           title={'x'}
-          style={{flex: 0.05}}
+          style={{flex: 1}}
           buttonStyle={styles.searchBtnStyle}
           titleStyle={styles.searchBtnTextStyle}
         />

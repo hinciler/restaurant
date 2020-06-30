@@ -15,7 +15,6 @@ export default function () {
   const [selected, setSelected] = React.useState(new Map());
   const [oldId, setOldId] = React.useState(0);
   const [tableState, updateTables] = React.useState([]);
-  const [value, onChangeText] = React.useState('');
   const lang = useSelector((state) => state.translate.lang);
   const tableData = useSelector((state) => state.table.data);
   const dispatch = useDispatch();

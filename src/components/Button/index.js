@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     fontFamily: 'Roboto-Medium',
+    color: colors.black,
   },
 });
 import {Typography} from 'components/Text';
@@ -19,11 +20,12 @@ const Buttons = ({
   disabled = false,
   onPress,
   loading = false,
+  style,
 }) => {
   return (
     <Button
       title={text}
-      buttonStyle={[styles.buttonStyle, {backgroundColor}]}
+      buttonStyle={[styles.buttonStyle, {backgroundColor}, style]}
       disabled={disabled}
       onPress={onPress}
       loading={loading}

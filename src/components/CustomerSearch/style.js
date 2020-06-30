@@ -5,6 +5,7 @@ import {isTablet} from 'react-native-device-info';
 const {width} = Dimensions.get('window');
 export const styles = StyleSheet.create({
   container: {
+    backgroundColor: colors.background1,
     flex: 1,
   },
   searchContainer: {

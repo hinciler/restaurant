@@ -5,7 +5,7 @@ import {Button, normalize} from 'react-native-elements';
 export default function ({green_btn}) {
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.green}>
           {green_btn.map((item, index) => (
             <Button
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     margin: '1%',
     flexGrow: 1,
     width: '30%',
+    height: normalize(55),
   },
 
   buttonStyle: {backgroundColor: 'green'},
@@ -48,5 +49,7 @@ const styles = StyleSheet.create({
   titleStyle: {
     color: 'white',
     fontWeight: 'bold',
+    fontFamily: 'Roboto-Medium',
+    fontSize: normalize(12),
   },
 });

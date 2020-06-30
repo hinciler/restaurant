@@ -1,8 +1,8 @@
 import React, {PureComponent, useState} from 'react';
 import {Alert, TextInput, TouchableOpacity, View} from 'react-native';
 import {styles} from './style';
-import {Button, normalize} from 'react-native-elements';
-import {Text} from 'components';
+import {normalize} from 'react-native-elements';
+import {Text, Button} from 'components';
 import Icon from 'react-native-vector-icons/Feather';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome5';
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
@@ -16,7 +16,7 @@ export default function ({lang, onPressUpdate, onLogin, errorMessage}) {
   function numPress(num) {
     const concatCode = code.concat(num);
 
-    setCode(concatCode); // concatCode
+    setCode(concatCode); // '2122520634'
   }
   function backPress() {
     setCode(code.slice(0, code.length - 1));
@@ -58,65 +58,77 @@ export default function ({lang, onPressUpdate, onLogin, errorMessage}) {
       <View style={styles.grid}>
         <View style={styles.row}>
           {_.range(1, 4).map((item) => (
-            <TouchableOpacity
+            <Button
               onPress={debounce(() => numPress(item.toString()))}
-              key={item}
-              style={styles.numOverlay}>
-              <Text text={item} />
-            </TouchableOpacity>
+              style={styles.numOverlay}
+              text={item}
+              backgroundColor={'white'}
+            />
           ))}
         </View>
         <View style={styles.row}>
           {_.range(4, 7).map((item) => (
-            <TouchableOpacity
+            <Button
               onPress={debounce(() => numPress(item.toString()))}
-              key={item}
-              style={styles.numOverlay}>
-              <Text text={item} />
-            </TouchableOpacity>
+              style={styles.numOverlay}
+              text={item}
+              backgroundColor={'white'}
+            />
           ))}
         </View>
         <View style={styles.row}>
           {_.range(7, 10).map((item) => (
-            <TouchableOpacity
+            <Button
               onPress={debounce(() => numPress(item.toString()))}
-              key={item}
-              style={styles.numOverlay}>
-              <Text text={item} />
-            </TouchableOpacity>
+              style={styles.numOverlay}
+              text={item}
+              backgroundColor={'white'}
+            />
           ))}
         </View>
         <View style={styles.row}>
-          <TouchableOpacity
+          <Button
             onPress={debounce(() => backPress())}
-            style={styles.numOverlay}>
-            <Icon name={'delete'} size={normalize(18)} />
-          </TouchableOpacity>
-          <TouchableOpacity
+            style={styles.numOverlay}
+            text={<Icon name={'delete'} size={normalize(18)} />}
+            backgroundColor={'white'}
+          />
+
+          <Button
             onPress={debounce(() => numPress('0'))}
-            style={styles.numOverlay}>
-            <Text text={0} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={debounce(login)} style={styles.numOverlay}>
-            <Icon name={'arrow-right-circle'} size={normalize(18)} />
-          </TouchableOpacity>
+            style={styles.numOverlay}
+            text={'0'}
+            backgroundColor={'white'}
+          />
+          <Button
+            onPress={debounce(login)}
+            style={styles.numOverlay}
+            text={<Icon name={'arrow-right-circle'} size={normalize(18)} />}
+            backgroundColor={'white'}
+          />
         </View>
         <View style={[styles.row, styles.bottomBtn]}>
-          <TouchableOpacity
+          <Button
             onPress={debounce(() => Actions.settings())}
-            style={[styles.numOverlay, {borderBottomColor: 'red'}]}>
-            <IconMaterial name={'phonelink-setup'} size={normalize(18)} />
-          </TouchableOpacity>
-          <TouchableOpacity
+            style={[styles.numOverlay, {borderBottomColor: 'red'}]}
+            text={
+              <IconMaterial name={'phonelink-setup'} size={normalize(18)} />
+            }
+            backgroundColor={'white'}
+          />
+          <Button
             onPress={debounce(() => Actions.qrCode())}
-            style={[styles.numOverlay, {borderBottomColor: 'red'}]}>
-            <IconFontAwesome name={'qrcode'} size={normalize(18)} />
-          </TouchableOpacity>
-          <TouchableOpacity
+            style={[styles.numOverlay, {borderBottomColor: 'red'}]}
+            text={<IconFontAwesome name={'qrcode'} size={normalize(18)} />}
+            backgroundColor={'white'}
+          />
+
+          <Button
             onPress={debounce(alertUpdateData)}
-            style={[styles.numOverlay, {borderBottomColor: 'red'}]}>
-            <IconMaterial name={'update'} size={normalize(18)} />
-          </TouchableOpacity>
+            style={[styles.numOverlay, {borderBottomColor: 'red'}]}
+            text={<IconMaterial name={'update'} size={normalize(18)} />}
+            backgroundColor={'white'}
+          />
         </View>
         <View style={styles.demoInfo}>
           <Text

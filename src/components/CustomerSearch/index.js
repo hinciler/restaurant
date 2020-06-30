@@ -14,23 +14,19 @@ export default function ({showHeader = false}) {
       {showHeader && (
         <Header rightIconName="close" onRightPress={Actions.pop} />
       )}
-      {!isTablet() ? (
+      {!isTablet() && (
         <View style={styles.scrollHorizontalPortrait}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <ListBtns />
           </ScrollView>
         </View>
-      ) : (
-        <View />
       )}
       <View style={styles.searchContainer}>
         <TableContainer />
-        {isTablet() ? (
+        {isTablet() && (
           <View style={styles.rightBtnContainer}>
             <ListBtns />
           </View>
-        ) : (
-          <View />
         )}
       </View>
     </View>
