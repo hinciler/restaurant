@@ -1,7 +1,7 @@
 import React, {useEffect, useCallback} from 'react';
 import {ScrollView, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {Header, Text, CustomerSearch} from 'components';
+import {Header, Text, CustomerSearch, Button} from 'components';
 import {Typography} from 'components/Text';
 import debounce from 'utilities/helpers/debounce';
 import _ from 'lodash';
@@ -10,6 +10,7 @@ import {styles} from './style';
 import {colors} from 'config';
 import {Actions} from 'react-native-router-flux';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {normalize} from 'react-native-elements';
 
 export default function () {
   const [selected, setSelected] = React.useState(new Map());
@@ -66,25 +67,23 @@ export default function () {
       <Header />
       <View style={styles.scrollHorizontal}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <TouchableOpacity
+          <Button
             onPress={debounce(() => onSelect(-1))}
-            key={-1}
             style={[
               styles.horizontalButton,
               {
                 backgroundColor: selected.get(-1) ? colors.grey0 : colors.white,
               },
-            ]}>
-            <Text
-              text={lang.customerSearch}
-              textAlign="center"
-              type={Typography.PS}
-            />
-          </TouchableOpacity>
+            ]}
+            text={lang.customerSearch}
+            backgroundColor={'white'}
+            fontFamily={'Roboto-Regular'}
+            fontSize={normalize(12)}
+          />
+
           {_.range(1, 12).map((item, index) => (
-            <TouchableOpacity
+            <Button
               onPress={debounce(() => onSelect(index))}
-              key={index}
               style={[
                 styles.horizontalButton,
                 {
@@ -92,13 +91,12 @@ export default function () {
                     ? colors.grey0
                     : colors.white,
                 },
-              ]}>
-              <Text
-                text={'All Tables ' + item}
-                textAlign="center"
-                type={Typography.PS}
-              />
-            </TouchableOpacity>
+              ]}
+              text={'All Tables ' + item}
+              backgroundColor={'white'}
+              fontFamily={'Roboto-Regular'}
+              fontSize={normalize(12)}
+            />
           ))}
         </ScrollView>
       </View>
@@ -113,16 +111,14 @@ export default function () {
             ) : (
               <View style={styles.verticalView}>
                 {tableState.map((item, idx) => (
-                  <TouchableOpacity
+                  <Button
                     onPress={debounce(() => Actions.orderList())}
-                    key={idx}
-                    style={styles.verticalButton}>
-                    <Text
-                      text={item.name}
-                      textAlign="center"
-                      type={Typography.PS}
-                    />
-                  </TouchableOpacity>
+                    style={styles.verticalButton}
+                    text={item.name}
+                    backgroundColor={'white'}
+                    fontFamily={'Roboto-Regular'}
+                    fontSize={normalize(12)}
+                  />
                 ))}
               </View>
             )}

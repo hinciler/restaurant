@@ -21,6 +21,8 @@ const Buttons = ({
   onPress,
   loading = false,
   style,
+  fontFamily = 'Roboto-Medium',
+  fontSize = normalize(14),
 }) => {
   return (
     <Button
@@ -29,7 +31,7 @@ const Buttons = ({
       disabled={disabled}
       onPress={onPress}
       loading={loading}
-      titleStyle={styles.titleStyle}
+      titleStyle={[styles.titleStyle, {fontFamily, fontSize}]}
     />
   );
 };
