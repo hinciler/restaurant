@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {useSelector, useDispatch} from 'react-redux';
 import {setBaseUrl} from '@settings/actions';
 import {translate} from '@translate/actions';
+import {colors} from 'config';
 
 import _ from 'lodash';
 import {Actions} from 'react-native-router-flux';
@@ -60,7 +61,7 @@ export default function () {
         />
       </ScrollView>
       <View style={styles.paddingHorizontal}>
-        <Button text={lang.save} onPress={save} />
+        <Button text={lang.save} onPress={save} color={colors.active} />
       </View>
     </View>
   );

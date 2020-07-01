@@ -1,5 +1,6 @@
 import React, {useState, memo} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import {colors} from 'config';
 
 import {View, StyleSheet, FlatList} from 'react-native';
 import Modal from 'react-native-modal';
@@ -83,6 +84,7 @@ const CustomModal = memo(
           />
           <Button
             text={lang.save}
+            color={colors.active}
             onPress={() => onSave(type === 'check' ? checklist : selectIndex)}
           />
         </View>
