@@ -59,71 +59,72 @@ export default function () {
   );
 
   return (
-    <KeyboardAwareScrollView
-      style={styles.container}
-      behavior="padding"
-      extraScrollHeight={50}>
+    <View style={styles.container}>
       <Header />
-      <View style={styles.scrollHorizontal}>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <Button
-            onPress={debounce(() => onSelect(-1))}
-            style={[
-              styles.horizontalButton,
-              {
-                backgroundColor: selected.get(-1) ? colors.grey0 : colors.white,
-              },
-            ]}
-            text={lang.customerSearch}
-            backgroundColor={'white'}
-            fontFamily={'Roboto-Regular'}
-            fontSize={normalize(12)}
-          />
-
-          {_.range(1, 12).map((item, index) => (
+      <KeyboardAwareScrollView behavior="padding" extraScrollHeight={50}>
+        <View style={styles.scrollHorizontal}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <Button
-              onPress={debounce(() => onSelect(index))}
+              onPress={debounce(() => onSelect(-1))}
               style={[
                 styles.horizontalButton,
                 {
-                  backgroundColor: selected.get(index)
+                  backgroundColor: selected.get(-1)
                     ? colors.grey0
                     : colors.white,
                 },
               ]}
-              text={'All Tables ' + item}
+              text={lang.customerSearch}
               backgroundColor={'white'}
               fontFamily={'Roboto-Regular'}
               fontSize={normalize(12)}
             />
-          ))}
-        </ScrollView>
-      </View>
 
-      <View style={styles.scrollContainer}>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          snapToAlignment={'start'}>
+            {_.range(1, 12).map((item, index) => (
+              <Button
+                onPress={debounce(() => onSelect(index))}
+                style={[
+                  styles.horizontalButton,
+                  {
+                    backgroundColor: selected.get(index)
+                      ? colors.grey0
+                      : colors.white,
+                  },
+                ]}
+                text={'All Tables ' + item}
+                backgroundColor={'white'}
+                fontFamily={'Roboto-Regular'}
+                fontSize={normalize(12)}
+              />
+            ))}
+          </ScrollView>
+        </View>
+
+        <View style={styles.scrollContainer}>
           <View>
             {oldId === -1 ? (
               <CustomerSearch />
             ) : (
-              <View style={styles.verticalView}>
-                {tableState.map((item, idx) => (
-                  <Button
-                    onPress={debounce(() => Actions.orderList())}
-                    style={styles.verticalButton}
-                    text={item.name}
-                    backgroundColor={'white'}
-                    fontFamily={'Roboto-Regular'}
-                    fontSize={normalize(12)}
-                  />
-                ))}
-              </View>
+              <ScrollView
+                showsVerticalScrollIndicator={false}
+                snapToAlignment={'start'}>
+                <View style={styles.verticalView}>
+                  {tableState.map((item, idx) => (
+                    <Button
+                      onPress={debounce(() => Actions.orderList())}
+                      style={styles.verticalButton}
+                      text={item.name}
+                      backgroundColor={'white'}
+                      fontFamily={'Roboto-Regular'}
+                      fontSize={normalize(12)}
+                    />
+                  ))}
+                </View>
+              </ScrollView>
             )}
           </View>
-        </ScrollView>
-      </View>
-    </KeyboardAwareScrollView>
+        </View>
+      </KeyboardAwareScrollView>
+    </View>
   );
 }

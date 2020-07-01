@@ -34,7 +34,6 @@ export const styles = StyleSheet.create({
   tableContainerStyle: {
     flex: 1,
     backgroundColor: colors.white,
-    justifyContent: 'center',
     width: width,
   },
 

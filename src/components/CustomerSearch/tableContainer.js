@@ -1,6 +1,6 @@
 import React from 'react';
 import randomColor from 'randomcolor';
-import {TextInput, View} from 'react-native';
+import {ScrollView, TextInput, View} from 'react-native';
 import {Button, ListItem} from 'react-native-elements';
 import {Text} from 'components';
 import {styles} from './style';
@@ -24,31 +24,31 @@ const list = [
     subtitle: 'Labor',
   },
 ];
+let _handleContacts = (allContacts) => {
+  let help = '';
+  let title = '';
+  return allContacts.map((user) => {
+    help = user.name.replace(/\s\s+/g, ' ').split(' ');
+    help.length = 2;
+    title = help.map((contact) => {
+      return contact[0];
+    });
+
+    user.helper = {
+      name: user.name.toLowerCase(),
+      title: title.toString().replace(',', ''),
+      bgColor: randomColor({
+        luminosity: 'dark',
+      }),
+    };
+
+    return user;
+  });
+};
+
+const allContacts = _handleContacts(list);
 
 export default function () {
-  let _handleContacts = (allContacts) => {
-    let help = '';
-    let title = '';
-    return allContacts.map((user) => {
-      help = user.name.replace(/\s\s+/g, ' ').split(' ');
-      help.length = 2;
-      title = help.map((contact) => {
-        return contact[0];
-      });
-
-      user.helper = {
-        name: user.name.toLowerCase(),
-        title: title.toString().replace(',', ''),
-        bgColor: randomColor({
-          luminosity: 'dark',
-        }),
-      };
-
-      return user;
-    });
-  };
-
-  const allContacts = _handleContacts(list);
   const lang = useSelector((state) => state.translate.lang);
   const [value, onChangeText] = React.useState('');
 
@@ -78,7 +78,7 @@ export default function () {
           value={value}
         />
       </View>
-      <View style={styles.tableContainerStyle}>
+      <ScrollView style={styles.tableContainerStyle}>
         {allContacts.map((l, i) => (
           <ListItem
             key={i}
@@ -102,7 +102,7 @@ export default function () {
         {/*    </View>*/}
         {/*  ))}*/}
         {/*</View>*/}
-      </View>
+      </ScrollView>
     </View>
   );
 }
