@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
   searchLeftContainer: {
     flex: isTablet() ? 0.9 : 1,
     margin: 10,
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
 
   searchInputContainer: {
@@ -26,33 +26,17 @@ export const styles = StyleSheet.create({
   },
 
   searchTextInputStyle: {
-    height: normalize(25),
-    padding: 3,
-    borderColor: colors.grey0,
-    borderWidth: 1,
-    flex: 0.94,
     backgroundColor: colors.white,
+    marginBottom: 10,
+    width: width,
   },
-
-  searchBtnStyle: {
-    paddingBottom: normalize(2.5),
-    paddingTop: normalize(2.5),
-    backgroundColor: colors.white,
-    borderWidth: 1,
-    borderColor: colors.grey0,
-  },
-
-  searchBtnTextStyle: {color: colors.black, fontWeight: 'bold'},
 
   tableContainerStyle: {
-    flexGrow: 1,
+    flex: 1,
     backgroundColor: colors.white,
-    borderColor: colors.grey0,
-    borderWidth: 1,
-    height: normalize(250),
+    justifyContent: 'center',
+    width: width,
   },
-
-  searchTextStyle: {flex: isTablet() ? 0.08 : 0.18},
 
   tableHeaderStyle: {
     borderColor: colors.grey0,

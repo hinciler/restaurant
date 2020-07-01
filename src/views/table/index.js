@@ -1,8 +1,7 @@
 import React, {useEffect, useCallback} from 'react';
-import {ScrollView, TouchableOpacity, View} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {Header, Text, CustomerSearch, Button} from 'components';
-import {Typography} from 'components/Text';
+import {Header, CustomerSearch, Button} from 'components';
 import debounce from 'utilities/helpers/debounce';
 import _ from 'lodash';
 import {table} from '@table/actions';

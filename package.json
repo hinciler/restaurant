@@ -17,6 +17,7 @@
     "moment": "^2.25.3",
     "prop-types": "^15.7.2",
     "querystring": "^0.2.0",
+    "randomcolor": "^0.5.4",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera.git",
