@@ -28,7 +28,6 @@ class PinCode extends PureComponent {
   async componentDidMount() {
     let lang = '';
     const deviceLang = await AsyncStorage.getItem('@lang');
-    console.log('deviceLang', deviceLang);
     if (deviceLang) {
       this.props.translate(deviceLang);
     } else {
@@ -47,7 +46,10 @@ class PinCode extends PureComponent {
     }
     const value = await AsyncStorage.getItem('@baseUrl');
     if (value) {
-      this.props.setBaseUrl(value);
+      const {domain, port} = JSON.parse(value);
+      const baseUrl = `http://${domain}:${port}`;
+
+      this.props.setBaseUrl({domain, port, baseUrl});
     } else {
       const defaultBaseUrl = 'https://androiddemo.sambapos.com:9000';
       this.props.setBaseUrl(defaultBaseUrl);

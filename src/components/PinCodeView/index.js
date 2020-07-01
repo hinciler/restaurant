@@ -59,9 +59,10 @@ export default function ({lang, onPressUpdate, onLogin, errorMessage}) {
         <View style={styles.row}>
           {_.range(1, 4).map((item) => (
             <Button
+              key={item}
               onPress={debounce(() => numPress(item.toString()))}
               style={styles.numOverlay}
-              text={item}
+              text={item.toString()}
               backgroundColor={'white'}
             />
           ))}
@@ -69,9 +70,10 @@ export default function ({lang, onPressUpdate, onLogin, errorMessage}) {
         <View style={styles.row}>
           {_.range(4, 7).map((item) => (
             <Button
+              key={item}
               onPress={debounce(() => numPress(item.toString()))}
               style={styles.numOverlay}
-              text={item}
+              text={item.toString()}
               backgroundColor={'white'}
             />
           ))}
@@ -79,9 +81,10 @@ export default function ({lang, onPressUpdate, onLogin, errorMessage}) {
         <View style={styles.row}>
           {_.range(7, 10).map((item) => (
             <Button
+              key={item}
               onPress={debounce(() => numPress(item.toString()))}
               style={styles.numOverlay}
-              text={item}
+              text={item.toString()}
               backgroundColor={'white'}
             />
           ))}
@@ -90,7 +93,7 @@ export default function ({lang, onPressUpdate, onLogin, errorMessage}) {
           <Button
             onPress={debounce(() => backPress())}
             style={styles.numOverlay}
-            text={<Icon name={'delete'} size={normalize(18)} />}
+            icon={<Icon name={'delete'} size={normalize(18)} />}
             backgroundColor={'white'}
           />
 
@@ -103,7 +106,7 @@ export default function ({lang, onPressUpdate, onLogin, errorMessage}) {
           <Button
             onPress={debounce(login)}
             style={styles.numOverlay}
-            text={<Icon name={'arrow-right-circle'} size={normalize(18)} />}
+            icon={<Icon name={'arrow-right-circle'} size={normalize(18)} />}
             backgroundColor={'white'}
           />
         </View>
@@ -111,7 +114,7 @@ export default function ({lang, onPressUpdate, onLogin, errorMessage}) {
           <Button
             onPress={debounce(() => Actions.settings())}
             style={[styles.numOverlay, {borderBottomColor: 'red'}]}
-            text={
+            icon={
               <IconMaterial name={'phonelink-setup'} size={normalize(18)} />
             }
             backgroundColor={'white'}
@@ -119,14 +122,14 @@ export default function ({lang, onPressUpdate, onLogin, errorMessage}) {
           <Button
             onPress={debounce(() => Actions.qrCode())}
             style={[styles.numOverlay, {borderBottomColor: 'red'}]}
-            text={<IconFontAwesome name={'qrcode'} size={normalize(18)} />}
+            icon={<IconFontAwesome name={'qrcode'} size={normalize(18)} />}
             backgroundColor={'white'}
           />
 
           <Button
             onPress={debounce(alertUpdateData)}
             style={[styles.numOverlay, {borderBottomColor: 'red'}]}
-            text={<IconMaterial name={'update'} size={normalize(18)} />}
+            icon={<IconMaterial name={'update'} size={normalize(18)} />}
             backgroundColor={'white'}
           />
         </View>

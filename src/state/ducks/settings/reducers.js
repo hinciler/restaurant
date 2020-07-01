@@ -5,6 +5,8 @@ const INITIAL_STATE = {
   error: '',
   data: [],
   baseUrl: 'http://78.159.99.84:9000',
+  domain: null,
+  port: null,
 };
 
 const settings = (state = INITIAL_STATE, action) => {
@@ -18,6 +20,8 @@ const settings = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         baseUrl: action.baseUrl,
+        domain: action.domain,
+        port: action.port,
       };
     case type.settings_SUCCESS:
       return {
