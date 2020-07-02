@@ -2,7 +2,6 @@ import {Dimensions, StyleSheet} from 'react-native';
 import {colors} from 'config';
 import {normalize} from 'react-native-elements';
 import {isTablet} from 'react-native-device-info';
-const {width} = Dimensions.get('window');
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.background1,
@@ -13,28 +12,22 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   searchLeftContainer: {
-    flex: isTablet() ? 0.9 : 1,
-    margin: 10,
-    alignItems: 'center',
+    flex: 3,
   },
 
   searchInputContainer: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: normalize(5),
-    flex: 0.1,
   },
 
   searchTextInputStyle: {
     backgroundColor: colors.white,
-    marginBottom: 10,
-    width: width,
   },
 
   tableContainerStyle: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: colors.white,
-    width: width,
   },
 
   tableHeaderStyle: {
@@ -44,13 +37,16 @@ export const styles = StyleSheet.create({
     width: normalize(85),
   },
 
-  rightBtnContainer: {flex: isTablet() ? 0.1 : 0.27},
-
+  rightBtnContainer: {flex: 1},
   scrollHorizontalPortrait: {
-    flex: 0.1,
+    minHeight: normalize(70),
     justifyContent: 'center',
-    alignItems: 'center',
+    paddingBottom: normalize(5),
   },
 
-  listBtn: {flex: 1, flexDirection: !isTablet() ? 'row' : 'column'},
+  listBtn: {
+    flexGrow: 1,
+    flexDirection: !isTablet() ? 'row' : 'column',
+    backgroundColor: colors.background1,
+  },
 });

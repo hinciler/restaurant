@@ -16,9 +16,7 @@ export default function ({showHeader = false}) {
       )}
       {!isTablet() && (
         <View style={styles.scrollHorizontalPortrait}>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <ListBtns />
-          </ScrollView>
+          <ListBtns />
         </View>
       )}
       <View style={styles.searchContainer}>

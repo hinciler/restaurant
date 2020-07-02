@@ -40,4 +40,13 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: normalize(15),
   },
+  textStyle: {
+    color: 'white',
+    fontFamily: 'Roboto-Regular',
+  },
+  progressWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contentWrapper: {justifyContent: 'flex-start'},
 });

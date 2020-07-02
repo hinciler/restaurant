@@ -7,6 +7,7 @@ export default function ({text, disabled = false}) {
     <Button
       title={text}
       type="clear"
+      raised
       disabled={disabled}
       titleStyle={styles.button}
       containerStyle={styles.buttonContainer}
@@ -16,8 +17,11 @@ export default function ({text, disabled = false}) {
 const styles = StyleSheet.create({
   buttonContainer: {
     backgroundColor: 'white',
+    minHeight: normalize(50),
     margin: normalize(5),
-    padding: normalize(5),
+    paddingHorizontal: normalize(5),
+    justifyContent: 'center',
+    flex: 1,
   },
   button: {
     color: '#000',

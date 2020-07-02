@@ -1,6 +1,7 @@
 import React from 'react';
 import {ScrollView, View, StyleSheet} from 'react-native';
 import {Button, normalize} from 'react-native-elements';
+import {colors} from 'config';
 
 export default function ({green_btn}) {
   return (
@@ -25,12 +26,11 @@ export default function ({green_btn}) {
 const styles = StyleSheet.create({
   container: {
     flex: 3,
-    backgroundColor: 'white',
+    backgroundColor: colors.background1,
   },
 
   green: {
     flex: 1,
-    backgroundColor: 'white',
     flexWrap: 'wrap',
     flexDirection: 'row',
   },

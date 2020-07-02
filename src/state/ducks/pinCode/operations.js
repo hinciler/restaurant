@@ -229,7 +229,6 @@ function* watch_getMenu() {
 
 export function* connectionControl(action) {
   try {
-    debugger;
     const {data = {}, error, status} = yield api.connection_control(
       action.payload,
     );
@@ -241,7 +240,7 @@ export function* connectionControl(action) {
         client_id: 'pda',
       });
 
-      const {data: token} = yield api.token(requestBody);
+      const {data: token, error: _error} = yield api.token(requestBody);
       if (token?.access_token) {
         const getUserPayload = getUserQueries(action.code);
         yield put({

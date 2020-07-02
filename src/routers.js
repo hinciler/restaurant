@@ -8,6 +8,7 @@ import Settings from 'views/settings/container';
 import Order from 'views/order';
 import OrderList from 'views/orderList';
 import AddOrder from 'views/orderList/addOrder';
+import AddProduct from 'views/orderList/addProduct';
 import QrCode from 'views/pinCode/qrCode';
 import Table from 'views/table/container';
 import Payment from 'views/payment';
@@ -38,6 +39,7 @@ const router = () => (
         <Scene component={Table} key="table" />
         <Scene component={Payment} key="payment" />
         <Scene component={CustomerSearch} key="customerSearch" />
+        <Scene component={AddProduct} key="addProduct" />
       </Modal>
     </Overlay>
   </Router>

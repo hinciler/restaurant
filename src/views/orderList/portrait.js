@@ -38,6 +38,9 @@ function Portrait() {
         Actions.customerSearch({showHeader: true});
         setVisible(true);
         break;
+      case 'addProduct':
+        Actions.addProduct({showHeader: true});
+        break;
       default:
         break;
     }
