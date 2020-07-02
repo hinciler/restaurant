@@ -1,5 +1,5 @@
-import React, {PureComponent, useState} from 'react';
-import {Alert, TextInput, TouchableOpacity, View} from 'react-native';
+import React, {useState} from 'react';
+import {Alert, TextInput, View} from 'react-native';
 import {styles} from './style';
 import {normalize} from 'react-native-elements';
 import {Text, Button} from 'components';

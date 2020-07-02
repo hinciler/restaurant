@@ -32,7 +32,6 @@ export default function () {
     try {
       const {port, domain} = IPRef.current.getDomain();
       const baseUrl = `http://${domain}:${port}`;
-
       dispatch(setBaseUrl({domain, port, baseUrl}));
       const data = {
         domain,

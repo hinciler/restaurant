@@ -48,7 +48,6 @@ class PinCode extends PureComponent {
     if (value) {
       const {domain, port} = JSON.parse(value);
       const baseUrl = `http://${domain}:${port}`;
-
       this.props.setBaseUrl({domain, port, baseUrl});
     } else {
       const defaultBaseUrl = 'https://androiddemo.sambapos.com:9000';
@@ -116,7 +115,7 @@ class PinCode extends PureComponent {
           animationOutTiming={800}
           backdropTransitionOutTiming={600}>
           <View style={styles.content}>
-            <View style={{justifyContent: 'flex-start'}}>
+            <View style={styles.contentWrapper}>
               <Text
                 style={styles.contentTitle}
                 text={lang.loading}
@@ -128,11 +127,7 @@ class PinCode extends PureComponent {
                 type={Typography.PL}
               />
             </View>
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+            <View style={styles.progressWrapper}>
               <Progress.Bar
                 width={normalize(250)}
                 progress={this.state.progress}
@@ -183,6 +178,7 @@ class PinCode extends PureComponent {
           visible={loading}
           animation="none"
           size="large"
+          textStyle={styles.textStyle}
           color="#fff"
           textContent={lang.pleaseWait}
           overlayColor="rgba(0,0,0,.80)"

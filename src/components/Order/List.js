@@ -1,13 +1,13 @@
 import React from 'react';
 import {StyleSheet, SectionList, View} from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {isTablet} from 'react-native-device-info';
 
 import {Text} from 'components';
 import {Typography} from 'components/Text';
 import {ListItem, normalize, Button} from 'react-native-elements';
-import colors from '../../utilities/config/colors';
+import {colors} from 'config';
 const DATA = [
   {
     title: 'Main dishes',
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: colors.grey,
     paddingLeft: normalize(10),
+    height: normalize(40),
   },
   renderSectionHeader: {
     backgroundColor: colors.background1,
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
 
     backgroundColor: '#f5f5f5',
+    paddingBottom: normalize(2),
   },
   balance: {
     backgroundColor: colors.background1,
@@ -90,7 +92,7 @@ const OrderList = () => {
             <ListItem
               leftElement={<Text text={index + 1} type={Typography.PMB} />}
               title={<Text text={item} type={Typography.PMB} />}
-              rightTitle={<Text text={index * 5} type={Typography.PMB} />}
+              rightTitle={<Text text={index * 5.3} type={Typography.PMB} />}
               subtitle={<Text text={item} type={Typography.PSM} />}
               bottomDivider
             />

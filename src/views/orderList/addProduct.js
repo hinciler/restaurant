@@ -4,13 +4,23 @@ import {StyleSheet, View, FlatList, Text} from 'react-native';
 import Modal from 'react-native-modal';
 import {Actions} from 'react-native-router-flux';
 
-import {OrangeButton, List, LeftOrderButton, GreenButton} from 'components';
+import {
+  OrangeButton,
+  List,
+  LeftOrderButton,
+  GreenButton,
+  Header,
+} from 'components';
 import {normalize} from 'react-native-elements';
 const dummy = require('./dummy.json');
 
 const {leftDummy, orange, green} = dummy;
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    paddingBottom: 20,
+  },
+  wrapper: {
     flex: 1,
     paddingBottom: 20,
     flexDirection: 'row',
@@ -45,25 +55,8 @@ function OrderList() {
   };
   return (
     <View style={styles.container}>
-      <FlatList
-        contentContainerStyle={styles.contentContainerStyle}
-        style={styles.container}
-        data={leftDummy}
-        renderItem={({item, index}) => (
-          <LeftOrderButton
-            onPress={() => pressLeftButton(item.key)}
-            containerStyle={styles.leftButtons}
-            item={item}
-            text={item.text}
-            disabled={item.disabled}
-          />
-        )}
-        keyExtractor={(item) => item.key}
-      />
-      <View style={styles.listWrapper}>
-        <List />
-      </View>
-      <View style={styles.right}>
+      <Header rightIconName="close" onRightPress={Actions.pop} />
+      <View style={styles.wrapper}>
         <OrangeButton orange_btn={orange} />
         <GreenButton green_btn={green} />
       </View>

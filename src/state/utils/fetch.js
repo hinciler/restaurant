@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
 });
 axiosInstance.defaults.headers['Content-Type'] = 'application/json';
 axiosInstance.interceptors.request.use((config) => {
-  config.baseURL = store.getState().settings.baseUrl + '/api/graphql';
+  config.baseURL = `${store.getState().settings.baseUrl}/api/graphql`;
   if (store.getState().pinCode.token) {
     config.headers.Authorization = `Bearer ${store.getState().pinCode.token}`;
   }

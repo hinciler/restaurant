@@ -1,6 +1,6 @@
 import React from 'react';
 import randomColor from 'randomcolor';
-import {TextInput, View} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import {Button, ListItem} from 'react-native-elements';
 import {Text} from 'components';
 import {styles} from './style';
@@ -60,8 +60,6 @@ export default function () {
           containerStyle={styles.searchTextInputStyle}
           inputContainerStyle={{
             backgroundColor: '#F2F3F5',
-            padding: 0,
-            height: 10,
           }}
           inputStyle={{
             fontSize: 16,
@@ -78,7 +76,7 @@ export default function () {
           value={value}
         />
       </View>
-      <View style={styles.tableContainerStyle}>
+      <ScrollView contentContainerStyle={styles.tableContainerStyle}>
         {allContacts.map((l, i) => (
           <ListItem
             key={i}
@@ -92,17 +90,7 @@ export default function () {
             chevron
           />
         ))}
-        {/*<View*/}
-        {/*  style={{*/}
-        {/*    flexDirection: 'row',*/}
-        {/*  }}>*/}
-        {/*  {containerItems.map((item, idx) => (*/}
-        {/*    <View style={styles.tableHeaderStyle}>*/}
-        {/*      <Text text={item} type={Typography.PSB} numberOfLines={1} />*/}
-        {/*    </View>*/}
-        {/*  ))}*/}
-        {/*</View>*/}
-      </View>
+      </ScrollView>
     </View>
   );
 }
