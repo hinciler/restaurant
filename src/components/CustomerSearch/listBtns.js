@@ -22,7 +22,7 @@ export default function () {
           disabled={item.disabled}
         />
       )}
-      keyExtractor={(item) => item.pay}
+      keyExtractor={(item) => item.key}
     />
   );
 }

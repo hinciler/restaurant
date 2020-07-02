@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {StyleSheet, View, FlatList, Text} from 'react-native';
-import Modal from 'react-native-modal';
+import {StyleSheet, View, FlatList} from 'react-native';
 import {Actions} from 'react-native-router-flux';
-
 import {OrangeButton, List, LeftOrderButton, GreenButton} from 'components';
 import {normalize} from 'react-native-elements';
 const dummy = require('./dummy.json');
