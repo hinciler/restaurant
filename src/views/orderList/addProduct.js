@@ -38,6 +38,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
   },
   listWrapper: {flex: 3},
+  productListContainer: {flexDirection: 'row', flex: 1},
+  productList: {
+    borderWidth: 1,
+    borderColor: colors.grey,
+    flex: 4,
+  },
 });
 function OrderList() {
   const {lang} = useSelector((state) => state.translate);
@@ -47,13 +53,8 @@ function OrderList() {
       <View style={styles.wrapper}>
         <OrangeButton orange_btn={orange} />
         <View style={{flex: 3}}>
-          <View style={{flexDirection: 'row', flex: 1}}>
-            <View
-              style={{
-                borderWidth: 1,
-                borderColor: colors.grey,
-                flex: 4,
-              }}>
+          <View style={styles.productListContainer}>
+            <View style={styles.productList}>
               <SectionList
                 style={styles.sectionContainer}
                 sections={DATA}
