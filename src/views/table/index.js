@@ -70,7 +70,7 @@ export default function () {
                 styles.horizontalButton,
                 {
                   backgroundColor: selected.get(-1)
-                    ? colors.grey0
+                    ? colors.selected
                     : colors.white,
                 },
               ]}
@@ -87,7 +87,7 @@ export default function () {
                   styles.horizontalButton,
                   {
                     backgroundColor: selected.get(index)
-                      ? colors.grey0
+                      ? colors.selected
                       : colors.white,
                   },
                 ]}
