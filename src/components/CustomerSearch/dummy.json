@@ -2,22 +2,25 @@
     "rightDummy": [
         {
             "text": "Select Customer",
-            "disabled": true
+            "disabled": true,
+            "key": "selectCustomer"
         },
         {
             "text": "Edit Customer",
-            "disabled": true
+            "disabled": true,
+            "key": "editCustomer"
         },
         {
             "text": "New Customer",
-            "disabled": false
+            "disabled": false,
+            "key": "newCustomer"
         },
         {
             "text": "Account Details",
-            "disabled": true
+            "disabled": true,
+            "key": "accountDetails"
         }
     ],
-
     "containerItems": [
         "Name",
         "Phone",

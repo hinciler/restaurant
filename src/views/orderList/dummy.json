@@ -1,11 +1,6 @@
 {
     "leftDummy": [
         {
-            "text": "Add Product",
-            "disabled": false,
-            "key": "addProduct"
-        },
-        {
             "text": "Table Degistir",
             "disabled": false,
             "key": "changeTable"

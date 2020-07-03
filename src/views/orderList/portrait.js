@@ -7,8 +7,20 @@ const logo = require('assets/img/logo.png');
 import {normalize} from 'react-native-elements';
 import {List, LeftOrderButton} from 'components';
 const dummy = require('./dummy.json');
+import _ from 'lodash';
+var {leftDummy, orange, green} = dummy;
+const hasAddProduct = _.filter(leftDummy, {key: 'addProduct'});
+if (hasAddProduct) {
+  leftDummy = [
+    {
+      text: 'Add Product',
+      disabled: false,
+      key: 'addProduct',
+    },
+    ...leftDummy,
+  ];
+}
 
-const {leftDummy, orange, green} = dummy;
 const styles = StyleSheet.create({
   listContainer: {
     flex: 1,

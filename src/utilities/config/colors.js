@@ -5,6 +5,7 @@ const light = {
   background1: '#f5f5f5',
   background2: '#F0F3FA',
   background3: '#F0F3FA',
+  selected: '#E4E0DF',
   red: '#de3838',
   orange: '#fe3e05',
   active: '#fff',
@@ -60,6 +61,7 @@ const dark = {
   background2: '#21D4FD',
   color: '#000',
   black: '#1a1917',
+  selected: '#E4E0DF',
 
   grey0: '#888888',
   grey1: '#8E8E92',
