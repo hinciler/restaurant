@@ -9,6 +9,7 @@ import LeftOrderButton from './Order/LeftButton';
 import List from './Order/List';
 import OrangeButton from './Order/OrangeButton';
 import GreenButton from './Order/GreenButton';
+import NumPad from './NumPad';
 
 export {
   Header,
@@ -22,4 +23,5 @@ export {
   LeftOrderButton,
   List,
   CustomerSearch,
+  NumPad,
 };

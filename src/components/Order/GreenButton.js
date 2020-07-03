@@ -3,13 +3,14 @@ import {ScrollView, View, StyleSheet} from 'react-native';
 import {Button, normalize} from 'react-native-elements';
 import {colors} from 'config';
 
-export default function ({green_btn}) {
+export default function ({green_btn, onPress}) {
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.green}>
           {green_btn.map((item, index) => (
             <Button
+              onPress={onPress}
               key={index}
               title={item}
               containerStyle={styles.containerStyle}
@@ -42,9 +43,10 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     width: '30%',
     height: normalize(55),
+    justifyContent: 'center',
   },
 
-  buttonStyle: {backgroundColor: 'green'},
+  buttonStyle: {backgroundColor: 'green', padding: 0},
 
   titleStyle: {
     color: 'white',

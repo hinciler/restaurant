@@ -2,7 +2,7 @@ import {Dimensions, StyleSheet} from 'react-native';
 import {colors} from 'config';
 import {normalize} from 'react-native-elements';
 import {isTablet} from 'react-native-device-info';
-const {width} = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.background1,
@@ -30,8 +30,8 @@ export const styles = StyleSheet.create({
     marginRight: normalize(5),
   },
   verticalButton: {
-    height: normalize(50),
-    width: width > 600 ? normalize(85) : width / 3 - 15,
+    height: height / 8 - 10,
+    width: width > 600 ? normalize(95) : width / 3 - 15,
     borderColor: colors.border,
     borderWidth: 1,
     justifyContent: 'center',

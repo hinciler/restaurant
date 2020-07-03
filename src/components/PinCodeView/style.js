@@ -1,6 +1,7 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import {normalize} from 'react-native-elements';
 import {colors} from 'config';
+import {isTablet} from 'react-native-device-info';
 const {width, height} = Dimensions.get('window');
 const flexSize =
   width > 380
@@ -56,8 +57,8 @@ export const styles = StyleSheet.create({
     padding: normalize(2),
   },
   numOverlay: {
-    height: normalize(50),
-    width: normalize(80),
+    height: isTablet() ? normalize(60) : normalize(50),
+    width: isTablet() ? normalize(90) : normalize(80),
     borderColor: colors.border,
     borderWidth: 1,
     justifyContent: 'center',
