@@ -6,7 +6,7 @@ import {isTablet} from 'react-native-device-info';
 
 import {Text} from 'components';
 import {Typography} from 'components/Text';
-import {ListItem, normalize, Button} from 'react-native-elements';
+import {ListItem, normalize, Button, Divider} from 'react-native-elements';
 import {colors} from 'config';
 const DATA = [
   {
@@ -69,6 +69,20 @@ const styles = StyleSheet.create({
   settleTextStyle: {color: '#000', fontWeight: 'bold'},
   closeButtonStyle: {backgroundColor: colors.red},
   closeTextStyle: {color: '#fff', fontWeight: 'bold'},
+  itemWrapper: {
+    backgroundColor: colors.active,
+  },
+  sticker: {
+    paddingTop: normalize(1),
+    paddingBottom: normalize(1),
+  },
+  item: {
+    paddingTop: normalize(1),
+    paddingBottom: normalize(1),
+  },
+  paddingBottom: {
+    paddingBottom: normalize(5),
+  },
 });
 const OrderList = () => {
   const {lang} = useSelector((state) => state.translate);
@@ -89,13 +103,52 @@ const OrderList = () => {
         keyExtractor={(item, index) => item + index}
         renderItem={({item, index}) => {
           return (
-            <ListItem
-              leftElement={<Text text={index + 1} type={Typography.PMB} />}
-              title={<Text text={item} type={Typography.PMB} />}
-              rightTitle={<Text text={index * 5.3} type={Typography.PMB} />}
-              subtitle={<Text text={item} type={Typography.PSM} />}
-              bottomDivider
-            />
+            <View style={styles.itemWrapper}>
+              <ListItem
+                containerStyle={styles.item}
+                leftElement={<Text text={index + 1} type={Typography.PMB} />}
+                title={<Text text={item} type={Typography.PMB} />}
+                rightTitle={<Text text={index * 5.3} type={Typography.PMB} />}
+                subtitle={<Text text={item} type={Typography.PSM} />}
+                bottomDivider={index % 2 === 0 ? false : true}
+              />
+              {index % 2 === 0 && (
+                <View style={styles.stickerWrapper}>
+                  <ListItem
+                    containerStyle={styles.sticker}
+                    leftElement={
+                      <Text text={index + 1} type={Typography.PSM} />
+                    }
+                    rightTitle={
+                      <Text text={index * 5.3} type={Typography.PSM} />
+                    }
+                    title={<Text text={item} type={Typography.PSM} />}
+                  />
+                  <ListItem
+                    containerStyle={styles.sticker}
+                    leftElement={
+                      <Text text={index + 1} type={Typography.PSM} />
+                    }
+                    rightTitle={
+                      <Text text={index * 5.3} type={Typography.PSM} />
+                    }
+                    title={<Text text={item} type={Typography.PSM} />}
+                  />
+                  <ListItem
+                    containerStyle={styles.sticker}
+                    leftElement={
+                      <Text text={index + 1} type={Typography.PSM} />
+                    }
+                    rightTitle={
+                      <Text text={index * 5.3} type={Typography.PSM} />
+                    }
+                    title={<Text text={item} type={Typography.PSM} />}
+                  />
+                  <View style={styles.paddingBottom} />
+                  <Divider />
+                </View>
+              )}
+            </View>
           );
         }}
         renderSectionHeader={({section: {title}}) => (
