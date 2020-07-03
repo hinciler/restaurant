@@ -10,7 +10,7 @@ import {OrangeButton, GreenButton, Header, NumPad, Button} from 'components';
 import {ListItem, normalize} from 'react-native-elements';
 const dummy = require('./dummy.json');
 
-const {leftDummy, orange, green} = dummy;
+const {orange, green} = dummy;
 
 const DATA = [
   {
@@ -25,6 +25,10 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     paddingBottom: 20,
+    flexDirection: 'row',
+  },
+  item: {
+    padding: 2,
     flexDirection: 'row',
   },
   right: {
@@ -56,13 +60,17 @@ function OrderList() {
                 keyExtractor={(item, index) => item + index}
                 renderItem={({item, index}) => {
                   return (
-                    <ListItem
-                      style={{marginTop: -10}}
-                      leftElement={
-                        <Text text={index + 1} type={Typography.PMB} />
-                      }
-                      title={<Text text={item} type={Typography.PMB} />}
-                    />
+                    <View
+                      style={[
+                        styles.item,
+                        {
+                          backgroundColor:
+                            DATA.length === index ? colors.grey : colors.white,
+                        },
+                      ]}>
+                      <Text style={{marginRight: 10}} text={index + 1} />
+                      <Text text={item} />
+                    </View>
                   );
                 }}
               />
