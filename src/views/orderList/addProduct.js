@@ -1,22 +1,17 @@
 import React, {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {StyleSheet, View, FlatList, SectionList} from 'react-native';
-import {Typography} from 'components/Text';
+import {useSelector} from 'react-redux';
+import {StyleSheet, View, SectionList} from 'react-native';
 import {Text} from 'components';
 import {Actions} from 'react-native-router-flux';
 import {colors} from 'config';
 
 import {OrangeButton, GreenButton, Header, NumPad, Button} from 'components';
-import {ListItem, normalize} from 'react-native-elements';
+import {normalize} from 'react-native-elements';
+import debounce from '../../utilities/helpers/debounce';
 const dummy = require('./dummy.json');
 
-const {orange, green} = dummy;
+const {orange} = dummy;
 
-const DATA = [
-  {
-    data: ['Pizza', 'Burger', 'Risotto'],
-  },
-];
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -44,9 +39,12 @@ const styles = StyleSheet.create({
     borderColor: colors.grey,
     flex: 4,
   },
+  closeBtn: {flex: 1, marginLeft: 2, marginRight: 2},
 });
 function OrderList() {
   const {lang} = useSelector((state) => state.translate);
+  const [products, setProduct] = useState([]);
+
   return (
     <View style={styles.container}>
       <Header rightIconName="close" onRightPress={Actions.pop} />
@@ -55,28 +53,24 @@ function OrderList() {
         <View style={{flex: 3}}>
           <View style={styles.productListContainer}>
             <View style={styles.productList}>
-              <SectionList
-                style={styles.sectionContainer}
-                sections={DATA}
-                keyExtractor={(item, index) => item + index}
-                renderItem={({item, index}) => {
-                  return (
-                    <View
-                      style={[
-                        styles.item,
-                        {
-                          backgroundColor:
-                            DATA.length === index ? colors.grey : colors.white,
-                        },
-                      ]}>
-                      <Text style={{marginRight: 10}} text={index + 1} />
-                      <Text text={item} />
-                    </View>
-                  );
-                }}
-              />
+              {products.map((item, index) => (
+                <View
+                  key={index}
+                  style={[
+                    styles.item,
+                    {
+                      backgroundColor:
+                        products.length === index + 1
+                          ? colors.grey
+                          : colors.white,
+                    },
+                  ]}>
+                  <Text style={{marginRight: 10}} text={item.item} />
+                  <Text text={item.itemName} />
+                </View>
+              ))}
             </View>
-            <View style={{flex: 1, marginLeft: 2, marginRight: 2}}>
+            <View style={styles.closeBtn}>
               <Button
                 text={'Close'}
                 color={'white'}
@@ -86,11 +80,8 @@ function OrderList() {
               />
             </View>
           </View>
-          <View style={{flex: 2}}>
-            <GreenButton green_btn={green} />
-          </View>
-          <View style={{flex: 2}}>
-            <NumPad />
+          <View style={{flex: 4}}>
+            <NumPad addProduct={(products) => setProduct(products)} />
           </View>
         </View>
       </View>

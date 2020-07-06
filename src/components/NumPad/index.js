@@ -2,25 +2,44 @@ import React, {useState} from 'react';
 import {TextInput, View} from 'react-native';
 import {styles} from './style';
 import {normalize} from 'react-native-elements';
-import {Button} from 'components';
+import {Button, GreenButton} from 'components';
 import Icon from 'react-native-vector-icons/Feather';
 import _ from 'lodash';
 import debounce from 'utilities/helpers/debounce';
+const dummy = require('./dummy.json');
+let products = [];
 
-export default function () {
-  const [code, setCode] = useState('');
+const {green} = dummy;
+export default function ({addProduct}) {
+  const [item, setItem] = useState('');
   function numPress(num) {
-    const concatCode = code.concat(num);
+    const concatCode = item.concat(num);
 
-    setCode(concatCode);
+    setItem(concatCode);
   }
   function backPress() {
-    setCode(code.slice(0, code.length - 1));
+    setItem(item.slice(0, item.length - 1));
   }
+
+  const addItem = (itemName) => {
+    products = [
+      ...products,
+      {itemName: itemName, item: item === '' ? '1' : item},
+    ];
+    setItem('');
+    addProduct(products);
+  };
+
   return (
     <View style={styles.container}>
+      <GreenButton
+        green_btn={green}
+        onPress={(itemName) => {
+          addItem(itemName);
+        }}
+      />
       <View style={styles.inputContainer}>
-        <TextInput style={styles.input} value={code} editable={false} />
+        <TextInput style={styles.input} value={item} editable={false} />
       </View>
       <View style={styles.grid}>
         <View style={styles.row}>

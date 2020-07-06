@@ -2,15 +2,20 @@ import React from 'react';
 import {ScrollView, View, StyleSheet} from 'react-native';
 import {Button, normalize} from 'react-native-elements';
 import {colors} from 'config';
+import debounce from '../../utilities/helpers/debounce';
 
 export default function ({green_btn, onPress}) {
+  const getProduct = (itemName) => {
+    onPress(itemName);
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.green}>
           {green_btn.map((item, index) => (
             <Button
-              onPress={onPress}
+              onPress={debounce(() => getProduct(item))}
               key={index}
               title={item}
               containerStyle={styles.containerStyle}

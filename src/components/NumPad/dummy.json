@@ -1,0 +1,93 @@
+{
+    "leftDummy": [
+        {
+            "text": "Table Degistir",
+            "disabled": false,
+            "key": "changeTable"
+        },
+        {
+            "text": "Customer Sec",
+            "disabled": false,
+            "key": "selectCustomer"
+        },
+        {
+            "text": "Ticket Note",
+            "disabled": false,
+            "key": "ticketNote"
+        },
+        {
+            "text": "Print Bill",
+            "disabled": true,
+            "key": "printBill"
+        },
+        {
+            "text": "Add Ticket",
+            "disabled": true,
+            "key": "addTicket"
+        }
+    ],
+    "orange": [
+        "Breakfast",
+        "Soup",
+        "Weaps",
+        "Sandwiches",
+        "Breakfast",
+        "Soup",
+        "Weaps",
+        "Sandwiches",
+        "Breakfast",
+        "Soup",
+        "Weaps",
+        "Sandwiches"
+    ],
+    "green": [
+        "Breakfast",
+        "Soup Drink",
+        "Weaps",
+        "Sandwiches",
+        "Breakfast",
+        "Soup",
+        "Weaps",
+        "Sandwiches",
+        "Breakfast",
+        "Soup",
+        "Weaps",
+        "Sandwiches",
+        "Breakfast",
+        "Soup",
+        "Weaps",
+        "Sandwiches",
+        "Breakfast",
+        "Soup",
+        "Weaps",
+        "Sandwiches",
+        "Breakfast",
+        "Soup",
+        "Weaps",
+        "Sandwiches",
+        "Breakfast",
+        "Soup",
+        "Weaps",
+        "Sandwiches",
+        "Breakfast",
+        "Soup",
+        "Weaps",
+        "Sandwiches",
+        "Breakfast",
+        "Soup",
+        "Weaps",
+        "Sandwiches",
+        "Breakfast",
+        "Soup",
+        "Weaps",
+        "Sandwiches",
+        "Breakfast",
+        "Soup",
+        "Weaps",
+        "Sandwiches",
+        "Breakfast",
+        "Soup",
+        "Weaps",
+        "Sandwiches"
+    ]
+}
