@@ -11,22 +11,19 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background1,
+    justifyContent: 'space-around',
   },
   inputContainer: {
     borderColor: colors.border2,
     borderWidth: normalize(2),
-    height: normalize(50),
+    height: normalize(40),
     backgroundColor: colors.white,
-    marginTop:
-      width > 380
-        ? normalize(40)
-        : (width > 321 ? normalize(30) : normalize(5)) || 40,
     marginLeft: normalize(30),
     marginRight: normalize(30),
     justifyContent: 'center',
   },
   input: {
-    height: normalize(40),
+    height: normalize(30),
     backgroundColor: colors.white,
     paddingLeft: 15,
     paddingRight: 15,
@@ -40,27 +37,23 @@ export const styles = StyleSheet.create({
   },
   footer: {
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    marginTop: flexSize,
   },
   grid: {
     flexDirection: 'column',
-    padding:
-      width > 380
-        ? normalize(30)
-        : (width > 321 ? normalize(20) : normalize(15)) || 30,
     justifyContent: 'space-between',
   },
   row: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    padding: normalize(2),
+    justifyContent: 'center',
+    padding: isTablet() ? normalize(6) : normalize(4),
   },
   numOverlay: {
     height: isTablet() ? normalize(60) : normalize(50),
     width: isTablet() ? normalize(90) : normalize(80),
     borderColor: colors.border,
     borderWidth: 1,
+    marginRight: isTablet() ? normalize(6) : normalize(4),
+    marginLeft: isTablet() ? normalize(6) : normalize(4),
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.white,

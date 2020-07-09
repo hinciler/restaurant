@@ -15,7 +15,7 @@ const {orange} = dummy;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingBottom: 20,
+    backgroundColor: colors.background1,
   },
   wrapper: {
     flex: 1,
@@ -47,7 +47,7 @@ function OrderList() {
 
   return (
     <View style={styles.container}>
-      <Header rightIconName="close" onRightPress={Actions.pop} />
+      <Header />
       <View style={styles.wrapper}>
         <OrangeButton orange_btn={orange} />
         <View style={{flex: 3}}>
