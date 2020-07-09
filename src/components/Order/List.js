@@ -37,8 +37,9 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: colors.grey,
+    padding: normalize(3),
+    justifyContent: 'center',
     paddingLeft: normalize(10),
-    height: normalize(40),
   },
   renderSectionHeader: {
     backgroundColor: colors.background1,
@@ -94,7 +95,6 @@ const OrderList = () => {
         title={<Text text={'28 Table B12'} type={Typography.PMB} />}
         subtitle={<Text text={'Status un appeared'} type={Typography.PSM} />}
         containerStyle={styles.header}
-        bottomDivider
       />
       <SectionList
         contentContainerStyle={styles.contentContainerStyle}
