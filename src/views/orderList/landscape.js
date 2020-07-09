@@ -2,7 +2,13 @@ import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {StyleSheet, View, FlatList} from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import {OrangeButton, List, LeftOrderButton, GreenButton} from 'components';
+import {
+  OrangeButton,
+  List,
+  LeftOrderButton,
+  GreenButton,
+  NumPad,
+} from 'components';
 import {normalize} from 'react-native-elements';
 const dummy = require('./dummy.json');
 
@@ -20,7 +26,6 @@ const styles = StyleSheet.create({
     flex: 5,
     flexDirection: 'row',
     marginLeft: normalize(4),
-    backgroundColor: 'red',
   },
   modalContainer: {
     flex: 1,
@@ -31,6 +36,7 @@ const styles = StyleSheet.create({
 function OrderList() {
   const [visible, setVisible] = useState(false);
   const {lang} = useSelector((state) => state.translate);
+  const [products, setProduct] = useState([]);
   const pressLeftButton = (key) => {
     switch (key) {
       case 'selectCustomer':
@@ -63,7 +69,7 @@ function OrderList() {
       </View>
       <View style={styles.right}>
         <OrangeButton orange_btn={orange} />
-        <GreenButton green_btn={green} />
+        <NumPad addProduct={(products) => setProduct(products)} />
       </View>
     </View>
   );

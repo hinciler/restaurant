@@ -1,11 +1,12 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import {normalize} from 'react-native-elements';
 import {colors} from 'config';
+import {isTablet} from 'react-native-device-info';
 const {width} = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 3,
     backgroundColor: colors.background1,
   },
   inputContainer: {
@@ -29,18 +30,18 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     paddingTop:
       width > 380
-        ? normalize(15)
+        ? normalize(7)
         : (width > 321 ? normalize(5) : normalize(0)) || 10,
     justifyContent: 'space-between',
   },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    padding: normalize(1),
+    padding: isTablet() ? normalize(4) : normalize(1),
   },
   numOverlay: {
-    height: normalize(40),
-    width: normalize(60),
+    height: isTablet() ? normalize(45) : normalize(40),
+    width: isTablet() ? normalize(85) : normalize(65),
     borderColor: colors.border,
     borderWidth: 1,
     justifyContent: 'center',

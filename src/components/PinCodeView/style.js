@@ -20,10 +20,14 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.white,
     marginLeft: normalize(30),
     marginRight: normalize(30),
+    marginTop:
+      width > 680
+        ? normalize(40)
+        : (width > 321 ? normalize(10) : normalize(5)) || 10,
     justifyContent: 'center',
   },
   input: {
-    height: normalize(30),
+    height: normalize(35),
     backgroundColor: colors.white,
     paddingLeft: 15,
     paddingRight: 15,
@@ -57,9 +61,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.white,
-  },
-  errorWrapper: {
-    paddingTop: normalize(5),
   },
   bottomBtn: {
     marginTop:

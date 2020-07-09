@@ -50,7 +50,7 @@ export default function ({lang, onPressUpdate, onLogin, errorMessage}) {
         />
       </View>
       {errorMessage && (
-        <View style={styles.errorWrapper}>
+        <View>
           <Text text={errorMessage} color={colors.error} textAlign="center" />
         </View>
       )}
