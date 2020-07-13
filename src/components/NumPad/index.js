@@ -38,8 +38,10 @@ export default function ({addProduct}) {
           addItem(itemName);
         }}
       />
-      <View style={styles.inputContainer}>
-        <TextInput style={styles.input} value={item} editable={false} />
+      <View style={styles.inputAlign}>
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.input} value={item} editable={false} />
+        </View>
       </View>
       <View style={styles.grid}>
         <View style={styles.row}>

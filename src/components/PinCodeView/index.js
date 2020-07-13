@@ -41,13 +41,15 @@ export default function ({lang, onPressUpdate, onLogin, errorMessage}) {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder={'Pin Giriniz'}
-          value={code}
-          editable={false}
-        />
+      <View style={styles.inputAlign}>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder={'Pin Giriniz'}
+            value={code}
+            editable={false}
+          />
+        </View>
       </View>
       {errorMessage && (
         <View>
