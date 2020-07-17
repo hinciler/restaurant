@@ -5,7 +5,7 @@ import {Text} from 'components';
 import {Actions} from 'react-native-router-flux';
 import {colors} from 'config';
 
-import {OrangeButton, GreenButton, Header, NumPad, Button} from 'components';
+import {OrangeButton, Header, NumPad, Button} from 'components';
 import {normalize} from 'react-native-elements';
 import debounce from '../../utilities/helpers/debounce';
 const dummy = require('./dummy.json');
