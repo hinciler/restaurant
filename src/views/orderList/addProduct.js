@@ -80,7 +80,13 @@ const styles = StyleSheet.create({
   },
   orderTagList: {flex: 1, borderWidth: 1, borderColor: colors.grey},
   badgeStyle: {backgroundColor: 'green', width: 25, height: 20},
+  btnContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginTop: 10,
+  },
 });
+
 function OrderList() {
   const {lang} = useSelector((state) => state.translate);
   const [products, setProduct] = useState([]);
@@ -88,6 +94,7 @@ function OrderList() {
   const [selected, setSelected] = React.useState(new Map());
   const [oldId, setOldId] = React.useState(0);
   const [selectedIndex, selectRadio] = React.useState(0);
+  const [items, setItems] = useState(list);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -96,6 +103,21 @@ function OrderList() {
   useEffect(function effectFunction() {
     onSelectMenu(0);
   }, []);
+
+  const onPress = (item) => {
+    toggleSelect(item);
+  };
+
+  const toggleSelect = (item) => {
+    setItems(
+      items.map((i) => {
+        if (item === i) {
+          i.selected = !i.selected;
+        }
+        return i;
+      }),
+    );
+  };
 
   const onSelectMenu = useCallback(
     (id) => {
@@ -171,6 +193,7 @@ function OrderList() {
             {list.map((l, i) =>
               l.multiple ? (
                 <ListItem
+                  onPress={() => onPress(l)}
                   key={i}
                   title={l.name}
                   bottomDivider
@@ -179,28 +202,40 @@ function OrderList() {
                     badgeStyle: styles.badgeStyle,
                   }}
                   rightTitle={
-                    <Icon name={'check'} color={'green'} size={normalize(18)} />
+                    l.selected ? (
+                      <Icon
+                        name={'check'}
+                        color={'green'}
+                        size={normalize(18)}
+                      />
+                    ) : (
+                      <View />
+                    )
                   }
                 />
               ) : (
                 <ListItem
+                  onPress={() => onPress(l)}
                   key={i}
                   title={l.name}
                   bottomDivider
                   rightTitle={
-                    <Icon name={'check'} color={'green'} size={normalize(18)} />
+                    l.selected ? (
+                      <Icon
+                        name={'check'}
+                        color={'green'}
+                        size={normalize(18)}
+                      />
+                    ) : (
+                      <View />
+                    )
                   }
                 />
               ),
             )}
           </View>
 
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-evenly',
-              marginTop: 10,
-            }}>
+          <View style={styles.btnContainer}>
             <Button
               text="Cancel"
               onPress={toggleModal}
