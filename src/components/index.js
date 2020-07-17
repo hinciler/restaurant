@@ -10,6 +10,8 @@ import List from './Order/List';
 import OrangeButton from './Order/OrangeButton';
 import GreenButton from './Order/GreenButton';
 import NumPad from './NumPad';
+import RadioItem from './SelectedList/radioItem';
+import CheckBox from './SelectedList/checkboxItem';
 
 export {
   Header,
@@ -24,4 +26,6 @@ export {
   List,
   CustomerSearch,
   NumPad,
+  RadioItem,
+  CheckBox,
 };
