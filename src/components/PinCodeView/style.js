@@ -13,13 +13,15 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.background1,
     justifyContent: 'space-around',
   },
+  inputAlign: {
+    alignItems: 'center',
+  },
   inputContainer: {
     borderColor: colors.border2,
     borderWidth: normalize(2),
     height: normalize(40),
+    width: isTablet() ? normalize(295) : normalize(260),
     backgroundColor: colors.white,
-    marginLeft: normalize(30),
-    marginRight: normalize(30),
     marginTop:
       width > 680
         ? normalize(40)

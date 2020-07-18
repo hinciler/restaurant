@@ -89,5 +89,40 @@
         "Soup",
         "Weaps",
         "Sandwiches"
+    ],
+
+    "buttons" : ["Burger Menus", "Burger Drink", "Burger Modifier", "Burger Type", "Burger Cheese"],
+    "radioBtn": [
+        {
+            "text": "Normal",
+            "disabled": false
+        },
+        {
+            "text": "Double",
+            "disabled": false
+        },
+        {
+            "text": "Half",
+            "disabled": false
+        }
+    ],
+    "list" :[
+        {
+            "name": "Amy Farha",
+            "subtitle": "Vice President",
+            "multiple": true
+        },
+        {
+            "name": "Chris Jackson",
+            "subtitle": "Vice Chairman"
+        },
+        {
+            "name": "Ahmet Kaya",
+            "subtitle": "Vice Chairman"
+        },
+        {
+            "name": "Sezen Aksu",
+            "subtitle": "Vice Chairman"
+        }
     ]
 }

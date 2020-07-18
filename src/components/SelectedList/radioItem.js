@@ -2,7 +2,14 @@ import React from 'react';
 import {CheckBox} from 'react-native-elements';
 import {colors} from 'config';
 
-export default function ({text, index, onPress, selectedIndex}) {
+export default function ({
+  text,
+  index,
+  onPress,
+  selectedIndex,
+  style,
+  checkedColor,
+}) {
   const pressed = () => {
     const data = {index};
     onPress(data);
@@ -12,9 +19,10 @@ export default function ({text, index, onPress, selectedIndex}) {
       title={text}
       checked={index === selectedIndex}
       onPress={pressed}
-      checkedColor={colors.red}
+      checkedColor={checkedColor ? undefined : colors.red}
       checkedIcon="dot-circle-o"
       uncheckedIcon="circle-o"
+      containerStyle={style}
     />
   );
 }

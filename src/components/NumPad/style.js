@@ -9,13 +9,16 @@ export const styles = StyleSheet.create({
     flex: 3,
     backgroundColor: colors.background1,
   },
+  inputAlign: {
+    alignItems: 'center',
+  },
   inputContainer: {
     borderColor: colors.grey,
     borderWidth: normalize(1),
     height: normalize(30),
     backgroundColor: colors.white,
     marginTop: normalize(5),
-    marginRight: normalize(5),
+    width: isTablet() ? normalize(312) : normalize(230),
     justifyContent: 'center',
   },
   input: {
@@ -41,7 +44,7 @@ export const styles = StyleSheet.create({
   },
   numOverlay: {
     height: isTablet() ? normalize(45) : normalize(40),
-    width: isTablet() ? normalize(85) : normalize(65),
+    width: isTablet() ? normalize(95) : normalize(70),
     borderColor: colors.border,
     borderWidth: 1,
     justifyContent: 'center',
