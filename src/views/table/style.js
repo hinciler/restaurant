@@ -9,25 +9,21 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   scrollHorizontal: {
-    flex: 0.1,
-    marginBottom: normalize(10),
     justifyContent: 'center',
-    alignItems: 'center',
   },
   scrollContainer: {
     flex: 1,
     marginBottom: normalize(10),
   },
   horizontalButton: {
-    height: width > 380 ? normalize(50) : normalize(45),
-    width: width / 2 - 15,
-    flex: 1,
+    paddingHorizontal: normalize(20),
+    paddingVertical: normalize(10),
     borderColor: colors.border,
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: normalize(5),
-    marginRight: normalize(5),
+    marginVertical: normalize(10),
+    marginHorizontal: normalize(2),
   },
   verticalButton: {
     height: height / 8 - 10,
@@ -46,5 +42,16 @@ export const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+  inputContainerStyle: {
+    backgroundColor: '#F2F3F5',
+  },
+  searchTextInputStyle: {
+    padding: normalize(10),
+  },
+  horizontalScrollContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

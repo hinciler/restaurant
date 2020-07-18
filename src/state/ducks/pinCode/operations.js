@@ -58,7 +58,6 @@ export function* getMenu(action) {
       });
     } else {
       const categories = response.data.getMenu.categories;
-      console.log('categories', categories);
       categories.map(async function (item, categoryIdx) {
         const groupId = item.id;
         const name = item.name;

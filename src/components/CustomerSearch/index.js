@@ -8,7 +8,6 @@ import {Header} from 'components';
 import {Actions} from 'react-native-router-flux';
 
 export default function ({showHeader = false}) {
-  console.log('showHeader', showHeader);
   return (
     <View style={styles.container}>
       {showHeader && (
