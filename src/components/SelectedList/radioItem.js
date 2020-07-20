@@ -9,6 +9,7 @@ export default function ({
   selectedIndex,
   style,
   checkedColor,
+  textStyle,
 }) {
   const pressed = () => {
     const data = {index};
@@ -23,6 +24,7 @@ export default function ({
       checkedIcon="dot-circle-o"
       uncheckedIcon="circle-o"
       containerStyle={style}
+      textStyle={textStyle}
     />
   );
 }

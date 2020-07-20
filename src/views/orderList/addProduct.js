@@ -85,6 +85,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     marginTop: 10,
   },
+  radioTxtStyle: {
+    fontSize: normalize(11),
+  },
 });
 
 function OrderList() {
@@ -153,6 +156,7 @@ function OrderList() {
                 onPress={(data) => selectRadio(data.index)}
                 selectedIndex={selectedIndex}
                 index={index}
+                textStyle={styles.radioTxtStyle}
               />
             ))}
           </View>
