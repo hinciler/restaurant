@@ -1,5 +1,5 @@
 import React, {useEffect, useCallback, useRef} from 'react';
-import {ScrollView, View, Animated} from 'react-native';
+import {ScrollView, View, Dimensions} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {Header, CustomerSearch, Button} from 'components';
 import debounce from 'utilities/helpers/debounce';
@@ -120,8 +120,9 @@ export default function () {
             extraScrollHeight={50}
             onContentSizeChange={(contentWidth, contentHeight) => {
               if (contentHeight > 200 && opacity === 0) {
-                scrollViewRef.current.scrollToPosition(75, 75, true);
-
+                if (contentHeight + 75 > Dimensions.get('window').height) {
+                  scrollViewRef.current.scrollToPosition(75, 75, true);
+                }
                 setTimeout(() => {
                   setOpacity(1);
                 }, 300);
@@ -145,16 +146,15 @@ export default function () {
             />
             <View style={styles.verticalView}>
               {tableState.map((item, idx) => (
-                <View>
-                  <Button
-                    onPress={debounce(() => Actions.orderList())}
-                    style={styles.verticalButton}
-                    text={item.name}
-                    backgroundColor={'white'}
-                    fontFamily={'Roboto-Regular'}
-                    fontSize={normalize(12)}
-                  />
-                </View>
+                <Button
+                  key={idx}
+                  onPress={debounce(() => Actions.orderList())}
+                  style={styles.verticalButton}
+                  text={item.name}
+                  backgroundColor={'white'}
+                  fontFamily={'Roboto-Regular'}
+                  fontSize={normalize(12)}
+                />
               ))}
             </View>
           </KeyboardAwareScrollView>
