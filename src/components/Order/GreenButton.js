@@ -95,16 +95,18 @@ const styles = StyleSheet.create({
     fontFamily: 'Avenir',
   },
   containerStyle: {
-    padding: normalize(10),
     backgroundColor: 'green',
     margin: '1%',
     flexGrow: 1,
     width: '30%',
-    height: normalize(55),
     justifyContent: 'center',
   },
 
-  buttonStyle: {backgroundColor: 'green', padding: 0},
+  buttonStyle: {
+    backgroundColor: 'green',
+    padding: normalize(10),
+    height: normalize(55),
+  },
 
   titleStyle: {
     color: 'white',

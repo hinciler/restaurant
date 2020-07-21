@@ -1,6 +1,12 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState, useRef} from 'react';
 import {useSelector} from 'react-redux';
-import {StyleSheet, View, TouchableOpacity, Dimensions} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {colors} from 'config';
 import Modal from 'react-native-modal';
@@ -42,13 +48,21 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
   },
   listWrapper: {flex: 3},
-  productListContainer: {flexDirection: 'row', flex: 1},
+  productListContainer: {
+    flexDirection: 'row',
+    flex: 1,
+  },
   productList: {
+    flexGrow: 1,
+    paddingBottom: 10,
+  },
+  productListWrapper: {
+    flexGrow: 4,
+
     borderWidth: 1,
     borderColor: colors.grey,
-    flex: 4,
   },
-  closeBtn: {flex: 1, marginLeft: 2, marginRight: 2},
+  closeBtn: {marginLeft: 2, marginRight: 2, paddingHorizontal: normalize(10)},
   wrapButton: {
     height: width > 380 ? normalize(30) : normalize(35),
     width: 108,
@@ -98,6 +112,7 @@ function OrderList() {
   const [oldId, setOldId] = React.useState(0);
   const [selectedIndex, selectRadio] = React.useState(0);
   const [items, setItems] = useState(list);
+  const scrollViewRef = useRef();
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -261,36 +276,42 @@ function OrderList() {
         <OrangeButton orange_btn={orange} />
         <View style={{flex: 3}}>
           <View style={styles.productListContainer}>
-            <View style={styles.productList}>
-              {products.map((item, index) => (
-                <TouchableOpacity onPress={toggleModal}>
-                  <View
-                    key={index}
-                    style={[
-                      styles.item,
-                      {
-                        backgroundColor:
-                          products.length === index + 1
-                            ? colors.grey
-                            : colors.white,
-                      },
-                    ]}>
-                    <Text style={{marginRight: 10}} text={item.item} />
-                    <Text text={item.itemName} />
-                  </View>
-                </TouchableOpacity>
-              ))}
+            <View style={styles.productListWrapper}>
+              <ScrollView
+                contentContainerStyle={styles.productList}
+                onContentSizeChange={(contentWidth, contentHeight) => {
+                  scrollViewRef.current.scrollToEnd();
+                }}
+                ref={scrollViewRef}>
+                {products.map((item, index) => (
+                  <TouchableOpacity onPress={toggleModal}>
+                    <View
+                      key={index}
+                      style={[
+                        styles.item,
+                        {
+                          backgroundColor:
+                            products.length === index + 1
+                              ? colors.grey
+                              : colors.white,
+                        },
+                      ]}>
+                      <Text style={{marginRight: 10}} text={item.item} />
+                      <Text text={item.itemName} />
+                    </View>
+                  </TouchableOpacity>
+                ))}
+              </ScrollView>
             </View>
 
-            <View style={styles.closeBtn}>
-              <Button
-                text={'Close'}
-                color={'white'}
-                fontSize={normalize(12)}
-                style={{height: normalize(50)}}
-                onPress={Actions.pop}
-              />
-            </View>
+            <Button
+              text={'Close'}
+              color={'white'}
+              fontSize={normalize(12)}
+              contentContainerStyle={{padding: 10}}
+              style={{padding: normalize(10), marginHorizontal: normalize(5)}}
+              onPress={Actions.pop}
+            />
           </View>
           <View style={{flex: 4}}>
             <NumPad addProduct={(product) => setProduct(product)} />

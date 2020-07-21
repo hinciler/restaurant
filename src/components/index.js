@@ -10,6 +10,7 @@ import List from './Order/List';
 import OrangeButton from './Order/OrangeButton';
 import GreenButton from './Order/GreenButton';
 import NumPad from './NumPad';
+import BottomSheet from './NumPad/BottomSheet';
 import RadioItem from './SelectedList/radioItem';
 import CheckBox from './SelectedList/checkboxItem';
 
@@ -28,4 +29,5 @@ export {
   NumPad,
   RadioItem,
   CheckBox,
+  BottomSheet,
 };
