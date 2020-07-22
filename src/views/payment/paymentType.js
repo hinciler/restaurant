@@ -15,15 +15,6 @@ const styles = StyleSheet.create({
     marginHorizontal: normalize(10),
     justifyContent: 'center',
     paddingBottom: normalize(10),
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3,
-
-    elevation: 5,
   },
   button: {
     height: '100%',

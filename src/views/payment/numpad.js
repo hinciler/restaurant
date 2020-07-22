@@ -107,15 +107,6 @@ const styles = StyleSheet.create({
   footerButton: {
     backgroundColor: colors.white,
     height: '100%',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3,
-
-    elevation: 5,
   },
   number: {
     width: '33%',
@@ -127,15 +118,6 @@ const styles = StyleSheet.create({
   numberButton: {
     backgroundColor: '#007acc',
     height: '100%',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3,
-
-    elevation: 5,
   },
   deleteWrapper: {
     width: '33%',

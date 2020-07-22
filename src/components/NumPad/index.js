@@ -25,10 +25,8 @@ export default function ({addProduct}) {
   const [item, setItem] = useState('');
   const [draggableValue, setDraggableValue] = useState(new Animated.Value(0));
   const [size, onLayout] = useComponentSize();
-  console.log('size', size);
   function numPress(num) {
     const concatCode = item.concat(num);
-
     setItem(concatCode);
   }
   function backPress() {

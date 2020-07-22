@@ -4,16 +4,19 @@ import {StyleSheet, FlatList} from 'react-native';
 import {Text} from 'components';
 import {Typography} from 'components/Text';
 import {ListItem} from 'react-native-elements';
+import {colors} from 'config';
 const list = [
   {
     name: 'Amy Farha',
     subtitle: 'Vice President',
     pay: 10,
+    id: '1',
   },
   {
     name: 'Chris Jackson',
     subtitle: 'Vice Chairman',
     pay: 100.202,
+    id: '2',
   },
 ];
 const styles = StyleSheet.create({
