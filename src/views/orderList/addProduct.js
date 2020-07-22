@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
   },
   closeBtn: {flex: 1, marginLeft: 2, marginRight: 2},
   wrapButton: {
-    height: width > 380 ? normalize(30) : normalize(35),
-    width: 108,
+    height: width > 380 ? normalize(30) : normalize(28),
+    width: width > 380 ? normalize(90) : normalize(87),
     borderColor: colors.border,
     borderWidth: 1,
     justifyContent: 'center',
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   radioTxtStyle: {
-    fontSize: normalize(11),
+    fontSize: width > 380 ? normalize(11) : normalize(10),
   },
 });
 
