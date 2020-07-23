@@ -18,7 +18,7 @@ import {Typography} from '../../components/Text';
 import Icon from 'react-native-vector-icons/Feather';
 const dummy = require('./dummy.json');
 
-const {orange, buttons, radioBtn, list} = dummy;
+const {orange, buttons, radioBtn, list, prefixBtns} = dummy;
 const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
@@ -192,6 +192,24 @@ function OrderList() {
           </View>
           <View>
             <Text text={'Max:9999/Min:0'} type={Typography.PS} />
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              marginBottom: normalize(3),
+            }}>
+            {prefixBtns.map((item, index) => (
+              <Button
+                text={item.name}
+                color={'white'}
+                backgroundColor={item.color}
+                style={{
+                  width: (width - 70) / prefixBtns.length,
+                  margin: normalize(2),
+                }}
+              />
+            ))}
           </View>
           <View style={styles.orderTagList}>
             {list.map((l, i) =>
