@@ -124,5 +124,15 @@
             "name": "Sezen Aksu",
             "subtitle": "Vice Chairman"
         }
+    ],
+    "prefixBtns" :[
+        {
+            "name": "Var",
+            "color": "red"
+        },
+        {
+            "name": "Yok",
+            "color": "blue"
+        }
     ]
 }

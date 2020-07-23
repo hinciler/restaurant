@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+//import {styles} from './style';
 import {Actions} from 'react-native-router-flux';
 const buttons = require('./data.json');
 
