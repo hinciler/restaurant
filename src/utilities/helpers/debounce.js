@@ -1,7 +1,7 @@
-export default (func, wait = 1000) => {
+export default (func, wait = 200) => {
   let tapCount = 0;
   let handler;
-  return function() {
+  return function () {
     if (tapCount === 0) {
       tapCount++;
       func();

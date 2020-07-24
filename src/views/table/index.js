@@ -1,4 +1,4 @@
-import React, {useEffect, useCallback, useRef} from 'react';
+import React, {useEffect, useCallback, useRef, useState} from 'react';
 import {ScrollView, View, Dimensions} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {Header, CustomerSearch, Button} from 'components';
@@ -11,13 +11,25 @@ import {Actions} from 'react-native-router-flux';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {normalize, SearchBar} from 'react-native-elements';
 import {SearchItems} from 'helpers/searchItems';
+const useComponentSize = () => {
+  const [size, setSize] = useState(null);
 
+  const onLayout = useCallback((event) => {
+    const {width, height} = event.nativeEvent.layout;
+    setSize({width, height});
+  }, []);
+
+  return [size, onLayout];
+};
+const searchBarHeight = 75;
 export default function () {
   const [selected, setSelected] = React.useState(new Map());
   const [oldId, setOldId] = React.useState(0);
   const [value, updateSearch] = React.useState('');
   const [opacity, setOpacity] = React.useState(0);
+  const [paddingBottom, setPaddingBottom] = useState(0);
   const [tableState, updateTables] = React.useState([]);
+  const [size, onLayout] = useComponentSize();
   const lang = useSelector((state) => state.translate.lang);
   const tableData = useSelector((state) => state.table.data);
   const dispatch = useDispatch();
@@ -113,52 +125,57 @@ export default function () {
         </ScrollView>
       </View>
 
-      <View style={styles.scrollContainer}>
-        <View>
-          <KeyboardAwareScrollView
-            behavior="padding"
-            extraScrollHeight={50}
-            onContentSizeChange={(contentWidth, contentHeight) => {
-              if (contentHeight > 200 && opacity === 0) {
-                if (contentHeight + 75 > Dimensions.get('window').height) {
-                  scrollViewRef.current.scrollToPosition(75, 75, true);
-                }
-                setTimeout(() => {
-                  setOpacity(1);
-                }, 300);
+      <View style={styles.scrollContainer} onLayout={onLayout}>
+        <KeyboardAwareScrollView
+          behavior="padding"
+          extraScrollHeight={50}
+          onContentSizeChange={(contentWidth, contentHeight) => {
+            if (contentHeight > 200 && opacity === 0) {
+              if (Math.abs(size?.height - contentHeight) < searchBarHeight) {
+                setPaddingBottom(size.height - contentHeight + searchBarHeight);
               }
+              scrollViewRef.current.scrollToPosition(
+                searchBarHeight,
+                searchBarHeight,
+                true,
+              );
+
+              setTimeout(() => {
+                setOpacity(1);
+              }, 500);
+            }
+          }}
+          contentContainerStyle={{paddingBottom: paddingBottom}}
+          ref={scrollViewRef}>
+          <SearchBar
+            platform="ios"
+            containerStyle={[styles.searchTextInputStyle, {opacity: opacity}]}
+            inputContainerStyle={styles.inputContainerStyle}
+            inputStyle={styles.inputStyle}
+            clearIcon={{
+              type: 'materialIcons',
+              name: 'clear',
             }}
-            ref={scrollViewRef}>
-            <SearchBar
-              platform="ios"
-              containerStyle={[styles.searchTextInputStyle, {opacity: opacity}]}
-              inputContainerStyle={styles.inputContainerStyle}
-              inputStyle={styles.inputStyle}
-              clearIcon={{
-                type: 'materialIcons',
-                name: 'clear',
-              }}
-              placeholderTextColor="#8E8E92"
-              autoCapitalize="none"
-              placeholder={lang.pleaseSearch}
-              onChangeText={(text) => onChangeSearchText(text)}
-              value={value}
-            />
-            <View style={styles.verticalView}>
-              {tableState.map((item, idx) => (
-                <Button
-                  key={idx}
-                  onPress={debounce(() => Actions.orderList())}
-                  style={styles.verticalButton}
-                  text={item.name}
-                  backgroundColor={'white'}
-                  fontFamily={'Roboto-Regular'}
-                  fontSize={normalize(12)}
-                />
-              ))}
-            </View>
-          </KeyboardAwareScrollView>
-        </View>
+            placeholderTextColor="#8E8E92"
+            autoCapitalize="none"
+            placeholder={lang.pleaseSearch}
+            onChangeText={(text) => onChangeSearchText(text)}
+            value={value}
+          />
+          <View style={[styles.verticalView, {opacity: opacity}]}>
+            {tableState.map((item, idx) => (
+              <Button
+                key={idx}
+                onPress={debounce(() => Actions.orderList())}
+                style={styles.verticalButton}
+                text={item.name}
+                backgroundColor={'white'}
+                fontFamily={'Roboto-Regular'}
+                fontSize={normalize(12)}
+              />
+            ))}
+          </View>
+        </KeyboardAwareScrollView>
       </View>
     </View>
   );
