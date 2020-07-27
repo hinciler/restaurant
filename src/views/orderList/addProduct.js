@@ -165,6 +165,7 @@ function OrderList() {
           <View style={styles.radioBtnContainer}>
             {radioBtn.map((item, index) => (
               <RadioItem
+                key={index}
                 checkedColor={'default'}
                 style={styles.radioItem}
                 text={item.text}
@@ -178,6 +179,7 @@ function OrderList() {
           <View style={styles.orderGroupTag}>
             {buttons.map((item, index) => (
               <TouchableOpacity
+                key={index}
                 onPress={debounce(() => onSelectMenu(index))}
                 style={[
                   styles.wrapButton,
@@ -216,6 +218,7 @@ function OrderList() {
             }}>
             {prefixBtns.map((item, index) => (
               <Button
+                key={index}
                 text={item.name}
                 color={'white'}
                 backgroundColor={item.color}
@@ -302,7 +305,7 @@ function OrderList() {
                 }}
                 ref={scrollViewRef}>
                 {products.map((item, index) => (
-                  <TouchableOpacity onPress={toggleModal}>
+                  <TouchableOpacity onPress={toggleModal} key={index}>
                     <View
                       key={index}
                       style={[

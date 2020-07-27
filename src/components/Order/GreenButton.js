@@ -1,12 +1,10 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {ScrollView, View, StyleSheet, FlatList} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Animated, View, StyleSheet} from 'react-native';
 import {Button, normalize} from 'react-native-elements';
 import {colors} from 'config';
 import debounce from '../../utilities/helpers/debounce';
-import {ListItem, SearchBar, Icon, withBadge} from 'react-native-elements';
+import {SearchBar} from 'react-native-elements';
 import {useSelector} from 'react-redux';
-import Animated, {Value, useCode, set, cond} from 'react-native-reanimated';
-const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 import {SearchItems} from 'helpers/searchItems';
 
 export default function ({green_btn, onPress}) {
@@ -15,7 +13,7 @@ export default function ({green_btn, onPress}) {
   };
   const lang = useSelector((state) => state.translate.lang);
   const [value, onChangeText] = useState('');
-  const [productList, setProduct] = useState(green_btn);
+  const [productList, setProduct] = useState([]);
   const [opacity, setOpacity] = useState(0);
   const updateSearch = async (search) => {
     if (green_btn) {
@@ -25,6 +23,7 @@ export default function ({green_btn, onPress}) {
     }
   };
   useEffect(() => {
+    setProduct(green_btn);
     setTimeout(() => {
       setOpacity(1);
     }, 300);
@@ -41,12 +40,12 @@ export default function ({green_btn, onPress}) {
   );
   return (
     <View style={styles.container}>
-      <AnimatedFlatList
+      <Animated.FlatList
         data={productList}
         bounces={false}
         renderItem={Item}
-        contentContainerStyle={{opacity: opacity}}
         keyExtractor={(item, index) => index}
+        contentContainerStyle={{opacity: opacity}}
         initialScrollIndex={1}
         getItemLayout={(data, index) => ({
           length: data.length,

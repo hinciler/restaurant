@@ -1,5 +1,5 @@
 import React, {useState, useCallback} from 'react';
-import {Dimensions, View, TextInput, Animated} from 'react-native';
+import {View, TextInput, Animated} from 'react-native';
 import {styles} from './style';
 import {normalize} from 'react-native-elements';
 import {Button, GreenButton} from 'components';
@@ -8,7 +8,6 @@ import _ from 'lodash';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 const dummy = require('./dummy.json');
 let products = [];
-import debounce from 'utilities/helpers/debounce';
 const PIN_PAD_HEIGHT = 280;
 const {green} = dummy;
 const useComponentSize = () => {
@@ -23,7 +22,7 @@ const useComponentSize = () => {
 };
 export default function ({addProduct}) {
   const [item, setItem] = useState('');
-  const [draggableValue, setDraggableValue] = useState(new Animated.Value(0));
+  const draggableValue = new Animated.Value(0);
   const [size, onLayout] = useComponentSize();
   function numPress(num) {
     const concatCode = item.concat(num);
@@ -45,14 +44,17 @@ export default function ({addProduct}) {
   const opacity = draggableValue.interpolate({
     inputRange: [40, PIN_PAD_HEIGHT],
     outputRange: [0, 1],
+    useAnimatedDriver: true,
   });
   const minusHeight = draggableValue.interpolate({
     inputRange: [40, PIN_PAD_HEIGHT],
     outputRange: [40, 1],
+    useAnimatedDriver: true,
   });
   const paddingBottom = draggableValue.interpolate({
     inputRange: [0, PIN_PAD_HEIGHT],
     outputRange: [0, PIN_PAD_HEIGHT],
+    useAnimatedDriver: true,
   });
   return (
     <View style={styles.container} onLayout={onLayout}>
@@ -103,43 +105,43 @@ export default function ({addProduct}) {
           </Animated.View>
           <View style={styles.grid}>
             <View style={styles.row}>
-              {_.range(1, 4).map((item) => (
+              {_.range(1, 4).map((_item) => (
                 <Button
-                  key={item}
-                  onPress={() => numPress(item.toString())}
+                  key={_item}
+                  onPress={() => numPress(_item.toString())}
                   style={[
                     styles.numOverlay,
                     {width: size?.width / 3 - 5 || 100},
                   ]}
-                  text={item.toString()}
+                  text={_item.toString()}
                   backgroundColor={'white'}
                 />
               ))}
             </View>
             <View style={styles.row}>
-              {_.range(4, 7).map((item) => (
+              {_.range(4, 7).map((_item) => (
                 <Button
-                  key={item}
-                  onPress={() => numPress(item.toString())}
+                  key={_item}
+                  onPress={() => numPress(_item.toString())}
                   style={[
                     styles.numOverlay,
                     {width: size?.width / 3 - 5 || 100},
                   ]}
-                  text={item.toString()}
+                  text={_item.toString()}
                   backgroundColor={'white'}
                 />
               ))}
             </View>
             <View style={styles.row}>
-              {_.range(7, 10).map((item) => (
+              {_.range(7, 10).map((_item) => (
                 <Button
-                  key={item}
-                  onPress={() => numPress(item.toString())}
+                  key={_item}
+                  onPress={() => numPress(_item.toString())}
                   style={[
                     styles.numOverlay,
                     {width: size?.width / 3 - 5 || 100},
                   ]}
-                  text={item.toString()}
+                  text={_item.toString()}
                   backgroundColor={'white'}
                 />
               ))}

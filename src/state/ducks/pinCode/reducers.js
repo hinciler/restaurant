@@ -34,6 +34,7 @@ const pinCode = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loader: true,
+        userSuccess: false,
       };
     case type.PIN_CODE_SUCCESS:
       return {
