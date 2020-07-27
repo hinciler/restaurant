@@ -14,7 +14,7 @@ export default function ({green_btn, onPress}) {
   const lang = useSelector((state) => state.translate.lang);
   const [value, onChangeText] = useState('');
   const [productList, setProduct] = useState([]);
-  const [opacity, setOpacity] = useState(0);
+  // const [opacity, setOpacity] = useState(0);
   const updateSearch = async (search) => {
     if (green_btn) {
       const searchData = await SearchItems(green_btn, green_btn.length, search);
@@ -24,9 +24,9 @@ export default function ({green_btn, onPress}) {
   };
   useEffect(() => {
     setProduct(green_btn);
-    setTimeout(() => {
-      setOpacity(1);
-    }, 300);
+    // setTimeout(() => {
+    //   setOpacity(1);
+    // }, 300);
   }, []);
 
   const Item = ({item}) => (
@@ -41,17 +41,17 @@ export default function ({green_btn, onPress}) {
   return (
     <View style={styles.container}>
       <Animated.FlatList
-        data={productList}
+        data={green_btn}
         bounces={false}
         renderItem={Item}
         keyExtractor={(item, index) => index}
-        contentContainerStyle={{opacity: opacity}}
-        initialScrollIndex={1}
-        getItemLayout={(data, index) => ({
-          length: data.length,
-          offset: 70 * index,
-          index,
-        })}
+        // contentContainerStyle={{opacity: opacity}}
+        // initialScrollIndex={1}
+        // getItemLayout={(data, index) => ({
+        //   length: data.length,
+        //   offset: 70 * index,
+        //   index,
+        // })}
         numColumns={3}
         columnWrapperStyle={styles.columnWrapper}
         ListHeaderComponent={
