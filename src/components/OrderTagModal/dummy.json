@@ -1,0 +1,54 @@
+{
+    "buttons" : ["Burger Menus", "Burger Drink", "Burger Modifier", "Burger Type", "Burger Cheese"],
+    "radioBtn": [
+        {
+            "text": "Normal",
+            "disabled": false
+        },
+        {
+            "text": "Double",
+            "disabled": false
+        },
+        {
+            "text": "Half",
+            "disabled": false
+        }
+    ],
+    "list" :[
+        {
+            "name": "Amy Farha",
+            "subtitle": "Vice President",
+            "multiple": true,
+            "key": "1"
+        },
+        {
+            "name": "Chris Jackson",
+            "subtitle": "Vice Chairman",
+            "key": "2"
+        },
+        {
+            "name": "Ahmet Kaya",
+            "subtitle": "Vice Chairman",
+            "key": "3"
+        },
+        {
+            "name": "Sezen Aksu",
+            "subtitle": "Vice Chairman",
+            "key": "4"
+        }
+    ],
+    "prefixBtns" :[
+        {
+            "name": "Var",
+            "color": "red"
+        },
+        {
+            "name": "Yok",
+            "color": "blue"
+        },
+        {
+            "name": "Orta",
+            "color": "black"
+        }
+    ]
+}

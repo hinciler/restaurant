@@ -13,6 +13,7 @@ import NumPad from './NumPad';
 import BottomSheet from './NumPad/BottomSheet';
 import RadioItem from './SelectedList/radioItem';
 import CheckBox from './SelectedList/checkboxItem';
+import OrderTagModal from './OrderTagModal';
 
 export {
   Header,
@@ -30,4 +31,5 @@ export {
   RadioItem,
   CheckBox,
   BottomSheet,
+  OrderTagModal,
 };

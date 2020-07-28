@@ -1,7 +1,7 @@
 import React from 'react';
 import {Platform} from 'react-native';
 import {StackViewStyleInterpolator} from 'react-navigation-stack';
-import {Scene, Router, Overlay, Modal,Stack} from 'react-native-router-flux';
+import {Scene, Router, Overlay, Modal, Stack} from 'react-native-router-flux';
 import Users from 'views/users/container.js';
 import PinCode from 'views/pinCode/container';
 import Settings from 'views/settings/container';
@@ -28,8 +28,6 @@ const router = () => (
   <Router onStateChange={stateHandler} uriPrefix={prefix}>
     <Overlay key="overlay" panHandlers={null}>
       <Modal key="modal" transitionConfig={transitionConfig} hideNavBar>
-
-
         <Scene component={Users} key="users" />
         <Scene component={AddOrder} key="addOrder" />
         <Scene component={PinCode} key="pinCode" initial />
@@ -40,7 +38,6 @@ const router = () => (
         <Scene component={Payment} key="payment" />
         <Scene component={CustomerSearch} key="customerSearch" />
         <Scene component={AddProduct} key="addProduct" />
-
       </Modal>
     </Overlay>
   </Router>
