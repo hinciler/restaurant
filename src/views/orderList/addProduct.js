@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   Dimensions,
+  ScrollView,
   TouchableHighlight,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
