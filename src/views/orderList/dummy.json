@@ -110,19 +110,23 @@
         {
             "name": "Amy Farha",
             "subtitle": "Vice President",
-            "multiple": true
+            "multiple": true,
+            "key": "1"
         },
         {
             "name": "Chris Jackson",
-            "subtitle": "Vice Chairman"
+            "subtitle": "Vice Chairman",
+            "key": "2"
         },
         {
             "name": "Ahmet Kaya",
-            "subtitle": "Vice Chairman"
+            "subtitle": "Vice Chairman",
+            "key": "3"
         },
         {
             "name": "Sezen Aksu",
-            "subtitle": "Vice Chairman"
+            "subtitle": "Vice Chairman",
+            "key": "4"
         }
     ],
     "prefixBtns" :[
@@ -133,6 +137,10 @@
         {
             "name": "Yok",
             "color": "blue"
+        },
+        {
+            "name": "Orta",
+            "color": "black"
         }
     ]
 }
