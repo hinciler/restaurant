@@ -173,12 +173,7 @@ export default function (props) {
         <View>
           <Text text={'Max:9999/Min:0'} type={Typography.PS} />
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            marginBottom: normalize(3),
-          }}>
+        <View style={styles.prefixBtnContainer}>
           {prefixBtns.map((item, index) => (
             <Button
               key={index}

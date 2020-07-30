@@ -83,10 +83,14 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 2,
   },
-
   renderItemContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  prefixBtnContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: normalize(3),
   },
 });
