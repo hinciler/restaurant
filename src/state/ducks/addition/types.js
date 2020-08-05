@@ -1,0 +1,5 @@
+const ADDITION = 'ADDITION/addition';
+const ADDITION_FAILED = 'ADDITION_FAILED/addition';
+const ADDITION_SUCCESS = 'ADDITION_SUCCESS/addition';
+export default{  ADDITION, ADDITION_SUCCESS, ADDITION_FAILED }
+        

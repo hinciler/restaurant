@@ -32,4 +32,7 @@ export default {
   token(data) {
     return api_helper.post('Token', data);
   },
+  getAddition(data) {
+    return axios.post('getAddition', data);
+  },
 };

@@ -21,6 +21,10 @@
   "save": "Save",
   "customerSearch": "Customer Search",
   "pleaseSearch": "Please Search",
-  "search": "Search"
-
+  "search": "Search",
+  "total": "Total",
+  "done": "Done",
+  "ticketOpening": "Ticket Opening",
+  "lastOrderTime": "Last Order Time",
+  "status": "Status"
 }

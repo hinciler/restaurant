@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto-Medium',
   },
 });
-import {Typography} from 'components/Text';
 const Buttons = ({
   text,
   icon,
