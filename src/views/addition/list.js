@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, SectionList, View} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, SectionList, View, TouchableOpacity} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {useSelector} from 'react-redux';
 import {isTablet} from 'react-native-device-info';
@@ -9,13 +9,12 @@ import {Typography} from 'components/Text';
 import {ListItem, normalize, Button, Divider} from 'react-native-elements';
 import {colors} from 'config';
 
-const OrderList = ({data}) => {
-  console.log('data', data);
+const OrderList = ({sectionData}) => {
+  console.log('sectionData', sectionData);
   const {lang} = useSelector((state) => state.translate);
-  const onResponderReleaseHandler = () => {
-    console.log('object');
-    //do stuff
-  };
+  //const {sectionData} = useSelector((state) => state.addition);
+  //const [sectionData, setSectionData] = useState(data);
+
   return (
     <View style={styles.container}>
       <ListItem
@@ -27,55 +26,44 @@ const OrderList = ({data}) => {
       <SectionList
         contentContainerStyle={styles.contentContainerStyle}
         style={styles.sectionContainer}
-        onResponderRelease={onResponderReleaseHandler}
-        sections={data}
+        sections={sectionData}
         keyExtractor={(item, index) => item + index}
         renderItem={({item, index}) => {
+          console.log(item);
           return (
             <View style={styles.itemWrapper}>
-              <ListItem
-                containerStyle={styles.item}
-                leftElement={<Text text={index + 1} type={Typography.PMB} />}
-                title={<Text text={item} type={Typography.PMB} />}
-                rightTitle={<Text text={index * 5.3} type={Typography.PMB} />}
-                bottomDivider={index % 2 === 0 ? false : true}
-              />
-              {index % 2 === 0 && (
+              <TouchableOpacity
+                style={{
+                  backgroundColor: item.isSelected
+                    ? colors.background1
+                    : 'white',
+                }}>
+                <ListItem
+                  containerStyle={styles.item}
+                  leftElement={<Text text={item.count} type={Typography.PMB} />}
+                  title={<Text text={item.title} type={Typography.PMB} />}
+                  rightTitle={<Text text={item.price} type={Typography.PMB} />}
+                />
+
                 <View style={styles.stickerWrapper}>
-                  <ListItem
-                    containerStyle={styles.sticker}
-                    leftElement={
-                      <Text text={index + 1} type={Typography.PSM} />
-                    }
-                    rightTitle={
-                      <Text text={index * 5.3} type={Typography.PSM} />
-                    }
-                    title={<Text text={item} type={Typography.PSM} />}
-                  />
-                  <ListItem
-                    containerStyle={styles.sticker}
-                    leftElement={
-                      <Text text={index + 1} type={Typography.PSM} />
-                    }
-                    rightTitle={
-                      <Text text={index * 5.3} type={Typography.PSM} />
-                    }
-                    title={<Text text={item} type={Typography.PSM} />}
-                  />
-                  <ListItem
-                    containerStyle={styles.sticker}
-                    leftElement={
-                      <Text text={index + 1} type={Typography.PSM} />
-                    }
-                    rightTitle={
-                      <Text text={index * 5.3} type={Typography.PSM} />
-                    }
-                    title={<Text text={item} type={Typography.PSM} />}
-                  />
+                  {item.tickets.map((ticket, index) => (
+                    <ListItem
+                      key={index}
+                      containerStyle={styles.sticker}
+                      title={<Text text={ticket.title} type={Typography.PSM} />}
+                      leftElement={
+                        <Text text={ticket.count} type={Typography.PSM} />
+                      }
+                      rightTitle={
+                        <Text text={ticket.price} type={Typography.PSM} />
+                      }
+                    />
+                  ))}
+
                   <View style={styles.paddingBottom} />
-                  <Divider />
                 </View>
-              )}
+                <Divider />
+              </TouchableOpacity>
             </View>
           );
         }}
@@ -167,12 +155,17 @@ const styles = StyleSheet.create({
   sticker: {
     paddingTop: normalize(1),
     paddingBottom: normalize(1),
+    backgroundColor: 'transparent',
   },
   item: {
     paddingTop: normalize(1),
     paddingBottom: normalize(1),
+    backgroundColor: 'transparent',
   },
   paddingBottom: {
     paddingBottom: normalize(5),
+  },
+  stickerWrapper: {
+    backgroundColor: 'transparent',
   },
 });
