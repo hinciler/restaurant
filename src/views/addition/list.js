@@ -8,86 +8,14 @@ import {Text} from 'components';
 import {Typography} from 'components/Text';
 import {ListItem, normalize, Button, Divider} from 'react-native-elements';
 import {colors} from 'config';
-const DATA = [
-  {
-    title: 'Main dishes',
-    data: ['Pizza', 'Burger', 'Risotto'],
-  },
-  {
-    title: 'Sides',
-    data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
-  },
-  {
-    title: 'Drinks',
-    data: ['Water', 'Coke', 'Beer'],
-  },
-  {
-    title: 'Desserts',
-    data: ['Cheese Cake', 'Ice Cream'],
-  },
-];
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.white,
-  },
-  sectionContainer: {
-    flexGrow: 3,
-    backgroundColor: colors.background1,
-  },
-  header: {
-    backgroundColor: colors.grey,
-    padding: normalize(3),
-    justifyContent: 'center',
-    paddingLeft: normalize(10),
-  },
-  renderSectionHeader: {
-    backgroundColor: colors.background1,
-    paddingLeft: normalize(10),
-  },
-  textAreaButtons: {
-    flexDirection: 'row',
 
-    backgroundColor: '#f5f5f5',
-    paddingBottom: normalize(2),
-  },
-  balance: {
-    backgroundColor: colors.background1,
-  },
-  closeButtonWrapper: {
-    flex: 1,
-    padding: normalize(5),
-    marginLeft: normalize(5),
-    backgroundColor: colors.red,
-  },
-  settleButtonContainer: {
-    flex: 1,
-    padding: normalize(5),
-    backgroundColor: 'white',
-    marginRight: normalize(5),
-  },
-  settleButtonStyle: {backgroundColor: 'white'},
-  settleTextStyle: {color: '#000', fontWeight: 'bold'},
-  closeButtonStyle: {backgroundColor: colors.red},
-  closeTextStyle: {color: '#fff', fontWeight: 'bold'},
-  itemWrapper: {
-    backgroundColor: colors.active,
-  },
-  sticker: {
-    paddingTop: normalize(1),
-    paddingBottom: normalize(1),
-  },
-  item: {
-    paddingTop: normalize(1),
-    paddingBottom: normalize(1),
-  },
-  paddingBottom: {
-    paddingBottom: normalize(5),
-  },
-});
-const OrderList = () => {
+const OrderList = ({data}) => {
+  console.log('data', data);
   const {lang} = useSelector((state) => state.translate);
-
+  const onResponderReleaseHandler = () => {
+    console.log('object');
+    //do stuff
+  };
   return (
     <View style={styles.container}>
       <ListItem
@@ -99,7 +27,8 @@ const OrderList = () => {
       <SectionList
         contentContainerStyle={styles.contentContainerStyle}
         style={styles.sectionContainer}
-        sections={DATA}
+        onResponderRelease={onResponderReleaseHandler}
+        sections={data}
         keyExtractor={(item, index) => item + index}
         renderItem={({item, index}) => {
           return (
@@ -157,15 +86,25 @@ const OrderList = () => {
         )}
       />
       <ListItem
-        title={<Text text={lang.balance} type={Typography.PS} />}
-        subtitle={<Text text={'Status un appeared'} type={Typography.PS} />}
+        title={
+          <Text
+            text={lang.ticketOpening + ' : ' + '07:30'}
+            type={Typography.PS}
+          />
+        }
+        subtitle={
+          <Text
+            text={lang.lastOrderTime + ' : ' + '09:39'}
+            type={Typography.PS}
+          />
+        }
         containerStyle={styles.header}
         leftIcon={{name: 'access-time', type: 'MaterialIcons'}}
         bottomDivider
       />
       <ListItem
         title={
-          <Text text={lang.balance} type={Typography.PLB} color={colors.red} />
+          <Text text={lang.total} type={Typography.PLB} color={colors.red} />
         }
         rightTitle={
           <Text text="29.95" type={Typography.PLB} color={colors.red} />
@@ -173,26 +112,67 @@ const OrderList = () => {
         containerStyle={styles.balance}
         bottomDivider
       />
-      <View style={styles.textAreaButtons}>
-        {isTablet() && (
-          <Button
-            title={lang.settle}
-            containerStyle={styles.settleButtonContainer}
-            buttonStyle={styles.settleButtonStyle}
-            titleStyle={styles.settleTextStyle}
-            onPress={Actions.payment}
-          />
-        )}
-        <Button
-          title={lang.close}
-          containerStyle={styles.closeButtonWrapper}
-          buttonStyle={styles.closeButtonStyle}
-          titleStyle={styles.closeTextStyle}
-          onPress={Actions.pop}
-        />
-      </View>
     </View>
   );
 };
 
 export default OrderList;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+  sectionContainer: {
+    flexGrow: 3,
+    backgroundColor: colors.white,
+  },
+  header: {
+    backgroundColor: colors.grey,
+    padding: normalize(3),
+    justifyContent: 'center',
+    paddingLeft: normalize(10),
+  },
+  renderSectionHeader: {
+    backgroundColor: colors.background1,
+    paddingLeft: normalize(10),
+  },
+  textAreaButtons: {
+    flexDirection: 'row',
+
+    backgroundColor: '#f5f5f5',
+    paddingBottom: normalize(2),
+  },
+  balance: {
+    backgroundColor: colors.background1,
+  },
+  closeButtonWrapper: {
+    flex: 1,
+    padding: normalize(5),
+    marginLeft: normalize(5),
+    backgroundColor: colors.red,
+  },
+  settleButtonContainer: {
+    flex: 1,
+    padding: normalize(5),
+    backgroundColor: 'white',
+    marginRight: normalize(5),
+  },
+  settleButtonStyle: {backgroundColor: 'white'},
+  settleTextStyle: {color: '#000', fontWeight: 'bold'},
+  closeButtonStyle: {backgroundColor: colors.red},
+  closeTextStyle: {color: '#fff', fontWeight: 'bold'},
+  itemWrapper: {
+    backgroundColor: colors.active,
+  },
+  sticker: {
+    paddingTop: normalize(1),
+    paddingBottom: normalize(1),
+  },
+  item: {
+    paddingTop: normalize(1),
+    paddingBottom: normalize(1),
+  },
+  paddingBottom: {
+    paddingBottom: normalize(5),
+  },
+});

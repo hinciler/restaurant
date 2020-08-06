@@ -21,5 +21,10 @@
   "save": "Kaydet",
   "customerSearch": "Müşteri Ara",
   "pleaseSearch": "Ara...",
-  "search": "Ara"
+  "search": "Ara",
+  "done": "Tamam",
+  "total": "Toplam",
+  "ticketOpening": "Ticket Acma",
+  "lastOrderTime": "Son Siparis Saati",
+  "status": "Durum"
 }
