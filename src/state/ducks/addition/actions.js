@@ -13,3 +13,11 @@ export const pop = (payload) => ({
   type: type.DELETE_ADDITION,
   payload,
 });
+export const selected = (payload) => ({
+  type: type.SELECT_ADDITION,
+  payload,
+});
+export const unSelected = (payload) => ({
+  type: type.UNSELECT_ADDITION,
+  payload,
+});

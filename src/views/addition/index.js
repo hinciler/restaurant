@@ -92,7 +92,6 @@ function Addition() {
   );
   sectionData.map((section) => console.log('section', section));
   const [list, setList] = useState([sectionData]);
-  console.log('sectionData index', list);
   const {lang} = useSelector((state) => state.translate);
   const dispatch = useDispatch();
 

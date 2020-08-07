@@ -195,6 +195,7 @@ const INITIAL_STATE = {
               },
             ],
             price: '100',
+            id: 0,
           },
         ],
       },
@@ -203,6 +204,7 @@ const INITIAL_STATE = {
         data: [
           {
             isSelected: false,
+            id: 1,
             count: '3',
             title: 'Burgers',
             tickets: [
@@ -245,6 +247,7 @@ const INITIAL_STATE = {
             isSelected: false,
             count: '3',
             title: 'Burgers',
+            id: 2,
             tickets: [
               {
                 count: 3,
@@ -281,6 +284,7 @@ const INITIAL_STATE = {
         data: [
           {
             isSelected: false,
+            id: 3,
             count: '3',
             title: 'Burgers',
             tickets: [
@@ -316,6 +320,7 @@ const INITIAL_STATE = {
       },
     ],
   ],
+  selectedList: [],
 };
 
 INITIAL_STATE.sectionData2.map((data) => console.log('data', data));
@@ -343,6 +348,24 @@ const addition = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         sectionData: [...state.sectionData, []],
+      };
+    case type.SELECT_ADDITION:
+      return {
+        ...state,
+        selectedList: [...state.selectedList, action.payload],
+      };
+    case type.UNSELECT_ADDITION:
+      const newAddition = state.selectedList.filter((addition) => {
+        if (addition.id === action.payload.id) {
+        }
+        console.log('addition', addition);
+        console.log('action.payload', action.payload);
+      });
+      return {
+        ...state,
+        selectedList: state.selectedList.filter(
+          ({id}) => id !== action.payload.id,
+        ),
       };
     case type.DELETE_ADDITION:
       return {

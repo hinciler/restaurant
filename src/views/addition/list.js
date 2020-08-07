@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {StyleSheet, SectionList, View, TouchableOpacity} from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {isTablet} from 'react-native-device-info';
+import {selected, unSelected} from '@addition/actions';
 
 import {Text} from 'components';
 import {Typography} from 'components/Text';
@@ -12,9 +13,28 @@ import {colors} from 'config';
 const OrderList = ({sectionData}) => {
   console.log('sectionData', sectionData);
   const {lang} = useSelector((state) => state.translate);
-  //const {sectionData} = useSelector((state) => state.addition);
-  //const [sectionData, setSectionData] = useState(data);
+  const {selectedList} = useSelector((state) => state.addition);
+  const dispatch = useDispatch();
 
+  const [list, setSectionData] = useState(sectionData);
+  const selectedItem = (item) => {
+    const newData = list.filter(({data}) => {
+      if (data[0].id === item.id) {
+        if (data[0].isSelected) {
+          data[0].isSelected = false;
+          dispatch(unSelected(item));
+        } else {
+          data[0].isSelected = true;
+          dispatch(selected(item));
+        }
+      }
+      return data;
+    });
+    setSectionData(newData);
+  };
+  const setItem = () => {
+    console.log('setItem');
+  };
   return (
     <View style={styles.container}>
       <ListItem
@@ -22,17 +42,19 @@ const OrderList = ({sectionData}) => {
         title={<Text text={'28 Table B12'} type={Typography.PMB} />}
         subtitle={<Text text={'Status un appeared'} type={Typography.PSM} />}
         containerStyle={styles.header}
+        onPress={setItem}
       />
       <SectionList
         contentContainerStyle={styles.contentContainerStyle}
         style={styles.sectionContainer}
-        sections={sectionData}
+        sections={list}
         keyExtractor={(item, index) => item + index}
         renderItem={({item, index}) => {
           console.log(item);
           return (
             <View style={styles.itemWrapper}>
               <TouchableOpacity
+                onLongPress={() => selectedItem(item)}
                 style={{
                   backgroundColor: item.isSelected
                     ? colors.background1
