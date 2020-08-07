@@ -1,39 +1,48 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, SectionList, View, TouchableOpacity} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {useSelector, useDispatch} from 'react-redux';
 import {isTablet} from 'react-native-device-info';
-import {selected, unSelected} from '@addition/actions';
+import {selected, unSelected, setAddition} from '@addition/actions';
 
 import {Text} from 'components';
 import {Typography} from 'components/Text';
 import {ListItem, normalize, Button, Divider} from 'react-native-elements';
 import {colors} from 'config';
 
-const OrderList = ({sectionData}) => {
-  console.log('sectionData', sectionData);
+const OrderList = ({sectionData, index}) => {
   const {lang} = useSelector((state) => state.translate);
   const {selectedList} = useSelector((state) => state.addition);
   const dispatch = useDispatch();
-
   const [list, setSectionData] = useState(sectionData);
-  const selectedItem = (item) => {
-    const newData = list.filter(({data}) => {
+  const selectedItem = (item, sectionIndex) => {
+    const newData = list.filter((section) => {
+      const {data} = section;
       if (data[0].id === item.id) {
         if (data[0].isSelected) {
           data[0].isSelected = false;
-          dispatch(unSelected(item));
+          dispatch(unSelected(section, item.id));
         } else {
           data[0].isSelected = true;
-          dispatch(selected(item));
+          data[0].sectionIndex = index;
+          const selectedData = {
+            section,
+            sectionListIndex: index,
+            itemID: item.id,
+            sectionIndex,
+          };
+          dispatch(selected(section));
         }
       }
       return data;
     });
     setSectionData(newData);
   };
+  useEffect(() => {
+    setSectionData(sectionData);
+  }, [sectionData]);
   const setItem = () => {
-    console.log('setItem');
+    dispatch(setAddition(index));
   };
   return (
     <View style={styles.container}>
@@ -50,11 +59,10 @@ const OrderList = ({sectionData}) => {
         sections={list}
         keyExtractor={(item, index) => item + index}
         renderItem={({item, index}) => {
-          console.log(item);
           return (
             <View style={styles.itemWrapper}>
               <TouchableOpacity
-                onLongPress={() => selectedItem(item)}
+                onLongPress={() => selectedItem(item, index)}
                 style={{
                   backgroundColor: item.isSelected
                     ? colors.background1

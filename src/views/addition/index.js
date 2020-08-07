@@ -90,7 +90,6 @@ function Addition() {
   const {loader, data, error, sectionData} = useSelector(
     (state) => state.addition,
   );
-  sectionData.map((section) => console.log('section', section));
   const [list, setList] = useState([sectionData]);
   const {lang} = useSelector((state) => state.translate);
   const dispatch = useDispatch();
@@ -105,7 +104,7 @@ function Addition() {
           showsHorizontalScrollIndicator={false}>
           {sectionData.map((item, idx) => (
             <View style={styles.listWrapper} key={idx}>
-              <List sectionData={item} _data={item} />
+              <List sectionData={item} index={idx} />
             </View>
           ))}
         </ScrollView>
@@ -117,7 +116,7 @@ function Addition() {
             icon={<Icon name="plus" type="feather" size={25} color={'black'} />}
           />
           <View style={styles.padding}>
-            <Text text={list.length} />
+            <Text text={sectionData.length} />
           </View>
           <Button
             icon={
@@ -125,7 +124,10 @@ function Addition() {
             }
             style={styles.btn}
             onPress={() => dispatch(pop())}
-            //  disabled={list.length > 0 && list[list.length - 1].length !== 0}
+            disabled={
+              sectionData.length > 0 &&
+              sectionData[sectionData.length - 1].length !== 0
+            }
           />
         </View>
       </View>

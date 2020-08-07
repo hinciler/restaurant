@@ -4,7 +4,6 @@ export const addition = (payload) => ({
   payload,
 });
 export const push = () => {
-  console.log('payload');
   return {
     type: type.ADD_ADDITION,
   };
@@ -17,7 +16,13 @@ export const selected = (payload) => ({
   type: type.SELECT_ADDITION,
   payload,
 });
-export const unSelected = (payload) => ({
+export const unSelected = (payload, id) => ({
   type: type.UNSELECT_ADDITION,
   payload,
+  id,
+});
+export const setAddition = (index) => ({
+  type: type.SET_ADDITION,
+
+  index,
 });

@@ -323,8 +323,6 @@ const INITIAL_STATE = {
   selectedList: [],
 };
 
-INITIAL_STATE.sectionData2.map((data) => console.log('data', data));
-
 const addition = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case type.ADDITION:
@@ -355,22 +353,37 @@ const addition = (state = INITIAL_STATE, action) => {
         selectedList: [...state.selectedList, action.payload],
       };
     case type.UNSELECT_ADDITION:
-      const newAddition = state.selectedList.filter((addition) => {
-        if (addition.id === action.payload.id) {
-        }
-        console.log('addition', addition);
-        console.log('action.payload', action.payload);
-      });
       return {
         ...state,
         selectedList: state.selectedList.filter(
-          ({id}) => id !== action.payload.id,
+          ({data}) => data[0].id !== action.id,
         ),
       };
     case type.DELETE_ADDITION:
       return {
         ...state,
         sectionData: state.sectionData.slice(0, -1),
+      };
+    case type.SET_ADDITION:
+      state.selectedList.map((item) => {
+        item.data[0].isSelected = false;
+        const parentIndex = item.data[0].sectionIndex;
+        state.sectionData[parentIndex] = state.sectionData[parentIndex].filter(
+          (section) => {
+            return section.data[0].id !== item.data[0].id;
+          },
+        );
+        return item;
+      });
+      // state.sectionData.filter(section =>)
+      const newItem = [
+        ...state.sectionData[action.index],
+        ...state.selectedList,
+      ];
+      state.sectionData[action.index] = newItem;
+      return {
+        ...state,
+        selectedList: [],
       };
     default:
       return state;
