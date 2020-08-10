@@ -23,7 +23,8 @@
         {
             "text": "Add Ticket",
             "disabled": true,
-            "key": "addTicket"
+            "key": "addTicket",
+            "status": "both"
         }
     ],
     "orange": [
@@ -90,8 +91,13 @@
         "Weaps",
         "Sandwiches"
     ],
-
-    "buttons" : ["Burger Menus", "Burger Drink", "Burger Modifier", "Burger Type", "Burger Cheese"],
+    "buttons": [
+        "Burger Menus",
+        "Burger Drink",
+        "Burger Modifier",
+        "Burger Type",
+        "Burger Cheese"
+    ],
     "radioBtn": [
         {
             "text": "Normal",
@@ -106,7 +112,7 @@
             "disabled": false
         }
     ],
-    "list" :[
+    "list": [
         {
             "name": "Amy Farha",
             "subtitle": "Vice President",
@@ -129,7 +135,7 @@
             "key": "4"
         }
     ],
-    "prefixBtns" :[
+    "prefixBtns": [
         {
             "name": "Var",
             "color": "red"

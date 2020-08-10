@@ -10,6 +10,7 @@ import {
   NumPad,
 } from 'components';
 import {normalize} from 'react-native-elements';
+import {isTablet} from 'react-native-device-info';
 const dummy = require('./dummy.json');
 
 const {leftDummy, orange, green} = dummy;
@@ -43,6 +44,10 @@ function OrderList() {
         Actions.customerSearch({showHeader: true});
         setVisible(true);
         break;
+      case 'split_ticket':
+        Actions.addition();
+
+        break;
       default:
         break;
     }
@@ -62,6 +67,16 @@ function OrderList() {
             disabled={item.disabled}
           />
         )}
+        ListFooterComponent={
+          isTablet() && (
+            <LeftOrderButton
+              onPress={() => pressLeftButton('split_ticket')}
+              containerStyle={styles.leftButtons}
+              text={lang.split_ticket}
+              disabled={false}
+            />
+          )
+        }
         keyExtractor={(item) => item.key}
       />
       <View style={styles.listWrapper}>

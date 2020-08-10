@@ -26,5 +26,6 @@
   "done": "Done",
   "ticketOpening": "Ticket Opening",
   "lastOrderTime": "Last Order Time",
-  "status": "Status"
+  "status": "Status",
+  "split_ticket": "Split Ticket"
 }

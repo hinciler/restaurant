@@ -62,17 +62,33 @@ const OrderList = ({sectionData, index}) => {
           return (
             <View style={styles.itemWrapper}>
               <TouchableOpacity
-                onLongPress={() => selectedItem(item, index)}
+                onPress={() => selectedItem(item, index)}
                 style={{
-                  backgroundColor: item.isSelected
-                    ? colors.background1
-                    : 'white',
+                  backgroundColor: item.isSelected ? '#0078d7' : 'white',
                 }}>
                 <ListItem
                   containerStyle={styles.item}
-                  leftElement={<Text text={item.count} type={Typography.PMB} />}
-                  title={<Text text={item.title} type={Typography.PMB} />}
-                  rightTitle={<Text text={item.price} type={Typography.PMB} />}
+                  leftElement={
+                    <Text
+                      text={item.count}
+                      type={Typography.PMB}
+                      color={item.isSelected && 'white'}
+                    />
+                  }
+                  title={
+                    <Text
+                      text={item.title}
+                      type={Typography.PMB}
+                      color={item.isSelected && 'white'}
+                    />
+                  }
+                  rightTitle={
+                    <Text
+                      text={item.price}
+                      type={Typography.PMB}
+                      color={item.isSelected && 'white'}
+                    />
+                  }
                 />
 
                 <View style={styles.stickerWrapper}>
@@ -80,12 +96,26 @@ const OrderList = ({sectionData, index}) => {
                     <ListItem
                       key={index}
                       containerStyle={styles.sticker}
-                      title={<Text text={ticket.title} type={Typography.PSM} />}
+                      title={
+                        <Text
+                          text={ticket.title}
+                          type={Typography.PSM}
+                          color={item.isSelected && 'white'}
+                        />
+                      }
                       leftElement={
-                        <Text text={ticket.count} type={Typography.PSM} />
+                        <Text
+                          text={ticket.count}
+                          type={Typography.PSM}
+                          color={item.isSelected && 'white'}
+                        />
                       }
                       rightTitle={
-                        <Text text={ticket.price} type={Typography.PSM} />
+                        <Text
+                          text={ticket.price}
+                          type={Typography.PSM}
+                          color={item.isSelected && 'white'}
+                        />
                       }
                     />
                   ))}

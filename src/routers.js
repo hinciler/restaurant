@@ -31,13 +31,13 @@ const router = () => (
       <Modal key="modal" transitionConfig={transitionConfig} hideNavBar>
         <Scene component={Users} key="users" />
         <Scene component={AddOrder} key="addOrder" />
-        <Scene component={PinCode} key="pinCode" />
+        <Scene component={PinCode} key="pinCode" initial />
         <Scene component={Settings} key="settings" />
         <Scene component={OrderList} key="orderList" />
         <Scene component={QrCode} key="qrCode" />
         <Scene component={Table} key="table" />
         <Scene component={Payment} key="payment" />
-        <Scene component={Addition} key="addition" initial />
+        <Scene component={Addition} key="addition" />
         <Scene component={CustomerSearch} key="customerSearch" />
         <Scene component={AddProduct} key="addProduct" />
       </Modal>
