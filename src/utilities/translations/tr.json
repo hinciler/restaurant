@@ -26,5 +26,6 @@
   "total": "Toplam",
   "ticketOpening": "Ticket Acma",
   "lastOrderTime": "Son Siparis Saati",
-  "status": "Durum"
+  "status": "Durum",
+  "split_ticket": "Adisyon Bol"
 }

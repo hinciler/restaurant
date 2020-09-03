@@ -1,20 +1,48 @@
-import React from 'react';
-import {StyleSheet, SectionList, View} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, SectionList, View, TouchableOpacity} from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {isTablet} from 'react-native-device-info';
+import {selected, unSelected, setAddition} from '@addition/actions';
 
 import {Text} from 'components';
 import {Typography} from 'components/Text';
 import {ListItem, normalize, Button, Divider} from 'react-native-elements';
 import {colors} from 'config';
 
-const OrderList = ({data}) => {
-  console.log('data', data);
+const OrderList = ({sectionData, index}) => {
   const {lang} = useSelector((state) => state.translate);
-  const onResponderReleaseHandler = () => {
-    console.log('object');
-    //do stuff
+  const {selectedList} = useSelector((state) => state.addition);
+  const dispatch = useDispatch();
+  const [list, setSectionData] = useState(sectionData);
+  const selectedItem = (item, sectionIndex) => {
+    const newData = list.filter((section) => {
+      const {data} = section;
+      if (data[0].id === item.id) {
+        if (data[0].isSelected) {
+          data[0].isSelected = false;
+          dispatch(unSelected(section, item.id));
+        } else {
+          data[0].isSelected = true;
+          data[0].sectionIndex = index;
+          const selectedData = {
+            section,
+            sectionListIndex: index,
+            itemID: item.id,
+            sectionIndex,
+          };
+          dispatch(selected(section));
+        }
+      }
+      return data;
+    });
+    setSectionData(newData);
+  };
+  useEffect(() => {
+    setSectionData(sectionData);
+  }, [sectionData]);
+  const setItem = () => {
+    dispatch(setAddition(index));
   };
   return (
     <View style={styles.container}>
@@ -23,59 +51,79 @@ const OrderList = ({data}) => {
         title={<Text text={'28 Table B12'} type={Typography.PMB} />}
         subtitle={<Text text={'Status un appeared'} type={Typography.PSM} />}
         containerStyle={styles.header}
+        onPress={setItem}
       />
       <SectionList
         contentContainerStyle={styles.contentContainerStyle}
         style={styles.sectionContainer}
-        onResponderRelease={onResponderReleaseHandler}
-        sections={data}
+        sections={list}
         keyExtractor={(item, index) => item + index}
         renderItem={({item, index}) => {
           return (
             <View style={styles.itemWrapper}>
-              <ListItem
-                containerStyle={styles.item}
-                leftElement={<Text text={index + 1} type={Typography.PMB} />}
-                title={<Text text={item} type={Typography.PMB} />}
-                rightTitle={<Text text={index * 5.3} type={Typography.PMB} />}
-                bottomDivider={index % 2 === 0 ? false : true}
-              />
-              {index % 2 === 0 && (
+              <TouchableOpacity
+                onPress={() => selectedItem(item, index)}
+                style={{
+                  backgroundColor: item.isSelected ? '#0078d7' : 'white',
+                }}>
+                <ListItem
+                  containerStyle={styles.item}
+                  leftElement={
+                    <Text
+                      text={item.count}
+                      type={Typography.PMB}
+                      color={item.isSelected && 'white'}
+                    />
+                  }
+                  title={
+                    <Text
+                      text={item.title}
+                      type={Typography.PMB}
+                      color={item.isSelected && 'white'}
+                    />
+                  }
+                  rightTitle={
+                    <Text
+                      text={item.price}
+                      type={Typography.PMB}
+                      color={item.isSelected && 'white'}
+                    />
+                  }
+                />
+
                 <View style={styles.stickerWrapper}>
-                  <ListItem
-                    containerStyle={styles.sticker}
-                    leftElement={
-                      <Text text={index + 1} type={Typography.PSM} />
-                    }
-                    rightTitle={
-                      <Text text={index * 5.3} type={Typography.PSM} />
-                    }
-                    title={<Text text={item} type={Typography.PSM} />}
-                  />
-                  <ListItem
-                    containerStyle={styles.sticker}
-                    leftElement={
-                      <Text text={index + 1} type={Typography.PSM} />
-                    }
-                    rightTitle={
-                      <Text text={index * 5.3} type={Typography.PSM} />
-                    }
-                    title={<Text text={item} type={Typography.PSM} />}
-                  />
-                  <ListItem
-                    containerStyle={styles.sticker}
-                    leftElement={
-                      <Text text={index + 1} type={Typography.PSM} />
-                    }
-                    rightTitle={
-                      <Text text={index * 5.3} type={Typography.PSM} />
-                    }
-                    title={<Text text={item} type={Typography.PSM} />}
-                  />
+                  {item.tickets.map((ticket, index) => (
+                    <ListItem
+                      key={index}
+                      containerStyle={styles.sticker}
+                      title={
+                        <Text
+                          text={ticket.title}
+                          type={Typography.PSM}
+                          color={item.isSelected && 'white'}
+                        />
+                      }
+                      leftElement={
+                        <Text
+                          text={ticket.count}
+                          type={Typography.PSM}
+                          color={item.isSelected && 'white'}
+                        />
+                      }
+                      rightTitle={
+                        <Text
+                          text={ticket.price}
+                          type={Typography.PSM}
+                          color={item.isSelected && 'white'}
+                        />
+                      }
+                    />
+                  ))}
+
                   <View style={styles.paddingBottom} />
-                  <Divider />
                 </View>
-              )}
+                <Divider />
+              </TouchableOpacity>
             </View>
           );
         }}
@@ -167,12 +215,17 @@ const styles = StyleSheet.create({
   sticker: {
     paddingTop: normalize(1),
     paddingBottom: normalize(1),
+    backgroundColor: 'transparent',
   },
   item: {
     paddingTop: normalize(1),
     paddingBottom: normalize(1),
+    backgroundColor: 'transparent',
   },
   paddingBottom: {
     paddingBottom: normalize(5),
+  },
+  stickerWrapper: {
+    backgroundColor: 'transparent',
   },
 });
